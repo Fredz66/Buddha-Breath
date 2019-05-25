@@ -30,8 +30,8 @@ class Player extends FlxSprite
 		animation.add("fall", [0]);
 		//animation.add("attack", [26,27,28,29],8);
 
-		setSize(68, 76);
-		offset.set(4, 4);
+		setSize(40, 76);
+		offset.set(24, 4);
 		
 		drag.x = DRAG;
 		acceleration.y = GRAVITY;
@@ -53,6 +53,8 @@ class Player extends FlxSprite
 		if (FlxG.keys.pressed.LEFT) 
 		{
 			flipX = true;
+			setSize(40, 76);
+			offset.set(4, 4);
 			direction = -1;
 			acceleration.x -= ACCELERATION;
 
@@ -60,6 +62,8 @@ class Player extends FlxSprite
 		else if (FlxG.keys.pressed.RIGHT)
 		{
 			flipX = false;
+			setSize(40, 76);
+			offset.set(24, 4);
 			direction = 1;
 			acceleration.x += ACCELERATION;
 		}

@@ -28,7 +28,7 @@ class MenuState extends FlxState
  		add(new FlxButton(280, 180, "New game", play));
 
 		// Show start button.
-		add(new FlxButton(280, 200, "Settings", play));
+		add(new FlxButton(280, 200, "Settings", settings));
 
 		// Show quit button.
 		add(new FlxButton(280, 220, "Quit", quit));
@@ -46,6 +46,11 @@ class MenuState extends FlxState
 	function play():Void
 	{
 		FlxG.switchState(new PlayState());
+ 	}
+
+	function settings():Void
+	{
+		FlxG.switchState(new SettingsState());
  	}
 
 	function quit():Void

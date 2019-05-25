@@ -102,6 +102,9 @@ class PlayState extends FlxState
 		if (player.x > map.width) {
 			FlxG.camera.fade(FlxColor.BLACK, .33, false, win);
 		}
+
+		//FlxG.debugger.visible = true;
+		//FlxG.debugger.drawDebug = true;
 	}
 
 	function death():Void
