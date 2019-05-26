@@ -16,9 +16,9 @@ class MenuState extends FlxState
       	add(new FlxText(0, 60, FlxG.width, "Buddha Breath").setFormat(null, 64, FlxColor.RED, FlxTextAlign.CENTER));
 
 		// Show controls.
-		add(new FlxText(0, 270, FlxG.width, "Run : <- ->").setFormat(null, 16, FlxColor.WHITE, FlxTextAlign.CENTER));
-		add(new FlxText(0, 290, FlxG.width, "Walk : W").setFormat(null, 16, FlxColor.WHITE, FlxTextAlign.CENTER));
-		add(new FlxText(0, 310, FlxG.width, "Jump : SPACE").setFormat(null, 16, FlxColor.WHITE, FlxTextAlign.CENTER));
+		add(new FlxText(0, 270, FlxG.width, "Move : <- ->").setFormat(null, 16, FlxColor.WHITE, FlxTextAlign.CENTER));
+		add(new FlxText(0, 290, FlxG.width, "Jump : ^").setFormat(null, 16, FlxColor.WHITE, FlxTextAlign.CENTER));
+		add(new FlxText(0, 310, FlxG.width, "Action : Crtl").setFormat(null, 16, FlxColor.WHITE, FlxTextAlign.CENTER));
 
 		// Show start button.
  		add(new FlxButton(280, 180, "New game", play));

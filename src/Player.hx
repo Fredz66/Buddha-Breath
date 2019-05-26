@@ -69,7 +69,7 @@ class Player extends FlxSprite
 
 		if (velocity.y == 0)
 		{
-			if (FlxG.keys.justPressed.SPACE && isTouching(FlxObject.FLOOR))
+			if (FlxG.keys.justPressed.UP && isTouching(FlxObject.FLOOR))
 				velocity.y = JUMP_FORCE;
 
 			if (FlxG.keys.pressed.W)
@@ -78,7 +78,7 @@ class Player extends FlxSprite
 				maxVelocity.x = RUN_SPEED;
 		}
 
-		if ((velocity.y < 0) && (FlxG.keys.justReleased.SPACE))
+		if ((velocity.y < 0) && (FlxG.keys.justReleased.UP))
 			velocity.y = velocity.y * 0.5;
 	}
 		
