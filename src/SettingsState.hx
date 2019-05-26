@@ -18,8 +18,12 @@ class SettingsState extends FlxState
 		// Show message.
       	add(new FlxText(0, 60, FlxG.width, "Settings").setFormat(null, 32, FlxColor.RED, FlxTextAlign.CENTER));
 
-		// Show main menu button.
- 		add(new FlxButton(280, 210, "Main Menu", reset));
+ 		add(new FlxButton(220, 180, "Graphics", keyboard));
+ 		add(new FlxButton(220, 200, "Keyboard", keyboard));
+ 		add(new FlxButton(220, 220, "Joypad", keyboard));
+ 		add(new FlxButton(220, 240, "Volume", keyboard));
+
+ 		add(new FlxButton(220, 270, "Back", back));
 	}
 
 	override public function update(elapsed:Float):Void
@@ -27,7 +31,12 @@ class SettingsState extends FlxState
 		super.update(elapsed);
 	}
 
-	function reset():Void
+	function keyboard():Void
+	{
+		FlxG.switchState(new KeyboardState());
+ 	}
+
+	function back():Void
 	{
 		FlxG.switchState(new MenuState());
  	}
