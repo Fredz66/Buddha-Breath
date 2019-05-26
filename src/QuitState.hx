@@ -18,11 +18,11 @@ class QuitState extends FlxState
 		// Show message.
       	add(new FlxText(0, 60, FlxG.width, "Are you sure ?").setFormat(null, 32, FlxColor.RED, FlxTextAlign.CENTER));
 
-		// Show start button.
- 		add(new FlxButton(280, 180, "Quit", quit));
-
 		// Show main menu button.
- 		add(new FlxButton(280, 210, "Main Menu", menu));
+ 		add(new FlxButton(280, 180, "Main Menu", menu));
+
+		// Show start button.
+ 		add(new FlxButton(280, 210, "Quit", quit));
 	}
 
 	override public function update(elapsed:Float):Void
