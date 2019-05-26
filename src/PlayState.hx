@@ -1,14 +1,8 @@
 package;
 
 import flixel.FlxG;
-import flixel.FlxSprite;
 import flixel.FlxState;
-import flixel.FlxObject;
-import flixel.text.FlxText;
-import flixel.ui.FlxButton;
-import flixel.math.FlxMath;
 import flixel.tile.FlxTilemap;
-
 import flixel.addons.display.FlxBackdrop;
 import flixel.util.FlxColor;
 

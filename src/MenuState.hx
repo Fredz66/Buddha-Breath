@@ -1,14 +1,10 @@
 package;
 
-import flixel.FlxGame;
-import openfl.Lib;
 import flixel.util.FlxColor;
 import flixel.FlxG;
-import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
-import flixel.math.FlxMath;
 
 class MenuState extends FlxState
 {
@@ -20,8 +16,8 @@ class MenuState extends FlxState
       	add(new FlxText(0, 60, FlxG.width, "Buddha Breath").setFormat(null, 64, FlxColor.RED, FlxTextAlign.CENTER));
 
 		// Show controls.
-		add(new FlxText(0, 270, FlxG.width, "Walk : <- ->").setFormat(null, 16, FlxColor.WHITE, FlxTextAlign.CENTER));
-		add(new FlxText(0, 290, FlxG.width, "Run : W").setFormat(null, 16, FlxColor.WHITE, FlxTextAlign.CENTER));
+		add(new FlxText(0, 270, FlxG.width, "Run : <- ->").setFormat(null, 16, FlxColor.WHITE, FlxTextAlign.CENTER));
+		add(new FlxText(0, 290, FlxG.width, "Walk : W").setFormat(null, 16, FlxColor.WHITE, FlxTextAlign.CENTER));
 		add(new FlxText(0, 310, FlxG.width, "Jump : SPACE").setFormat(null, 16, FlxColor.WHITE, FlxTextAlign.CENTER));
 
 		// Show start button.
@@ -55,6 +51,6 @@ class MenuState extends FlxState
 
 	function quit():Void
 	{
-		FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function() { openfl.system.System.exit(0); });
+		FlxG.switchState(new QuitState());
  	}
 }

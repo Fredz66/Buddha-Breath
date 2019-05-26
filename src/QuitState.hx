@@ -6,7 +6,7 @@ import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 
-class WinState extends FlxState
+class QuitState extends FlxState
 {
 	override public function create():Void
 	{
@@ -16,30 +16,26 @@ class WinState extends FlxState
 		FlxG.mouse.visible = true;
 
 		// Show message.
-      	add(new FlxText(0, 60, FlxG.width, "You Won !").setFormat(null, 32, FlxColor.RED, FlxTextAlign.CENTER));
+      	add(new FlxText(0, 60, FlxG.width, "Are you sure ?").setFormat(null, 32, FlxColor.RED, FlxTextAlign.CENTER));
 
 		// Show start button.
- 		add(new FlxButton(280, 180, "Continue", play));
+ 		add(new FlxButton(280, 180, "Quit", quit));
 
 		// Show main menu button.
- 		add(new FlxButton(280, 210, "Main Menu", reset));
+ 		add(new FlxButton(280, 210, "Main Menu", menu));
 	}
 
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-
-		if (FlxG.keys.anyPressed([W,X,C,SPACE])) {
-			play();
-		}
 	}
 
-	function play():Void
+	function quit():Void
 	{
-		FlxG.switchState(new PlayState());
+		FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function() { openfl.system.System.exit(0); });
  	}
 
-	function reset():Void
+	function menu():Void
 	{
 		FlxG.switchState(new MenuState());
  	}
