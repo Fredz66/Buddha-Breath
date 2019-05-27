@@ -22,7 +22,7 @@ class Player extends FlxSprite
 	public function new() 
 	{
 		super();
-		loadGraphic(AssetPaths.spritesProto__png, true, 68, 80);
+		loadGraphic(AssetPaths.sprites__png, true, 68, 80);
 
 		animation.add("idle", [0] );
 		animation.add("walk", [0, 1, 2, 3, 4, 5, 6 ], 14);

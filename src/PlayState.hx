@@ -1,6 +1,6 @@
 package;
 
-import flixel.FlxSprite;
+//import flixel.ui.FlxVirtualPad;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.tile.FlxTilemap;
@@ -97,6 +97,9 @@ class PlayState extends FlxState
 
 		// Hide mouse cursor.
 		FlxG.mouse.visible = false;
+
+		//var virtualPad = new FlxVirtualPad(FULL, A_B);
+		//add(virtualPad);
 	}
 	
 	override public function update(elapsed:Float):Void
