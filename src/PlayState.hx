@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.tile.FlxTilemap;
@@ -11,6 +12,7 @@ class PlayState extends FlxState
 	var background:FlxBackdrop;
 	var foreground:FlxBackdrop;
 	var map:FlxTilemap;
+	var mobile:Mobile;
 	var player:Player;
 
 	var tiles:Array<String> = [
@@ -25,11 +27,11 @@ class PlayState extends FlxState
 		'|                                                   |      |      |                      -==-       |      |    |     -=-         ',
 		'|                                                                                         ||   ==   |      |    |      |          ',
 		'|                =                     --=                                         -=-    ||   ||   |      |    |      |          ',
-		'|             =  |    =    =   -==-      |                                          |     ||   ||   |      |    |      |          ',
-		'---------------  |    |    |    ||       ----------------------------------------------   ||   ||   |      |    |      |       ---',
-		'|||||||||||||||  |    |    |    ||       ||||||||||||||||||||||||||||||||||||||||||||||   ||   ||   |      |    |      |       |||',
-		'|||||||||||||||  |    |    |    ||       ||||||||||||||||||||||||||||||||||||||||||||||   ||   ||   |      |    |      |       |||',
-		'|||||||||||||||  |    |    |    ||       ||||||||||||||||||||||||||||||||||||||||||||||   ||   ||   |      |    |      |       |||',
+		'|             =  |    =        [--]      |                                          |     ||   ||   |      |    |      |          ',
+		'---------------  |    |         ||       ----------------------------------------------   ||   ||   |      |    |      |       ---',
+		'|||||||||||||||  |    |         ||       ||||||||||||||||||||||||||||||||||||||||||||||   ||   ||   |      |    |      |       |||',
+		'|||||||||||||||  |    |         ||       ||||||||||||||||||||||||||||||||||||||||||||||   ||   ||   |      |    |      |       |||',
+		'|||||||||||||||  |    |         ||       ||||||||||||||||||||||||||||||||||||||||||||||   ||   ||   |      |    |      |       |||',
 	];
 
 	/*
@@ -44,6 +46,8 @@ class PlayState extends FlxState
 					case ' ': mapData.push(0);
 					case '-': mapData.push(1);
 					case '=': mapData.push(2);
+					case ']': mapData.push(3);
+					case '[': mapData.push(4);
 					case '|': mapData.push(5);
 					default:  mapData.push(0);
 				}
@@ -75,6 +79,10 @@ class PlayState extends FlxState
 		player = new Player();
 		add(player);
 
+		// Load mobile.
+		mobile = new Mobile();
+		add(mobile);
+
 		// Load foreground.
 		foreground = new FlxBackdrop("assets/images/water-640.png");
 		foreground.scrollFactor.x = 1.25;
@@ -100,6 +108,7 @@ class PlayState extends FlxState
 		}
 
 		// Collision detection between the player and the map.
+		FlxG.collide(player, mobile);
 		FlxG.collide(player, map);
 
 		// Detects fall and death.
