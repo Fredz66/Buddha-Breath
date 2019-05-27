@@ -9,6 +9,7 @@ import flixel.util.FlxColor;
 class PlayState extends FlxState
 {
 	var background:FlxBackdrop;
+	var foreground:FlxBackdrop;
 	var map:FlxTilemap;
 	var player:Player;
 
@@ -17,18 +18,18 @@ class PlayState extends FlxState
 		'                                                                                                                                  ',
 		'                                                                                                                                  ',
 		'                                                                                                                                  ',
-		'                                                    X      X      X                                                               ',
-		'                                                    X      X      X                                            XXX                ',
-		'                                                    X      X      X                                                               ',
-		'X                                                   X      X      X                                XXX    XXX                     ',
-		'X                                                   X      X      X                      XXXX                         XXX         ',
-		'X                                                                                              XX                                 ',
-		'X                X                     XXX                                         XXX                                            ',
-		'X             X  X    X    X   XXXX      X                                                                                        ',
-		'XXXXXXXXXXXXXXX  X    X    X    XX       XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                     XXX',
-		'XXXXXXXXXXXXXXX  X    X    X    XX       XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                     XXX',
-		'XXXXXXXXXXXXXXX  X    X    X    XX       XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                     XXX',
-		'XXXXXXXXXXXXXXX  X    X    X    XX       XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                     XXX',
+		'                                                    |      |      |                                                               ',
+		'                                                    |      |      |                                            -=-                ',
+		'                                                    |      |      |                                             |                 ',
+		'=                                                   |      |      |                                -=-    -=-   |                 ',
+		'|                                                   |      |      |                      -==-       |      |    |     -=-         ',
+		'|                                                                                         ||   ==   |      |    |      |          ',
+		'|                =                     --=                                         -=-    ||   ||   |      |    |      |          ',
+		'|             =  |    =    =   -==-      |                                          |     ||   ||   |      |    |      |          ',
+		'---------------  |    |    |    ||       ----------------------------------------------   ||   ||   |      |    |      |       ---',
+		'|||||||||||||||  |    |    |    ||       ||||||||||||||||||||||||||||||||||||||||||||||   ||   ||   |      |    |      |       |||',
+		'|||||||||||||||  |    |    |    ||       ||||||||||||||||||||||||||||||||||||||||||||||   ||   ||   |      |    |      |       |||',
+		'|||||||||||||||  |    |    |    ||       ||||||||||||||||||||||||||||||||||||||||||||||   ||   ||   |      |    |      |       |||',
 	];
 
 	/*
@@ -41,8 +42,9 @@ class PlayState extends FlxState
 			for (i in 0...row.length) {
 				switch row.charAt(i) {
 					case ' ': mapData.push(0);
-					case 'X': mapData.push(1);
-					case '-': mapData.push(2);
+					case '-': mapData.push(1);
+					case '=': mapData.push(2);
+					case '|': mapData.push(5);
 					default:  mapData.push(0);
 				}
 			}
@@ -57,13 +59,14 @@ class PlayState extends FlxState
 
 		// Load background.
 		background = new FlxBackdrop("assets/images/640.png");
-		background.scrollFactor.x = 1;
+		background.scrollFactor.x = 0.5;
+		background.scrollFactor.y = 0.5;
 		//background.offset.y = -24;
 		add(background);
 
 		// Load map but don't show it.
 		map = new FlxTilemap();
-		map.loadMapFromArray(StringsToMapData(tiles), 130, 16, AssetPaths.tilesProto2__png, 32, 32);
+		map.loadMapFromArray(StringsToMapData(tiles), 130, 16, AssetPaths.tiles__png, 32, 32);
 		add(map);
 		//FlxG.camera.setScrollBounds(0, 0, map.width, map.height);
 		//map.visible = false;
@@ -71,6 +74,13 @@ class PlayState extends FlxState
 		// Load player.
 		player = new Player();
 		add(player);
+
+		// Load foreground.
+		foreground = new FlxBackdrop("assets/images/water-640.png");
+		foreground.scrollFactor.x = 1.25;
+		foreground.scrollFactor.y = 1.25;
+		foreground.offset.y = 10;
+		add(foreground);
 
 		// Camera follows the player, map follows the camera.
 		FlxG.camera.follow(player, LOCKON, 1);
