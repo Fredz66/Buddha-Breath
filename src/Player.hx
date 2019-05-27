@@ -16,6 +16,8 @@ class Player extends FlxSprite
 	private static inline var FALLING_SPEED:Int = 300;
 
 	public var direction:Int = 1;
+	public var startx:Int = 100;
+	public var starty:Int = 310;
 
 	public function new() 
 	{
@@ -35,6 +37,9 @@ class Player extends FlxSprite
 		drag.x = DRAG;
 		acceleration.y = GRAVITY;
 		maxVelocity.set(RUN_SPEED, FALLING_SPEED);
+
+		x = startx;
+		y = starty;
 	}
 
 	override public function update(elapsed:Float):Void

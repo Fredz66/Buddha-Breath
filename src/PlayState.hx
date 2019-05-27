@@ -17,14 +17,18 @@ class PlayState extends FlxState
 		'                                                                                                                                  ',
 		'                                                                                                                                  ',
 		'                                                                                                                                  ',
-		'                                                                                                                                  ',
-		'                                                                                                                                  ',
-		'                 X                      XX                                                                                        ',
-		'              X  X    X    X   XXXX      X                                                                                        ',
-		'XXXXXXXXXXXXXXX  X    X    X    XX       XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-		'XXXXXXXXXXXXXXX  X    X    X    XX       XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-		'XXXXXXXXXXXXXXX  X    X    X    XX       XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-		'XXXXXXXXXXXXXXX  X    X    X    XX       XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+		'                                                    X      X      X                                                               ',
+		'                                                    X      X      X                                            XXX                ',
+		'                                                    X      X      X                                                               ',
+		'X                                                   X      X      X                                XXX    XXX                     ',
+		'X                                                   X      X      X                      XXXX                         XXX         ',
+		'X                                                                                              XX                                 ',
+		'X                X                     XXX                                         XXX                                            ',
+		'X             X  X    X    X   XXXX      X                                                                                        ',
+		'XXXXXXXXXXXXXXX  X    X    X    XX       XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                     XXX',
+		'XXXXXXXXXXXXXXX  X    X    X    XX       XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                     XXX',
+		'XXXXXXXXXXXXXXX  X    X    X    XX       XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                     XXX',
+		'XXXXXXXXXXXXXXX  X    X    X    XX       XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                     XXX',
 	];
 
 	/*
@@ -54,13 +58,14 @@ class PlayState extends FlxState
 		// Load background.
 		background = new FlxBackdrop("assets/images/640.png");
 		background.scrollFactor.x = 1;
-		background.offset.y = -24;
+		//background.offset.y = -24;
 		add(background);
 
 		// Load map but don't show it.
 		map = new FlxTilemap();
-		map.loadMapFromArray(StringsToMapData(tiles), 130, 12, AssetPaths.tilesProto2__png, 32, 32);
+		map.loadMapFromArray(StringsToMapData(tiles), 130, 16, AssetPaths.tilesProto2__png, 32, 32);
 		add(map);
+		//FlxG.camera.setScrollBounds(0, 0, map.width, map.height);
 		//map.visible = false;
 
 		// Load player.
@@ -88,7 +93,7 @@ class PlayState extends FlxState
 		FlxG.collide(player, map);
 
 		// Detects fall and death.
-		if (player.y > FlxG.height) {
+		if (player.y + player.height > FlxG.height + player.starty) {
 			FlxG.camera.fade(FlxColor.BLACK, .33, false, death);
 		}
 
