@@ -34,7 +34,7 @@ class Player extends FlxSprite
 		super();
 		loadGraphic(AssetPaths.sprites__png, true, 68, 80);
 
-		animation.add("idle", [0] );
+		animation.add("idle", [9, 10], 6);
 		animation.add("walk", [0, 1, 2, 3, 4, 5, 6 ], 14);
 		animation.add("skid", [0]);
 		animation.add("jump", [8]);
