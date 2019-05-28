@@ -13,6 +13,9 @@ class PlayState extends FlxState
 	var foreground:FlxBackdrop;
 	var map:FlxTilemap;
 	var mobile:Mobile;
+	var spiky1:Spiky;
+	var spiky2:Spiky;
+	var spiky3:Spiky;
 	var player:Player;
 
 	var tiles:Array<String> = [
@@ -24,7 +27,7 @@ class PlayState extends FlxState
 		'                                                    |      |      |                                            [=]                ',
 		'                                                    |      |      |                                             |                 ',
 		'=                                                   |      |      |                                [=]    [=]   |                 ',
-		'|                                                   |      |      |                      [==]       |      |    |     [=]         ',
+		'|                                                                                        [==]       |      |    |     [=]         ',
 		'|                                                                                         ||   ==   |      |    |      |          ',
 		'|                =                     [_=                                         [=]    ||   ||   |      |    |      |          ',
 		'|             =  |    =        [--]      |                                          |     ||   ||   |      |    |      |          ',
@@ -84,6 +87,22 @@ class PlayState extends FlxState
 		mobile = new Mobile();
 		add(mobile);
 
+		// Load spikies.
+		spiky1 = new Spiky();
+		add(spiky1);
+		spiky1.x = 1657;
+		spiky1.y = 250;
+
+		spiky2= new Spiky();
+		add(spiky2);
+		spiky2.x = 1881;
+		spiky2.y = 250;
+
+		spiky3 = new Spiky();
+		add(spiky3);
+		spiky3.x = 2105;
+		spiky3.y = 250;
+
 		// Load foreground.
 		foreground = new FlxBackdrop("assets/images/water-640.png");
 		foreground.scrollFactor.x = 1.25;
@@ -114,6 +133,9 @@ class PlayState extends FlxState
 		// Collision detection between the player and the map.
 		FlxG.collide(player, mobile);
 		FlxG.collide(player, map);
+		FlxG.collide(player, spiky1);
+		FlxG.collide(player, spiky2);
+		FlxG.collide(player, spiky3);
 
 		// Detects fall and death.
 		if (player.y + player.height > FlxG.height + player.starty) {
