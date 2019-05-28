@@ -1,6 +1,8 @@
 package;
 
 //import flixel.ui.FlxVirtualPad;
+import flixel.math.FlxAngle;
+import flixel.math.FlxMath;
 import flixel.addons.effects.FlxTrail;
 import flixel.FlxG;
 import flixel.FlxState;
@@ -19,6 +21,7 @@ class PlayState extends FlxState
 	var plonk:Plonk;
 	var spikies:Array<Spiky> = [];
 	var player:Player;
+	var frames:Int = 0;
 
 	var tiles:Array<String> = [
 		'                                                                                                                                  ',
@@ -123,7 +126,13 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 
+		frames++;
+
 		//trace(spiky1.direction, spiky1.angle, spiky1.angularVelocity);
+
+		//foreground.x += FlxMath.fastCos((elapsed % 5));
+		foreground.x += 2;
+		foreground.y += FlxMath.fastSin(((frames / (700 + FlxG.random.int(0, 300))) % 360) * FlxAngle.TO_DEG) / 3;
 
 		// Toggle map visibility with H key.
 		if (FlxG.keys.justPressed.H) {
