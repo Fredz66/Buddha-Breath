@@ -1,6 +1,7 @@
 package;
 
 //import flixel.ui.FlxVirtualPad;
+import flixel.addons.effects.FlxTrail;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.tile.FlxTilemap;
@@ -91,13 +92,14 @@ class PlayState extends FlxState
 
 		// Load spikies.
 		spiky1 = new Spiky();
+		add(new FlxTrail(spiky1, null, 3, 0, 0.2));
 		add(spiky1);
 		spiky1.x = 1657;
 		spiky1.y = 157;
-		//spiky1.angle = 0;
 		spiky1.angularVelocity = 150;
 
 		spiky2= new Spiky();
+		add(new FlxTrail(spiky2, null, 3, 0, 0.2));
 		add(spiky2);
 		spiky2.x = 1881;
 		spiky2.y = 157;
@@ -105,6 +107,7 @@ class PlayState extends FlxState
 		spiky2.angularVelocity = 120;
 
 		spiky3 = new Spiky();
+		add(new FlxTrail(spiky3, null, 3, 0, 0.2));
 		add(spiky3);
 		spiky3.x = 2105;
 		spiky3.y = 157;
