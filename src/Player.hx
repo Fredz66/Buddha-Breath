@@ -16,9 +16,12 @@ class Player extends FlxSprite
 	private static inline var FALLING_SPEED:Int = 300;
 
 	public var direction:Int = 1;
-	//public var startx:Int = 100;
-	public var startx:Int = 1400;
-	public var starty:Int = 310;
+
+	//public var startx:Int = 100; // First.
+	public var startx:Int = 1400; // Second.
+	//public var startx:Int = 2000; // Third.
+
+	public var starty:Int = 310; 
 
 	public function new() 
 	{
@@ -28,8 +31,9 @@ class Player extends FlxSprite
 		animation.add("idle", [0] );
 		animation.add("walk", [0, 1, 2, 3, 4, 5, 6 ], 14);
 		animation.add("skid", [0]);
-		animation.add("jump", [0]);
-		animation.add("fall", [0]);
+		animation.add("jump", [8]);
+		animation.add("fall", [8]);
+		animation.add("hit", [7]);
 		//animation.add("attack", [26,27,28,29],8);
 
 		setSize(40, 76);
@@ -45,8 +49,10 @@ class Player extends FlxSprite
 
 	override public function update(elapsed:Float):Void
 	{
-		move();		
-		animate();	
+		if (alive) {
+			move();
+			animate();
+		}
 
 		super.update(elapsed);
 	}

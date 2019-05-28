@@ -7,6 +7,7 @@ import flixel.tile.FlxTilemap;
 import flixel.addons.display.FlxBackdrop;
 import flixel.util.FlxColor;
 import flixel.util.FlxCollision;
+import flixel.util.FlxTimer;
 
 class PlayState extends FlxState
 {
@@ -111,7 +112,7 @@ class PlayState extends FlxState
 		spiky3.angularVelocity = 102;
 
 		// Load foreground.
-		foreground = new FlxBackdrop("assets/images/water-640.png");
+		foreground = new FlxBackdrop("assets/images/water-beige-640.png");
 		foreground.scrollFactor.x = 1.25;
 		foreground.scrollFactor.y = 1.25;
 		foreground.offset.y = 10;
@@ -144,8 +145,9 @@ class PlayState extends FlxState
 		FlxG.collide(player, map);
 
 		// Collision detection between the player and the spikies.
-		if (FlxCollision.pixelPerfectCheck(player, spiky1) || FlxCollision.pixelPerfectCheck(player, spiky2) || FlxCollision.pixelPerfectCheck(player, spiky3)) {
-			FlxG.camera.fade(FlxColor.BLACK, .33, false, death);
+		if (player.alive && (FlxCollision.pixelPerfectCheck(player, spiky1) || FlxCollision.pixelPerfectCheck(player, spiky2) || FlxCollision.pixelPerfectCheck(player, spiky3))) {
+			player.alive = false;
+			hit();
 		}
 
 		// Detects fall and death.
@@ -160,6 +162,19 @@ class PlayState extends FlxState
 
 		//FlxG.debugger.visible = true;
 		//FlxG.debugger.drawDebug = true;
+	}
+
+	function hit():Void
+	{
+		player.animation.play("hit");
+		player.maxVelocity.set(500, 300);
+		player.velocity.set(-300,-200);
+		new FlxTimer().start(1, hitdeath);
+	}
+
+	function hitdeath(Timer:FlxTimer):Void
+	{
+		FlxG.camera.fade(FlxColor.BLACK, .33, false, death);
 	}
 
 	function death():Void
