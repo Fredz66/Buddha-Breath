@@ -17,11 +17,17 @@ class Player extends FlxSprite
 
 	public var direction:Int = 1;
 
-	//public var startx:Int = 100; // First.
-	public var startx:Int = 1400; // Second.
-	//public var startx:Int = 2000; // Third.
+	// First position.
+	public var startx:Int = 60;
+	public var starty:Int = 150;
 
-	public var starty:Int = 310; 
+	// Second position.
+	//public var startx:Int = 1400;
+	//public var starty:Int = 310;
+
+	// Third position.
+	//public var startx:Int = 2500;
+	//public var starty:Int = 310;
 
 	public function new() 
 	{

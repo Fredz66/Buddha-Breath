@@ -16,20 +16,18 @@ class PlayState extends FlxState
 	var foreground:FlxBackdrop;
 	var map:FlxTilemap;
 	var mobile:Mobile;
-	var spiky1:Spiky;
-	var spiky2:Spiky;
-	var spiky3:Spiky;
+	var spikies:Array<Spiky> = [];
 	var player:Player;
 
 	var tiles:Array<String> = [
 		'                                                                                                                                  ',
 		'                                                                                                                                  ',
 		'                                                                                                                                  ',
-		'                                                    |      |      |                                                               ',
-		'                                                    |      |      |                                                               ',
-		'                                                    |      |      |                                            [=]                ',
-		'                                                    |      |      |                                             |                 ',
-		'=                                                   |      |      |                                [=]    [=]   |                 ',
+		'                                                  |     |     |     |     |                                                       ',
+		'                                                  |     |     |     |     |                                                       ',
+		'                                                  |     |     |     |     |                                    [=]                ',
+		'                                                  |     |     |     |     |                                     |                 ',
+		'=                                                 |     |     |     |     |                        [=]    [=]   |                 ',
 		'|                                                                                        [==]       |      |    |     [=]         ',
 		'|                                                                                         ||   ==   |      |    |      |          ',
 		'|                =                     [_=                                         [=]    ||   ||   |      |    |      |          ',
@@ -91,28 +89,11 @@ class PlayState extends FlxState
 		add(mobile);
 
 		// Load spikies.
-		spiky1 = new Spiky();
-		add(new FlxTrail(spiky1, null, 3, 0, 0.2));
-		add(spiky1);
-		spiky1.x = 1657;
-		spiky1.y = 157;
-		spiky1.angularVelocity = 150;
-
-		spiky2= new Spiky();
-		add(new FlxTrail(spiky2, null, 3, 0, 0.2));
-		add(spiky2);
-		spiky2.x = 1881;
-		spiky2.y = 157;
-		spiky2.angle = 33.5;
-		spiky2.angularVelocity = 120;
-
-		spiky3 = new Spiky();
-		add(new FlxTrail(spiky3, null, 3, 0, 0.2));
-		add(spiky3);
-		spiky3.x = 2105;
-		spiky3.y = 157;
-		spiky3.angle = 50;
-		spiky3.angularVelocity = 102;
+		addSpiky(1593, 157, 0, 150);
+		addSpiky(1785, 157, 33.5, 120);
+		addSpiky(1977, 157, 50, 102);
+		addSpiky(2169, 157, 0, 150);
+		addSpiky(2361, 157, 50, 102);
 
 		// Load foreground.
 		foreground = new FlxBackdrop("assets/images/water-beige-640.png");
@@ -143,14 +124,20 @@ class PlayState extends FlxState
 			map.visible = !map.visible;
 		}
 
-		// Collision detection between the player and the map.
-		FlxG.collide(player, mobile);
-		FlxG.collide(player, map);
+		if (player.alive) {
+			// Collision detection between the player and the map.
+			FlxG.collide(player, mobile);
+			FlxG.collide(player, map);
 
-		// Collision detection between the player and the spikies.
-		if (player.alive && (FlxCollision.pixelPerfectCheck(player, spiky1) || FlxCollision.pixelPerfectCheck(player, spiky2) || FlxCollision.pixelPerfectCheck(player, spiky3))) {
-			player.alive = false;
-			hit();
+			// Collision detection between the player and the spikies.
+			if (player.alive) {
+				for (spiky in spikies) {
+					if (FlxCollision.pixelPerfectCheck(player, spiky)) {
+						player.alive = false;
+						hit();
+					}
+				}
+			}
 		}
 
 		// Detects fall and death.
@@ -163,12 +150,26 @@ class PlayState extends FlxState
 			FlxG.camera.fade(FlxColor.BLACK, .33, false, win);
 		}
 
-		//FlxG.debugger.visible = true;
-		//FlxG.debugger.drawDebug = true;
+		#if debug
+		FlxG.debugger.visible = true;
+		FlxG.debugger.drawDebug = true;
+		#end
+	}
+
+	function addSpiky(x, y, angle, velocity) {
+		var spiky = new Spiky();
+		add(new FlxTrail(spiky, null, 3, 0, 0.2));
+		add(spiky);
+		spiky.x = x;
+		spiky.y = y;
+		spiky.angle = angle;
+		spiky.angularVelocity = velocity;
+		spikies.push(spiky);
 	}
 
 	function hit():Void
 	{
+		FlxG.camera.shake(0.01, 0.2);
 		player.animation.play("hit");
 		player.maxVelocity.set(500, 300);
 		player.velocity.set(-300,-200);
