@@ -93,11 +93,11 @@ class PlayState extends FlxState
 		add(mobile);
 
 		// Load spikies.
-		addSpiky(1593, 157, 33.5, 120);
-		addSpiky(1785, 157, 0, 150);
-		addSpiky(1977, 157, 50, 102);
-		addSpiky(2169, 157, 0, 150);
-		addSpiky(2361, 157, 50, 102);
+		addSpiky(50 * 32 - 7, 157, 33.5, 120);
+		addSpiky(56 * 32 - 7, 157, 0, 150);
+		addSpiky(62 * 32 - 7, 157, 50, 102);
+		addSpiky(68 * 32 - 7, 157, 0, 150);
+		addSpiky(74 * 32 - 7, 157, 50, 102);
 
 		// Load foreground.
 		foreground = new FlxBackdrop("assets/images/water-beige-640.png");
