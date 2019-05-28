@@ -89,8 +89,8 @@ class PlayState extends FlxState
 		add(mobile);
 
 		// Load spikies.
-		addSpiky(1593, 157, 0, 150);
-		addSpiky(1785, 157, 33.5, 120);
+		addSpiky(1593, 157, 33.5, 120);
+		addSpiky(1785, 157, 0, 150);
 		addSpiky(1977, 157, 50, 102);
 		addSpiky(2169, 157, 0, 150);
 		addSpiky(2361, 157, 50, 102);
