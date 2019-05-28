@@ -6,6 +6,7 @@ import flixel.FlxState;
 import flixel.tile.FlxTilemap;
 import flixel.addons.display.FlxBackdrop;
 import flixel.util.FlxColor;
+import flixel.util.FlxCollision;
 
 class PlayState extends FlxState
 {
@@ -91,17 +92,23 @@ class PlayState extends FlxState
 		spiky1 = new Spiky();
 		add(spiky1);
 		spiky1.x = 1657;
-		spiky1.y = 250;
+		spiky1.y = 157;
+		//spiky1.angle = 0;
+		spiky1.angularVelocity = 150;
 
 		spiky2= new Spiky();
 		add(spiky2);
 		spiky2.x = 1881;
-		spiky2.y = 250;
+		spiky2.y = 157;
+		spiky2.angle = 33.5;
+		spiky2.angularVelocity = 120;
 
 		spiky3 = new Spiky();
 		add(spiky3);
 		spiky3.x = 2105;
-		spiky3.y = 250;
+		spiky3.y = 157;
+		spiky3.angle = 50;
+		spiky3.angularVelocity = 102;
 
 		// Load foreground.
 		foreground = new FlxBackdrop("assets/images/water-640.png");
@@ -125,6 +132,8 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 
+		//trace(spiky1.direction, spiky1.angle, spiky1.angularVelocity);
+
 		// Toggle map visibility with H key.
 		if (FlxG.keys.justPressed.H) {
 			map.visible = !map.visible;
@@ -133,9 +142,11 @@ class PlayState extends FlxState
 		// Collision detection between the player and the map.
 		FlxG.collide(player, mobile);
 		FlxG.collide(player, map);
-		FlxG.collide(player, spiky1);
-		FlxG.collide(player, spiky2);
-		FlxG.collide(player, spiky3);
+
+		// Collision detection between the player and the spikies.
+		if (FlxCollision.pixelPerfectCheck(player, spiky1) || FlxCollision.pixelPerfectCheck(player, spiky2) || FlxCollision.pixelPerfectCheck(player, spiky3)) {
+			FlxG.camera.fade(FlxColor.BLACK, .33, false, death);
+		}
 
 		// Detects fall and death.
 		if (player.y + player.height > FlxG.height + player.starty) {
