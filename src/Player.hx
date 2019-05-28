@@ -87,16 +87,20 @@ class Player extends FlxSprite
 
 		if (velocity.y == 0)
 		{
-			if (FlxG.keys.justPressed.UP && isTouching(FlxObject.FLOOR))
+			if (FlxG.keys.justPressed.UP && isTouching(FlxObject.FLOOR)) {
+				FlxG.sound.play(AssetPaths.jump__ogg, 1);
 				velocity.y = JUMP_FORCE;
+			}
 
 			if (FlxG.keys.pressed.W)
 				maxVelocity.x = WALK_SPEED;
 			else
 				maxVelocity.x = RUN_SPEED;
 		} else {
-			if (FlxG.keys.justPressed.UP && isTouching(FlxObject.FLOOR))
+			if (FlxG.keys.justPressed.UP && isTouching(FlxObject.FLOOR)) {
+				FlxG.sound.play(AssetPaths.jump__ogg, 1);
 				velocity.y = JUMP_FORCE;
+			}
 		}
 
 		if ((velocity.y < 0) && (FlxG.keys.justReleased.UP))

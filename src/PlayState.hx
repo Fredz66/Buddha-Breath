@@ -1,6 +1,7 @@
 package;
 
 //import flixel.ui.FlxVirtualPad;
+import flixel.FlxObject;
 import flixel.math.FlxAngle;
 import flixel.math.FlxMath;
 import flixel.addons.effects.FlxTrail;
@@ -22,6 +23,8 @@ class PlayState extends FlxState
 	var spikies:Array<Spiky> = [];
 	var player:Player;
 	var frames:Int = 0;
+
+	var mobileFalling:Bool = false;
 
 	var tiles:Array<String> = [
 		'                                                                                                                                  ',
@@ -69,6 +72,8 @@ class PlayState extends FlxState
 	override public function create():Void
 	{
 		super.create();
+
+		FlxG.sound.playMusic(AssetPaths.asian_mystery_nometadata__ogg, 1, true);
 
 		// Load background.
 		background = new FlxBackdrop("assets/images/640.png");
@@ -141,7 +146,8 @@ class PlayState extends FlxState
 
 		if (player.alive) {
 			// Collision detection between the player and the map.
-			FlxG.collide(player, mobile);
+			//FlxG.collide(player, mobile);
+			FlxG.overlap(player, mobile, hitMobile);
 			FlxG.collide(player, map);
 
 			// Collision detection between the player and the spikies.
@@ -172,6 +178,14 @@ class PlayState extends FlxState
 		#end
 	}
 
+	function hitMobile(Object1:flixel.FlxObject, Object2:flixel.FlxObject):Void {
+		FlxObject.separate(Object1, Object2);
+		if (!mobileFalling) {
+			mobileFalling = true;
+			FlxG.sound.play(AssetPaths.tree__ogg, 1);
+		}
+	}
+
 	function addSpiky(x, y, angle, velocity) {
 		var spiky = new Spiky();
 		add(new FlxTrail(spiky, null, 3, 0, 0.2));
@@ -184,6 +198,7 @@ class PlayState extends FlxState
 	}
 
 	function drown():Void {
+		FlxG.sound.play(AssetPaths.watersplash__ogg, 1);
 		plonk.x = player.x;
 		plonk.y = FlxG.height + player.height;
 		plonk.velocity.y = -300;
@@ -192,6 +207,7 @@ class PlayState extends FlxState
 	}
 	function hit():Void
 	{
+		FlxG.sound.play(AssetPaths.death__ogg, 1);
 		FlxG.camera.shake(0.01, 0.2);
 		player.animation.play("hit");
 		player.maxVelocity.set(500, 300);
