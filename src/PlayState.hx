@@ -16,6 +16,7 @@ class PlayState extends FlxState
 	var foreground:FlxBackdrop;
 	var map:FlxTilemap;
 	var mobile:Mobile;
+	var plonk:Plonk;
 	var spikies:Array<Spiky> = [];
 	var player:Player;
 
@@ -100,6 +101,11 @@ class PlayState extends FlxState
 		foreground.scrollFactor.x = 1.25;
 		foreground.scrollFactor.y = 1.25;
 		foreground.offset.y = 10;
+
+		// Load plonk.
+		plonk = new Plonk();
+
+		add(plonk);
 		add(foreground);
 
 		// Camera follows the player, map follows the camera.
@@ -138,11 +144,12 @@ class PlayState extends FlxState
 					}
 				}
 			}
-		}
 
-		// Detects fall and death.
-		if (player.y + player.height > FlxG.height + player.starty) {
-			FlxG.camera.fade(FlxColor.BLACK, .33, false, death);
+			// Detects fall and death.
+			if (player.y + player.height > FlxG.height + player.starty) {
+				player.alive = false;
+				drown();
+			}
 		}
 
 		// Detects end of level.
@@ -167,6 +174,13 @@ class PlayState extends FlxState
 		spikies.push(spiky);
 	}
 
+	function drown():Void {
+		plonk.x = player.x;
+		plonk.y = FlxG.height + player.height;
+		plonk.velocity.y = -300;
+		plonk.acceleration.y = 400;
+		new FlxTimer().start(2, hitdeath);
+	}
 	function hit():Void
 	{
 		FlxG.camera.shake(0.01, 0.2);
