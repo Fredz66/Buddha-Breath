@@ -112,6 +112,7 @@ class PlayState extends FlxState
 
 		// Load plonk.
 		plonk = new Plonk();
+		plonk.visible = false;
 
 		add(plonk);
 		add(foreground);
@@ -201,6 +202,7 @@ class PlayState extends FlxState
 		FlxG.sound.play(AssetPaths.watersplash__ogg, 1);
 		plonk.x = player.x;
 		plonk.y = FlxG.height + player.height;
+		plonk.visible = true;
 		plonk.velocity.y = -300;
 		plonk.acceleration.y = 400;
 		new FlxTimer().start(2, hitdeath);

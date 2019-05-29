@@ -28,7 +28,7 @@ class MenuState extends FlxState
 
 		super.create();
 
-		FlxG.sound.playMusic(AssetPaths.temple_nometadata__wav, 1, true);
+		FlxG.sound.playMusic(AssetPaths.temple_nometadata__ogg, 1, true);
 	}
 
 	override public function update(elapsed:Float):Void
