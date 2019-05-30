@@ -32,14 +32,16 @@ class Player extends FlxSprite
 	public function new() 
 	{
 		super();
-		loadGraphic(AssetPaths.sprites__png, true, 68, 80);
+		//loadGraphic(AssetPaths.sprites__png, true, 68, 80);
+		loadGraphic(AssetPaths.litang__png, true, 68, 80);
 
-		animation.add("idle", [9, 10], 6);
-		animation.add("walk", [0, 1, 2, 3, 4, 5, 6 ], 14);
+		animation.add("idle", [10, 11], 6);
+		//animation.add("walk", [0, 1, 2, 3, 4, 5, 6 ], 14);
+		animation.add("walk", [16, 17, 18, 19, 20], 12);
 		animation.add("skid", [0]);
-		animation.add("jump", [8]);
-		animation.add("fall", [8]);
-		animation.add("hit", [7]);
+		animation.add("jump", [9]);
+		animation.add("fall", [9]);
+		animation.add("hit", [8]);
 		//animation.add("attack", [26,27,28,29],8);
 
 		setSize(40, 76);
