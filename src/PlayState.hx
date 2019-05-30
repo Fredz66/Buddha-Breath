@@ -36,7 +36,7 @@ class PlayState extends FlxState
 	var tiles:Array<String> = [
 		'                                                                                                                                  ',
 		'                                                                                                                                  ',
-		'                                                                                                                                  ',
+		'                                                  |     |     |     |     |                                                       ',
 		'                                                  |     |     |     |     |                                                       ',
 		'                                                  |     |     |     |     |                                                       ',
 		'                                                  |     |     |     |     |                                    [=]                ',
