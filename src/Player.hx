@@ -35,6 +35,7 @@ class Player extends FlxSprite
 		loadGraphic(AssetPaths.litang__png, true, 68, 80);
 
 		animation.add("idle", [10, 11], 6);
+		animation.add("crouch", [12, 13], 6);
 		animation.add("walk", [16, 17, 18, 19, 20], 12);
 		animation.add("skid", [0]);
 		animation.add("jump", [9]);
@@ -109,18 +110,22 @@ class Player extends FlxSprite
 		
 	private function animate() 
 	{
-		if ((velocity.y <= 0) && (!isTouching(FlxObject.FLOOR)))
+		if ((velocity.y <= 0) && (!isTouching(FlxObject.FLOOR))) {
 			animation.play("jump");
-		else if (velocity.y > 0) 
+		} else if (velocity.y > 0) {
 			animation.play("fall");
-		else if (velocity.x == 0) 
-			animation.play("idle");
-		else 
-		{
-			if (FlxMath.signOf(velocity.x) != FlxMath.signOf(direction)) 
+		} else if (velocity.x == 0) {
+			if (FlxG.keys.pressed.DOWN) {
+				animation.play("crouch");
+			} else {
+				animation.play("idle");
+			}
+		} else {
+			if (FlxMath.signOf(velocity.x) != FlxMath.signOf(direction)) {
 				animation.play("skid");
-			else 
+			} else {
 				animation.play("walk");
+			}
 		}
 	}
 }
