@@ -1,10 +1,9 @@
 package;
 
-//import flixel.ui.FlxVirtualPad;
 import flixel.FlxObject;
 import flixel.math.FlxAngle;
 import flixel.math.FlxMath;
-import flixel.addons.effects.FlxTrail;
+//import flixel.addons.effects.FlxTrail;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.tile.FlxTilemap;
@@ -12,6 +11,10 @@ import flixel.addons.display.FlxBackdrop;
 import flixel.util.FlxColor;
 import flixel.util.FlxCollision;
 import flixel.util.FlxTimer;
+
+#if mobile
+import flixel.ui.FlxVirtualPad;
+#end
 
 class PlayState extends FlxState
 {
@@ -23,6 +26,10 @@ class PlayState extends FlxState
 	var spikies:Array<Spiky> = [];
 	var player:Player;
 	var frames:Int = 0;
+
+	#if mobile
+ 	public static var virtualPad:FlxVirtualPad;
+ 	#end
 
 	var mobileFalling:Bool = false;
 
@@ -124,8 +131,11 @@ class PlayState extends FlxState
 		// Hide mouse cursor.
 		FlxG.mouse.visible = false;
 
-		//var virtualPad = new FlxVirtualPad(FULL, A_B);
-		//add(virtualPad);
+		#if mobile
+		virtualPad = new FlxVirtualPad(FULL, A_B);
+		virtualPad.visible = true;
+		add(virtualPad);
+		#end
 	}
 	
 	override public function update(elapsed:Float):Void
@@ -147,7 +157,6 @@ class PlayState extends FlxState
 
 		if (player.alive) {
 			// Collision detection between the player and the map.
-			//FlxG.collide(player, mobile);
 			FlxG.overlap(player, mobile, hitMobile);
 			FlxG.collide(player, map);
 
@@ -189,7 +198,7 @@ class PlayState extends FlxState
 
 	function addSpiky(x, y, angle, velocity) {
 		var spiky = new Spiky();
-		add(new FlxTrail(spiky, null, 3, 0, 0.2));
+		//add(new FlxTrail(spiky, null, 3, 0, 0.2));
 		add(spiky);
 		spiky.x = x;
 		spiky.y = y;
