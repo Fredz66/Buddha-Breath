@@ -112,10 +112,8 @@ class PlayState extends FlxState
 		addSpiky(74 * 32 - 7, 157, 50, 102);
 
 		// Load foreground.
-		foreground = new FlxBackdrop("assets/images/water-beige-640.png");
-		foreground.scrollFactor.x = 1.25;
-		foreground.scrollFactor.y = 1.25;
-		foreground.offset.y = 10;
+		foreground = new FlxBackdrop("assets/images/water.png", 1.25, 1.25, true, false);
+		foreground.offset.y = -465;
 
 		// Load plonk.
 		plonk = new Plonk();
