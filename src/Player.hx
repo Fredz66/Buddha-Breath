@@ -13,9 +13,11 @@ class Player extends FlxSprite
 	private static inline var JUMP_FORCE:Int = -280;
 	private static inline var WALK_SPEED:Int = 100;
 	private static inline var RUN_SPEED:Int = 150;
+	private static inline var CROUCH_SPEED:Int = 50;
 	private static inline var FALLING_SPEED:Int = 300;
 
 	public var direction:Int = 1;
+	public var crouch:Bool = false;
 
 	// First position.
 	public var startx:Int = 60;
@@ -34,13 +36,14 @@ class Player extends FlxSprite
 		super();
 		loadGraphic(AssetPaths.litang__png, true, 68, 80);
 
-		animation.add("idle", [10, 11], 6);
-		animation.add("crouch", [12, 13], 6);
-		animation.add("walk", [16, 17, 18, 19, 20], 12);
-		animation.add("skid", [0]);
-		animation.add("jump", [9]);
-		animation.add("fall", [9]);
-		animation.add("hit", [8]);
+		animation.add("idle", [0, 1], 6);
+		animation.add("walk", [2, 3, 4, 5, 6], 12);
+		animation.add("crouch", [8, 9], 6);
+		animation.add("crouch-walk", [8, 9], 12);
+		animation.add("skid", [0, 1], 6);
+		animation.add("jump", [17]);
+		animation.add("fall", [17]);
+		animation.add("hit", [16]);
 		//animation.add("attack", [26,27,28,29],8);
 
 		setSize(30, 76);
@@ -93,10 +96,18 @@ class Player extends FlxSprite
 				velocity.y = JUMP_FORCE;
 			}
 
-			if (FlxG.keys.pressed.W)
+			if (FlxG.keys.pressed.DOWN && isTouching(FlxObject.FLOOR)) {
+				crouch = true;
+				maxVelocity.x = CROUCH_SPEED;
+			} else {
+				crouch = false;
+				maxVelocity.x = RUN_SPEED;
+			}
+
+			/*if (FlxG.keys.pressed.W)
 				maxVelocity.x = WALK_SPEED;
 			else
-				maxVelocity.x = RUN_SPEED;
+				maxVelocity.x = RUN_SPEED;*/
 		} else {
 			if (FlxG.keys.justPressed.UP && isTouching(FlxObject.FLOOR)) {
 				FlxG.sound.play(AssetPaths.jump__ogg, 1);
@@ -115,16 +126,20 @@ class Player extends FlxSprite
 		} else if (velocity.y > 0) {
 			animation.play("fall");
 		} else if (velocity.x == 0) {
-			if (FlxG.keys.pressed.DOWN) {
+			if (crouch) {
 				animation.play("crouch");
 			} else {
 				animation.play("idle");
 			}
 		} else {
-			if (FlxMath.signOf(velocity.x) != FlxMath.signOf(direction)) {
-				animation.play("skid");
+			if (crouch) {
+				animation.play("crouch-walk");
 			} else {
-				animation.play("walk");
+				if (FlxMath.signOf(velocity.x) != FlxMath.signOf(direction)) {
+					animation.play("skid");
+				} else {
+					animation.play("walk");
+				}
 			}
 		}
 	}
