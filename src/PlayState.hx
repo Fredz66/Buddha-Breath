@@ -27,6 +27,7 @@ class PlayState extends FlxState
 	var plonk:Plonk;
 	var spikies:Array<Spiky> = [];
 	var player:Player;
+	var bird:Bird;
 	var frames:Int = 0;
 
 	#if mobile
@@ -103,6 +104,10 @@ class PlayState extends FlxState
 		// Load player.
 		player = new Player();
 		add(player);
+
+		// Load bird.
+		bird = new Bird();
+		add(bird);
 
 		// Load mobile.
 		mobile = new Mobile();
