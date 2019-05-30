@@ -19,7 +19,9 @@ import flixel.ui.FlxVirtualPad;
 class PlayState extends FlxState
 {
 	var background:FlxBackdrop;
-	var foreground:FlxBackdrop;
+	var foreground1:FlxBackdrop;
+	var foreground2:FlxBackdrop;
+	var foreground3:FlxBackdrop;
 	var map:FlxTilemap;
 	var mobile:Mobile;
 	var plonk:Plonk;
@@ -114,15 +116,23 @@ class PlayState extends FlxState
 		addSpiky(74 * 32 - 7, 157, 50, 102);
 
 		// Load foreground.
-		foreground = new FlxBackdrop("assets/images/water.png", 1.25, 1.25, true, false);
-		foreground.offset.y = -465;
+		foreground1 = new FlxBackdrop("assets/images/water3.png", 1.25, 1.25, true, false);
+		foreground1.offset.y = -450;
+		foreground2 = new FlxBackdrop("assets/images/water2.png", 1.30, 1.25, true, false);
+		foreground2.offset.x = 20;
+		foreground2.offset.y = -474;
+		foreground3 = new FlxBackdrop("assets/images/water1.png", 1.50, 1.25, true, false);
+		foreground3.offset.x = 60;
+		foreground3.offset.y = -510;
 
 		// Load plonk.
 		plonk = new Plonk();
 		plonk.visible = false;
 
 		add(plonk);
-		add(foreground);
+		add(foreground1);
+		add(foreground2);
+		add(foreground3);
 
 		// Camera follows the player, map follows the camera.
 		FlxG.camera.follow(player, LOCKON, 1);
@@ -146,9 +156,14 @@ class PlayState extends FlxState
 
 		//trace(spiky1.direction, spiky1.angle, spiky1.angularVelocity);
 
-		//foreground.x += FlxMath.fastCos((elapsed % 5));
-		foreground.x += 2;
-		foreground.y += FlxMath.fastSin(((frames / (700 + FlxG.random.int(0, 300))) % 360) * FlxAngle.TO_DEG) / 3;
+		foreground1.x += 2;
+		foreground1.y += FlxMath.fastSin(((frames / (700 + FlxG.random.int(0, 300))) % 360) * FlxAngle.TO_DEG) / 3;
+
+		foreground2.x += 2.3;
+		foreground2.y += FlxMath.fastSin(((frames / (700 + FlxG.random.int(0, 300))) % 360) * FlxAngle.TO_DEG) / 3;
+
+		foreground3.x += 2.8;
+		foreground3.y += FlxMath.fastSin(((frames / (700 + FlxG.random.int(0, 300))) % 360) * FlxAngle.TO_DEG) / 3;
 
 		// Toggle map visibility with H key.
 		if (FlxG.keys.justPressed.H) {
