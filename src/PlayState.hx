@@ -101,13 +101,13 @@ class PlayState extends FlxState
 		//FlxG.camera.setScrollBounds(0, 0, map.width, map.height);
 		//map.visible = false;
 
-		// Load player.
-		player = new Player();
-		add(player);
-
 		// Load bird.
 		bird = new Bird();
 		add(bird);
+
+		// Load player.
+		player = new Player();
+		add(player);
 
 		// Load mobile.
 		mobile = new Mobile();
