@@ -50,24 +50,8 @@ class MenuState extends FlxState
 		platforms += "mobile ";
 		#end
 
-		var controls:String = "";
-
-		#if !FLX_NO_MOUSE
-		controls += "mouse ";
-		#end
-		#if !FLX_NO_KEYBOARD
-		controls += "keyboard ";
-		#end
-		#if !FLX_NO_TOUCH
-		controls += "touch ";
-		#end
-		#if !FLX_NO_GAMEPAD
-		controls += "gamepad ";
-		#end
-
-		add(new FlxText(0, 328, FlxG.width, platforms).setFormat(null, 8));
-		add(new FlxText(0, 338, FlxG.width, controls).setFormat(null, 8));
-		add(new FlxText(0, 348, FlxG.width, "v0.4").setFormat(null, 8));
+		add(new FlxText(0, 338, FlxG.width, platforms).setFormat(null, 8));
+		add(new FlxText(0, 348, FlxG.width, "v0.5").setFormat(null, 8));
 
 		super.create();
 
