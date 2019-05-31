@@ -31,6 +31,10 @@ class Player extends FlxSprite
 	//public var startx:Int = 2500;
 	//public var starty:Int = 310;
 
+	// End position.
+	//public var startx:Int = 4100;
+	//public var starty:Int = 310;
+
 	public function new() 
 	{
 		super();

@@ -27,6 +27,8 @@ class PlayState extends FlxState
 	var plonk:Plonk;
 	var spikies:Array<Spiky> = [];
 	var player:Player;
+	var flagStart:Flag;
+	var flagEnd:Flag;
 	var bird:Bird;
 	var frames:Int = 0;
 
@@ -101,6 +103,13 @@ class PlayState extends FlxState
 		add(map);
 		//FlxG.camera.setScrollBounds(0, 0, map.width, map.height);
 		//map.visible = false;
+
+		// Load flags.
+		flagStart = new Flag(22, 190, false);
+		add(flagStart);
+
+		flagEnd = new Flag(4060, 190, true);
+		add(flagEnd);
 
 		releaseBirds(11, 0, 0, 300, 100);
 
