@@ -193,6 +193,10 @@ class PlayState extends FlxState
 			map.visible = !map.visible;
 		}
 
+		if (FlxG.keys.justPressed.ESCAPE) {
+			openSubState(new ExitState());
+		}
+
 		if (player.alive) {
 			// Collision detection between the player and the map.
 			FlxG.overlap(player, mobile, hitMobile);
