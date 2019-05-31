@@ -35,6 +35,7 @@ class PlayState extends FlxState
  	#end
 
 	var mobileFalling:Bool = false;
+	var birdsReleased:Bool = false;
 
 	var tiles:Array<String> = [
 		'                                                                                                                                  ',
@@ -43,8 +44,8 @@ class PlayState extends FlxState
 		'                                                  |     |     |     |     |                                                       ',
 		'                                                  |     |     |     |     |                                                       ',
 		'                                                  |     |     |     |     |                                    [-]                ',
-		'                                                  |     |     |     |     |                                     |                 ',
-		')                                                 |     |     |     |     |                        [-]    [-]   |                 ',
+		')                                                 |     |     |     |     |                                     |                 ',
+		'|                                                 |     |     |     |     |                        [-]    [-]   |                 ',
 		'|                                                                                        [--]       |      |    |     [-]         ',
 		'|                                                                                         ||   ()   |      |    |      |          ',
 		'|                =                     [_)                                         [-]    ||   ||   |      |    |      |          ',
@@ -101,9 +102,7 @@ class PlayState extends FlxState
 		//FlxG.camera.setScrollBounds(0, 0, map.width, map.height);
 		//map.visible = false;
 
-		// Load bird.
-		bird = new Bird();
-		add(bird);
+		releaseBirds(11, 0, 0, 300, 100);
 
 		// Load player.
 		player = new Player();
@@ -152,6 +151,13 @@ class PlayState extends FlxState
 		add(virtualPad);
 		#end
 	}
+
+	public function releaseBirds(count, x, y, speed, height) {
+		for (i in 0...count) {
+			bird = new Bird(FlxG.random.int(0, 25) * 2 + x, FlxG.random.int(0, 15) * 2 + y, 20, speed, height);
+			add(bird);
+		}
+	}
 	
 	override public function update(elapsed:Float):Void
 	{
@@ -159,7 +165,10 @@ class PlayState extends FlxState
 
 		frames++;
 
-		//trace(spiky1.direction, spiky1.angle, spiky1.angularVelocity);
+		if (!birdsReleased && player.x > 3500) {
+			birdsReleased = true;
+			releaseBirds(15, Std.int(map.width), 0, -300, 100);
+		}
 
 		foreground1.x += 2;
 		foreground1.y += FlxMath.fastSin(((frames / (700 + FlxG.random.int(0, 300))) % 360) * FlxAngle.TO_DEG) / 3;
