@@ -12,8 +12,7 @@ class GameOverState extends FlxState
 	{
 		super.create();
 
-		// Show mouse cursor.
-		FlxG.mouse.visible = true;
+		FlxG.mouse.visible = !FlxG.onMobile;
 
 		// Show message.
       	add(new FlxText(0, 60, FlxG.width, "Game Over").setFormat(null, 32, FlxColor.RED, FlxTextAlign.CENTER));

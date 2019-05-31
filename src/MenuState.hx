@@ -18,7 +18,7 @@ class MenuState extends FlxState
 {
 	override public function create():Void
 	{
-		FlxG.mouse.visible = true;
+		FlxG.mouse.visible = !FlxG.onMobile;
 
       	add(new FlxText(0, 60, FlxG.width, "Buddha Breath").setFormat(null, 64, FlxColor.RED, FlxTextAlign.CENTER));
 
@@ -26,10 +26,48 @@ class MenuState extends FlxState
 		add(new FlxButton(280, 200, "Settings", settings));
 		add(new FlxButton(280, 220, "Quit", quit));
 
+		var platforms:String = "";
+
+		#if desktop
+		platforms += "desktop ";
+		#end
+
 		#if html5
-		var button = new FlxButton(10, 10, "Fullscreen", function() FlxG.fullscreen = !FlxG.fullscreen);
+		platforms += "html5 ";
+
+		if (FlxG.onMobile) {
+			platforms += "(mobile) ";
+		} else {
+			platforms += "(desktop) ";
+		}
+
+		var button = new FlxButton(570, 290, "", function() FlxG.fullscreen = !FlxG.fullscreen);
+		button.loadGraphic("assets/images/fullscreen.png");
 		add(button);
 		#end
+
+		#if mobile
+		platforms += "mobile ";
+		#end
+
+		var controls:String = "";
+
+		#if !FLX_NO_MOUSE
+		controls += "mouse ";
+		#end
+		#if !FLX_NO_KEYBOARD
+		controls += "keyboard ";
+		#end
+		#if !FLX_NO_TOUCH
+		controls += "touch ";
+		#end
+		#if !FLX_NO_GAMEPAD
+		controls += "gamepad ";
+		#end
+
+		add(new FlxText(0, 328, FlxG.width, platforms).setFormat(null, 8));
+		add(new FlxText(0, 338, FlxG.width, controls).setFormat(null, 8));
+		add(new FlxText(0, 348, FlxG.width, "v0.3").setFormat(null, 8));
 
 		super.create();
 

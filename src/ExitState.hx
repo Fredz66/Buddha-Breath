@@ -15,8 +15,7 @@ class ExitState extends FlxSubState
 	{
 		super.create();
 
-		// Show mouse cursor.
-		FlxG.mouse.visible = true;
+		FlxG.mouse.visible = !FlxG.onMobile;
 
 		var background = new FlxSprite();
 		background.loadGraphic("assets/images/popup.png");

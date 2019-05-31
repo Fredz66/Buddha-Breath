@@ -11,10 +11,7 @@ import flixel.addons.display.FlxBackdrop;
 import flixel.util.FlxColor;
 import flixel.util.FlxCollision;
 import flixel.util.FlxTimer;
-
-#if mobile
 import flixel.ui.FlxVirtualPad;
-#end
 
 class PlayState extends FlxState
 {
@@ -33,9 +30,7 @@ class PlayState extends FlxState
 	var bird:Bird;
 	var frames:Int = 0;
 
-	#if mobile
- 	public static var virtualPad:FlxVirtualPad;
- 	#end
+	public static var virtualPad:FlxVirtualPad;
 
 	var mobileFalling:Bool = false;
 	var birdsReleased:Bool = false;
@@ -160,10 +155,12 @@ class PlayState extends FlxState
 		// Hide mouse cursor.
 		FlxG.mouse.visible = false;
 
-		#if mobile
-		virtualPad = new FlxVirtualPad(FULL, A_B);
-		virtualPad.visible = true;
-		add(virtualPad);
+		#if html5
+		if (FlxG.onMobile) {
+			virtualPad = new FlxVirtualPad(LEFT_RIGHT, A_B);
+			virtualPad.visible = true;
+			add(virtualPad);
+		}
 		#end
 	}
 
