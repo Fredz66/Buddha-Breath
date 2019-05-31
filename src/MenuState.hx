@@ -26,6 +26,9 @@ class MenuState extends FlxState
 		add(new FlxButton(280, 200, "Settings", settings));
 		add(new FlxButton(280, 220, "Quit", quit));
 
+		var button = new FlxButton(10, 10, "Fullscreen", function() FlxG.fullscreen = !FlxG.fullscreen);
+		add(button);
+
 		super.create();
 
 		FlxG.sound.playMusic(AssetPaths.temple_nometadata__ogg, 1, true);
