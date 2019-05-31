@@ -46,9 +46,9 @@ class PlayState extends FlxState
 		'                                                  |     |     |     |     |                                                       ',
 		'                                                  |     |     |     |     |                                                       ',
 		'                                                  |     |     |     |     |                                    [-]                ',
-		')                                                 |     |     |     |     |                                     |                 ',
-		'|                                                 |     |     |     |     |                        [-]    [-]   |                 ',
-		'|                                                                                        [--]       |      |    |     [-]         ',
+		')                                                 |     |     |     |     |                                     |                (',
+		'|                                                 |     |     |     |     |                        [-]    [-]   |                |',
+		'|                                                                                        [--]       |      |    |     [-]        L',
 		'|                                                                                         ||   ()   |      |    |      |          ',
 		'|                =                     [_)                                         [-]    ||   ||   |      |    |      |          ',
 		'|             =  |    =        [--]      |                                          |     ||   ||   |      |    |      |          ',
@@ -76,6 +76,7 @@ class PlayState extends FlxState
 					case '_': mapData.push(6);
 					case ')': mapData.push(7);
 					case '(': mapData.push(8);
+					case 'L': mapData.push(9);
 					default:  mapData.push(0);
 				}
 			}
@@ -108,7 +109,7 @@ class PlayState extends FlxState
 		flagStart = new Flag(22, 190, false);
 		add(flagStart);
 
-		flagEnd = new Flag(4060, 190, true);
+		flagEnd = new Flag(4037, 190, true);
 		add(flagEnd);
 
 		releaseBirds(11, 0, 0, 300, 100);
