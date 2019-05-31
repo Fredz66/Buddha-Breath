@@ -67,7 +67,7 @@ class MenuState extends FlxState
 
 		add(new FlxText(0, 328, FlxG.width, platforms).setFormat(null, 8));
 		add(new FlxText(0, 338, FlxG.width, controls).setFormat(null, 8));
-		add(new FlxText(0, 348, FlxG.width, "v0.3").setFormat(null, 8));
+		add(new FlxText(0, 348, FlxG.width, "v0.4").setFormat(null, 8));
 
 		super.create();
 
