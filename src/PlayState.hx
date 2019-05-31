@@ -22,6 +22,7 @@ class PlayState extends FlxState
 	var foreground1:FlxBackdrop;
 	var foreground2:FlxBackdrop;
 	var foreground3:FlxBackdrop;
+	var foreground4:FlxBackdrop;
 	var map:FlxTilemap;
 	var mobile:Mobile;
 	var plonk:Plonk;
@@ -139,6 +140,9 @@ class PlayState extends FlxState
 		foreground3.offset.x = 60;
 		foreground3.offset.y = -510;
 
+		foreground4 = new FlxBackdrop("assets/images/reed.png", 1.75, 1.25, true, false);
+		foreground4.offset.y = -490;
+
 		// Load plonk.
 		plonk = new Plonk();
 		plonk.visible = false;
@@ -147,6 +151,7 @@ class PlayState extends FlxState
 		add(foreground1);
 		add(foreground2);
 		add(foreground3);
+		add(foreground4);
 
 		// Camera follows the player, map follows the camera.
 		FlxG.camera.follow(player, LOCKON, 1);
