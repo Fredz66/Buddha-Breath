@@ -29,6 +29,7 @@ class PlayState extends FlxState
 	var flagStart:Flag;
 	var flagEnd:Flag;
 	var bird:Bird;
+	var fish:Fish;
 	var frames:Int = 0;
 
 	public var virtualPadOffset:Int = 10;
@@ -130,9 +131,11 @@ class PlayState extends FlxState
 		// Load foreground.
 		foreground1 = new FlxBackdrop("assets/images/water3.png", 1.25, 1.25, true, false);
 		foreground1.offset.y = -450;
+
 		foreground2 = new FlxBackdrop("assets/images/water2.png", 1.30, 1.25, true, false);
 		foreground2.offset.x = 20;
 		foreground2.offset.y = -474;
+
 		foreground3 = new FlxBackdrop("assets/images/water1.png", 1.50, 1.25, true, false);
 		foreground3.offset.x = 60;
 		foreground3.offset.y = -510;
@@ -144,8 +147,11 @@ class PlayState extends FlxState
 		plonk = new Plonk();
 		plonk.visible = false;
 
+		fish = new Fish(500, 370, -300, -50, 340);
+
 		add(plonk);
 		add(foreground1);
+		add(fish);
 		add(foreground2);
 		add(foreground3);
 		add(foreground4);
