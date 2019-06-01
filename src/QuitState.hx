@@ -31,6 +31,7 @@ class QuitState extends FlxState
 
 	function quit():Void
 	{
+		FlxG.sound.music.stop();
 		FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function() { openfl.system.System.exit(0); });
  	}
 
