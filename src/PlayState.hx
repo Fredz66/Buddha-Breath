@@ -252,6 +252,7 @@ class PlayState extends FlxState
 			// Detect if the player falls out of the screen and kill him.
 			if (player.y + player.height > FlxG.height + player.starty) {
 				player.alive = false;
+				player.acceleration.x = 0;
 				drown();
 			}
 		}
