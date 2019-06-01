@@ -36,6 +36,7 @@ class ExitState extends FlxSubState
 		super.update(elapsed);
 
 		if (FlxG.keys.justPressed.ESCAPE) {
+			FlxG.sound.resume();
 			close();
 		}
 	}
@@ -43,6 +44,7 @@ class ExitState extends FlxSubState
 	function back():Void
 	{
 		FlxG.mouse.visible = false;
+		FlxG.sound.resume();
 		close();
  	}
 

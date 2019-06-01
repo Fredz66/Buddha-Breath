@@ -237,6 +237,7 @@ class PlayState extends FlxState
 
 		// Show an exit popup if the ESCAPE key is pressed.
 		if (FlxG.keys.justPressed.ESCAPE) {
+			FlxG.sound.pause();
 			openSubState(new ExitState());
 		}
 
