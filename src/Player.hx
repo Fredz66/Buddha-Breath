@@ -18,6 +18,7 @@ class Player extends FlxSprite
 
 	public var direction:Int = 1;
 	public var crouch:Bool = false;
+	public var drown:Bool = false;
 
 	// First position.
 	public var startx:Int = 60;

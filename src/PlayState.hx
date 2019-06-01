@@ -248,13 +248,16 @@ class PlayState extends FlxState
 					}
 				}
 			}
+		}
 
+		if (player.alive || !player.drown) {
 			// Detect if the player falls out of the screen and kill him.
 			if (player.y + player.height > FlxG.height + player.starty) {
 				player.alive = false;
+				player.drown = true;
 				player.acceleration.x = 0;
 				drown();
-			}
+			}			
 		}
 
 		// Detect the end of the level.
@@ -303,7 +306,8 @@ class PlayState extends FlxState
 		player.animation.play("hit");
 		player.maxVelocity.set(500, 300);
 		player.velocity.set(-300,-200);
-		new FlxTimer().start(1, hitdeath);
+		player.acceleration.x = 0;
+		//new FlxTimer().start(1, hitdeath);
 	}
 
 	function hitdeath(Timer:FlxTimer):Void
