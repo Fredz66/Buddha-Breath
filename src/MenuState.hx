@@ -18,6 +18,9 @@ class MenuState extends FlxState
 {
 	override public function create():Void
 	{
+		// Display version number.
+		add(new FlxText(0, 348, FlxG.width, "v0.15").setFormat(null, 8));
+
 		FlxG.mouse.visible = !FlxG.onMobile;
 
       	add(new FlxText(0, 60, FlxG.width, "Buddha Breath").setFormat(null, 64, FlxColor.RED, FlxTextAlign.CENTER));
@@ -51,7 +54,6 @@ class MenuState extends FlxState
 		#end
 
 		add(new FlxText(0, 338, FlxG.width, platforms).setFormat(null, 8));
-		add(new FlxText(0, 348, FlxG.width, "v0.5").setFormat(null, 8));
 
 		super.create();
 

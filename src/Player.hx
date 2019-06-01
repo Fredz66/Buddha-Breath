@@ -75,7 +75,7 @@ class Player extends FlxSprite
 	{
 		acceleration.x = 0;
 		
-		if (FlxG.keys.pressed.LEFT || (PlayState.virtualPad != null && PlayState.virtualPad.buttonLeft.pressed))
+		if (FlxG.keys.pressed.LEFT || PlayState.buttonLeft.pressed)
 		{
 			flipX = true;
 			setSize(30, 76);
@@ -84,7 +84,7 @@ class Player extends FlxSprite
 			acceleration.x -= ACCELERATION;
 
 		} 
-		else if (FlxG.keys.pressed.RIGHT || (PlayState.virtualPad != null && PlayState.virtualPad.buttonRight.pressed))
+		else if (FlxG.keys.pressed.RIGHT || PlayState.buttonRight.pressed)
 		{
 			flipX = false;
 			setSize(30, 76);
@@ -95,12 +95,12 @@ class Player extends FlxSprite
 
 		if (velocity.y == 0)
 		{
-			if ((FlxG.keys.justPressed.UP || (PlayState.virtualPad != null && PlayState.virtualPad.buttonB.pressed)) && isTouching(FlxObject.FLOOR)) {
+			if ((FlxG.keys.justPressed.UP || PlayState.buttonJump.pressed) && isTouching(FlxObject.FLOOR)) {
 				FlxG.sound.play(AssetPaths.jump__ogg, 1);
 				velocity.y = JUMP_FORCE;
 			}
 
-			if ((FlxG.keys.pressed.DOWN || (PlayState.virtualPad != null && PlayState.virtualPad.buttonA.pressed)) && isTouching(FlxObject.FLOOR)) {
+			if ((FlxG.keys.pressed.DOWN || PlayState.buttonCrouch.pressed) && isTouching(FlxObject.FLOOR)) {
 				crouch = true;
 				maxVelocity.x = CROUCH_SPEED;
 			} else {
@@ -113,14 +113,11 @@ class Player extends FlxSprite
 			else
 				maxVelocity.x = RUN_SPEED;*/
 		} else {
-			if ((FlxG.keys.justPressed.UP || (PlayState.virtualPad != null && PlayState.virtualPad.buttonB.pressed)) && isTouching(FlxObject.FLOOR)) {
+			if ((FlxG.keys.justPressed.UP || PlayState.buttonJump.justPressed) && isTouching(FlxObject.FLOOR)) {
 				FlxG.sound.play(AssetPaths.jump__ogg, 1);
 				velocity.y = JUMP_FORCE;
 			}
 		}
-
-		/*if ((velocity.y < 0) && (FlxG.keys.justReleased.UP))
-			velocity.y = velocity.y * 0.5;*/
 	}
 		
 	private function animate() 
