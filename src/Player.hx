@@ -8,7 +8,7 @@ import flixel.math.FlxMath;
 class Player extends FlxSprite
 {
 	private static inline var ACCELERATION:Int = 320;
-	private static inline var DRAG:Int = 320;
+	private static inline var DRAG:Int = 640;
 	private static inline var GRAVITY:Int = 600;
 	private static inline var JUMP_FORCE:Int = -280;
 	private static inline var WALK_SPEED:Int = 100;
@@ -108,11 +108,6 @@ class Player extends FlxSprite
 				crouch = false;
 				maxVelocity.x = RUN_SPEED;
 			}
-
-			/*if (FlxG.keys.pressed.W)
-				maxVelocity.x = WALK_SPEED;
-			else
-				maxVelocity.x = RUN_SPEED;*/
 		} else {
 			if ((FlxG.keys.justPressed.UP || PlayState.buttonJump.justPressed) && isTouching(FlxObject.FLOOR)) {
 				FlxG.sound.play(AssetPaths.jump__ogg, 1);
