@@ -1,20 +1,17 @@
 package;
 
-import flixel.FlxObject;
 import flixel.FlxSprite;
-import flixel.FlxG;
-import flixel.math.FlxMath;
 
 class Fish extends FlxSprite
 {
-	private static inline var ACCELERATION:Int = 500;
-	private static inline var DRAG:Int = 320;
-	private static inline var GRAVITY:Int = 600;
-	private static inline var JUMP_FORCE:Int = -280;
-	private static inline var WALK_SPEED:Int = 100;
-	private static inline var RUN_SPEED:Int = 150;
-	private static inline var CROUCH_SPEED:Int = 50;
-	private static inline var FALLING_SPEED:Int = 300;
+	private static inline var ACCELERATION:Int = 500 * 3;
+	private static inline var DRAG:Int = 320 * 3;
+	private static inline var GRAVITY:Int = 600 * 3;
+	private static inline var JUMP_FORCE:Int = -280 * 3;
+	private static inline var WALK_SPEED:Int = 100 * 3;
+	private static inline var RUN_SPEED:Int = 150 * 3;
+	private static inline var CROUCH_SPEED:Int = 50 * 3;
+	private static inline var FALLING_SPEED:Int = 300 * 3;
 
 	public var direction:Int = 1;
 

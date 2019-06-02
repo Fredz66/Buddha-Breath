@@ -1,10 +1,9 @@
-package;
+package gui;
 
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.text.FlxText;
-import flixel.ui.FlxButton;
 
 class SettingsState extends FlxState
 {
@@ -15,14 +14,14 @@ class SettingsState extends FlxState
 		FlxG.mouse.visible = !FlxG.onMobile;
 
 		// Show message.
-      	add(new FlxText(0, 60, FlxG.width, "Settings").setFormat(null, 32, FlxColor.RED, FlxTextAlign.CENTER));
+      	add(new FlxText(0, 180, FlxG.width, "Settings").setFormat(null, 96, FlxColor.RED, FlxTextAlign.CENTER));
 
- 		add(new FlxButton(220, 180, "Graphics", keyboard));
- 		add(new FlxButton(220, 200, "Keyboard", keyboard));
- 		add(new FlxButton(220, 220, "Joypad", keyboard));
- 		add(new FlxButton(220, 240, "Volume", keyboard));
+ 		add(new FlxScaleButton(660, 540, "Graphics", keyboard));
+ 		add(new FlxScaleButton(660, 600, "Keyboard", keyboard));
+ 		add(new FlxScaleButton(660, 660, "Joypad", keyboard));
+ 		add(new FlxScaleButton(660, 720, "Volume", keyboard));
 
- 		add(new FlxButton(220, 270, "Back", back));
+ 		add(new FlxScaleButton(660, 810, "Back", back));
 	}
 
 	override public function update(elapsed:Float):Void

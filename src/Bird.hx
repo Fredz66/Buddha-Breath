@@ -1,20 +1,17 @@
 package;
 
-import flixel.FlxObject;
 import flixel.FlxSprite;
-import flixel.FlxG;
-import flixel.math.FlxMath;
 
 class Bird extends FlxSprite
 {
-	private static inline var ACCELERATION:Int = 500;
-	private static inline var DRAG:Int = 320;
-	private static inline var GRAVITY:Int = 600;
-	private static inline var JUMP_FORCE:Int = -280;
-	private static inline var WALK_SPEED:Int = 100;
-	private static inline var RUN_SPEED:Int = 150;
-	private static inline var CROUCH_SPEED:Int = 50;
-	private static inline var FALLING_SPEED:Int = 300;
+	private static inline var ACCELERATION:Int = 1500;
+	private static inline var DRAG:Int = 960;
+	private static inline var GRAVITY:Int = 1800;
+	private static inline var JUMP_FORCE:Int = -840;
+	private static inline var WALK_SPEED:Int = 300;
+	private static inline var RUN_SPEED:Int = 450;
+	private static inline var CROUCH_SPEED:Int = 150;
+	private static inline var FALLING_SPEED:Int = 900;
 
 	public var direction:Int = 1;
 
@@ -25,7 +22,7 @@ class Bird extends FlxSprite
 	{
 		super();
 
-		loadGraphic(AssetPaths.bird__png, true, 20, 20);
+		loadGraphic(AssetPaths.bird__png, true, 60, 60);
 
 		animation.add("idle", [2]);
 		animation.add("fly", [0, 1, 2, 3, 4, 5], 12);

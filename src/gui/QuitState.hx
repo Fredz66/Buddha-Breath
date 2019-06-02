@@ -1,10 +1,9 @@
-package;
+package gui;
 
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.text.FlxText;
-import flixel.ui.FlxButton;
 
 class QuitState extends FlxState
 {
@@ -15,13 +14,13 @@ class QuitState extends FlxState
 		FlxG.mouse.visible = !FlxG.onMobile;
 
 		// Show message.
-      	add(new FlxText(0, 60, FlxG.width, "Are you sure ?").setFormat(null, 32, FlxColor.RED, FlxTextAlign.CENTER));
+      	add(new FlxText(0, 180, FlxG.width, "Are you sure ?").setFormat(null, 96, FlxColor.RED, FlxTextAlign.CENTER));
 
 		// Show main menu button.
- 		add(new FlxButton(280, 180, "Main Menu", menu));
+ 		add(new FlxScaleButton(840, 540, "Main Menu", menu));
 
 		// Show start button.
- 		add(new FlxButton(280, 210, "Quit", quit));
+ 		add(new FlxScaleButton(840, 630, "Quit", quit));
 	}
 
 	override public function update(elapsed:Float):Void

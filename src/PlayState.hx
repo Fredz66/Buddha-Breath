@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxSprite;
 import flixel.ui.FlxButton;
 import flixel.math.FlxPoint;
 import flixel.FlxObject;
@@ -14,6 +15,10 @@ import flixel.util.FlxColor;
 import flixel.util.FlxCollision;
 import flixel.util.FlxTimer;
 
+import gui.ExitState;
+import gui.GameOverState;
+import gui.WinState;
+
 class PlayState extends FlxState
 {
 	var background:FlxBackdrop;
@@ -22,7 +27,7 @@ class PlayState extends FlxState
 	var foreground3:FlxBackdrop;
 	var foreground4:FlxBackdrop;
 	var map:FlxTilemap;
-	var mobile:Mobile;
+	var pole:Pole;
 	var plonk:Plonk;
 	var spikies:Array<Spiky> = [];
 	var player:Player;
@@ -32,13 +37,13 @@ class PlayState extends FlxState
 	var fish:Fish;
 	var frames:Int = 0;
 
-	public var virtualPadOffset:Int = 10;
+	public var virtualPadOffset:Int = 30;
 	public static var buttonLeft:FlxButton;
 	public static var buttonRight:FlxButton;
 	public static var buttonJump:FlxButton;
 	public static var buttonCrouch:FlxButton;
 
-	var mobileFalling:Bool = false;
+	var poleFalling:Bool = false;
 	var birdsReleased:Bool = false;
 
 	var tiles:Array<String> = [
@@ -46,14 +51,14 @@ class PlayState extends FlxState
 		'                                                                                                                                  ',
 		'                                                  |     |     |     |     |                                                       ',
 		'                                                  |     |     |     |     |                                                       ',
-		'                                                  |     |     |     |     |                                                       ',
+		'                                                  |     |     |     |     |                                     v                 ',
 		'                                                  |     |     |     |     |                                    [-]                ',
 		')                                                 |     |     |     |     |                                     |                (',
 		'|                                                 |     |     |     |     |                        [-]    [-]   |                |',
 		'|                                                                                        [--]       |      |    |     [-]        L',
 		'|                                                                                         ||   ()   |      |    |      |          ',
 		'|                =                     [_)                                         [-]    ||   ||   |      |    |      |          ',
-		'|             =  |    =        [--]      |                                          |     ||   ||   |      |    |      |          ',
+		'|  v    ~     =  |    =        [--]      |           ~                         ~    |     ||   ||   |      |    |      |          ',
 		'--------------)  |    |         ||       (--------------------------------------------)   ||   ||   |      |    |      |       (--',
 		'|||||||||||||||  |    |         ||       ||||||||||||||||||||||||||||||||||||||||||||||   ||   ||   |      |    |      |       |||',
 		'|||||||||||||||  |    |         ||       ||||||||||||||||||||||||||||||||||||||||||||||   ||   ||   |      |    |      |       |||',
@@ -94,60 +99,62 @@ class PlayState extends FlxState
 		FlxG.sound.playMusic(AssetPaths.asian_mystery_nometadata__ogg, 1, true);
 
 		// Load background.
-		background = new FlxBackdrop("assets/images/640.png");
+		//background = new FlxBackdrop("assets/images/640.png");
+		background = new FlxBackdrop("assets/images/background.png");
 		background.scrollFactor.x = 0.5;
 		background.scrollFactor.y = 0.5;
+		background.offset.y = 100;
 		add(background);
 
 		// Load map but don't show it.
 		map = new FlxTilemap();
-		map.loadMapFromArray(StringsToMapData(tiles), 130, 16, AssetPaths.tiles__png, 32, 32);
+		map.loadMapFromArray(StringsToMapData(tiles), 130, 16, AssetPaths.tiles__png, 32 * 3, 32 * 3);
 		add(map);
 
 		// Load flags.
-		flagStart = new Flag(22, 190, false);
+		flagStart = new Flag(22 * 3, 190 * 3, false);
 		add(flagStart);
 
-		flagEnd = new Flag(4037, 190, true);
+		flagEnd = new Flag(4037 * 3, 190 * 3, true);
 		add(flagEnd);
 
-		releaseBirds(11, 0, 0, 300, 100);
+		releaseBirds(11, 0, 0, 300 * 3, 100 * 3);
 
 		// Load player.
 		player = new Player();
 		add(player);
 
-		// Load mobile.
-		mobile = new Mobile();
-		add(mobile);
+		// Load pole.
+		pole = new Pole();
+		add(pole);
 
 		// Load spikies.
-		addSpiky(50 * 32 - 7, 157, 33.5, 120);
-		addSpiky(56 * 32 - 7, 157, 0, 150);
-		addSpiky(62 * 32 - 7, 157, 50, 102);
-		addSpiky(68 * 32 - 7, 157, 0, 150);
-		addSpiky(74 * 32 - 7, 157, 50, 102);
+		addSpiky(50 * 96 - 21, 750 - 279, 33.5, 120);
+		addSpiky(56 * 96 - 21, 750 - 279, 0, 150);
+		addSpiky(62 * 96 - 21, 750 - 279, 50, 102);
+		addSpiky(68 * 96 - 21, 750 - 279, 0, 150);
+		addSpiky(74 * 96 - 21, 750 - 279, 50, 102);
 
 		// Load foreground.
 		foreground1 = new FlxBackdrop("assets/images/water3.png", 1.25, 1.25, true, false);
-		foreground1.offset.y = -450;
+		foreground1.offset.y = -450 * 3;
 
 		foreground2 = new FlxBackdrop("assets/images/water2.png", 1.30, 1.25, true, false);
-		foreground2.offset.x = 20;
-		foreground2.offset.y = -474;
+		foreground2.offset.x = 20 * 3;
+		foreground2.offset.y = -474 * 3;
 
 		foreground3 = new FlxBackdrop("assets/images/water1.png", 1.50, 1.25, true, false);
-		foreground3.offset.x = 60;
-		foreground3.offset.y = -510;
+		foreground3.offset.x = 60 * 3;
+		foreground3.offset.y = -510 * 3;
 
 		foreground4 = new FlxBackdrop("assets/images/reed.png", 1.75, 1.25, true, false);
-		foreground4.offset.y = -490;
+		foreground4.offset.y = -490 * 3;
 
 		// Load plonk.
 		plonk = new Plonk();
 		plonk.visible = false;
 
-		fish = new Fish(500, 370, -300, -50, 340);
+		fish = new Fish(500 * 3, 370 * 3, -300 * 3, -50 * 3, 340 * 3);
 
 		add(plonk);
 		add(foreground1);
@@ -164,20 +171,22 @@ class PlayState extends FlxState
 		FlxG.mouse.visible = false;
 
 		// Create the buttons for the virtual floating pad.
-		buttonLeft = new FlxButton(0, 360 - 128, "");
-		buttonLeft.loadGraphic("assets/images/btn-128x128.png");
+		var buttonGraphic:FlxSprite = new FlxSprite().loadGraphic("assets/images/virtual-button.png");
+
+		buttonLeft = new FlxButton(0, 1080 - buttonGraphic.height, "");
+		buttonLeft.loadGraphicFromSprite(buttonGraphic);
 		add(buttonLeft);
 
-		buttonRight = new FlxButton(128, 360 - 128, "");
-		buttonRight.loadGraphic("assets/images/btn-128x128.png");
+		buttonRight = new FlxButton(buttonGraphic.width, 1080 - buttonGraphic.height, "");
+		buttonRight.loadGraphicFromSprite(buttonGraphic);
 		add(buttonRight);
 
-		buttonJump = new FlxButton(640 - 128, 360 - 256, "");
-		buttonJump.loadGraphic("assets/images/btn-128x128.png");
+		buttonJump = new FlxButton(1920 - buttonGraphic.width, 1080 - buttonGraphic.height * 2, "");
+		buttonJump.loadGraphicFromSprite(buttonGraphic);
 		add(buttonJump);
 
-		buttonCrouch = new FlxButton(640 - 128, 360 - 128, "");
-		buttonCrouch.loadGraphic("assets/images/btn-128x128.png");
+		buttonCrouch = new FlxButton(1920 - buttonGraphic.width, 1080 - buttonGraphic.height, "");
+		buttonCrouch.loadGraphicFromSprite(buttonGraphic);
 		add(buttonCrouch);
 
 		// Hide the virtual floating pad when not on mobile.		
@@ -191,7 +200,7 @@ class PlayState extends FlxState
 
 	public function releaseBirds(count, x, y, speed, height) {
 		for (i in 0...count) {
-			bird = new Bird(FlxG.random.int(0, 25) * 2 + x, FlxG.random.int(0, 15) * 2 + y, 20, speed, height);
+			bird = new Bird(FlxG.random.int(0, 25 * 3) * 2 + x, FlxG.random.int(0, 15 * 3) * 2 + y, 20 * 3, speed, height);
 			add(bird);
 		}
 	}
@@ -215,20 +224,20 @@ class PlayState extends FlxState
 		}
 
 		// Release the second flock of birds.
-		if (!birdsReleased && player.x > 3500) {
+		if (!birdsReleased && player.x > 3500 * 3) {
 			birdsReleased = true;
-			releaseBirds(15, Std.int(map.width), 0, -300, 100);
+			releaseBirds(15, Std.int(map.width), 0, -300 * 3, 100 * 3);
 		}
 
 		// Move the water with a sinusoidal wave.
-		foreground1.x += 2;
-		foreground1.y += FlxMath.fastSin(((frames / (700 + FlxG.random.int(0, 300))) % 360) * FlxAngle.TO_DEG) / 3;
+		foreground1.x += 6;
+		foreground1.y += FlxMath.fastSin(((frames / (700 + FlxG.random.int(0, 300))) % 360) * FlxAngle.TO_DEG);
 
-		foreground2.x += 2.3;
-		foreground2.y += FlxMath.fastSin(((frames / (700 + FlxG.random.int(0, 300))) % 360) * FlxAngle.TO_DEG) / 3;
+		foreground2.x += 7;
+		foreground2.y += FlxMath.fastSin(((frames / (700 + FlxG.random.int(0, 300))) % 360) * FlxAngle.TO_DEG);
 
-		foreground3.x += 2.8;
-		foreground3.y += FlxMath.fastSin(((frames / (700 + FlxG.random.int(0, 300))) % 360) * FlxAngle.TO_DEG) / 3;
+		foreground3.x += 9;
+		foreground3.y += FlxMath.fastSin(((frames / (700 + FlxG.random.int(0, 300))) % 360) * FlxAngle.TO_DEG);
 
 		// Toggle map visibility with the H key.
 		if (FlxG.keys.justPressed.H) {
@@ -243,7 +252,7 @@ class PlayState extends FlxState
 
 		if (player.alive) {
 			// Detect collision between the player and the map.
-			FlxG.overlap(player, mobile, hitMobile);
+			FlxG.overlap(player, pole, hitPole);
 			FlxG.collide(player, map);
 
 			// Detect collision between the player and the spikies.
@@ -255,6 +264,14 @@ class PlayState extends FlxState
 					}
 				}
 			}
+			/*if (player.alive) {
+				for (spiky in spikies) {
+					if (FlxG.overlap(player, spiky)) {
+						player.alive = false;
+						hit();
+					}
+				}
+			}*/
 		}
 
 		if (player.alive || !player.drown) {
@@ -278,10 +295,10 @@ class PlayState extends FlxState
 		#end
 	}
 
-	function hitMobile(Object1:flixel.FlxObject, Object2:flixel.FlxObject):Void {
+	function hitPole(Object1:flixel.FlxObject, Object2:flixel.FlxObject):Void {
 		FlxObject.separate(Object1, Object2);
-		if (!mobileFalling) {
-			mobileFalling = true;
+		if (!poleFalling) {
+			poleFalling = true;
 			FlxG.sound.play(AssetPaths.tree__ogg, 1);
 		}
 	}
@@ -302,8 +319,8 @@ class PlayState extends FlxState
 		plonk.x = player.x;
 		plonk.y = FlxG.height + player.height;
 		plonk.visible = true;
-		plonk.velocity.y = -300;
-		plonk.acceleration.y = 400;
+		plonk.velocity.y = -900;
+		plonk.acceleration.y = 1200;
 		new FlxTimer().start(2, hitdeath);
 	}
 	function hit():Void
@@ -311,8 +328,8 @@ class PlayState extends FlxState
 		FlxG.sound.play(AssetPaths.death__ogg, 1);
 		FlxG.camera.shake(0.01, 0.2);
 		player.animation.play("hit");
-		player.maxVelocity.set(500, 300);
-		player.velocity.set(-300,-200);
+		player.maxVelocity.set(500 * 3, 300 * 3);
+		player.velocity.set(-300 * 3,-200 * 3);
 		player.acceleration.x = 0;
 		//new FlxTimer().start(1, hitdeath);
 	}

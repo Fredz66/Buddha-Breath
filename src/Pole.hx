@@ -2,16 +2,16 @@ package;
 
 import flixel.FlxSprite;
 
-class Mobile extends FlxSprite
+class Pole extends FlxSprite
 {
-	public var startx:Int = 840;
-	public var starty:Int = 320;
+	public var startx:Int = 840 * 3;
+	public var starty:Int = 320 * 3;
 
 	public function new() 
 	{
 		super();
 
-		loadGraphic(AssetPaths.mobile__png, true, 32, 160);
+		loadGraphic(AssetPaths.pole__png, true, 32 * 3, 160 * 3);
 		
 		x = startx;
 		y = starty;

@@ -11,7 +11,7 @@ class Spiky extends FlxSprite
 	{
 		super();
 
-		loadGraphic(AssetPaths.spiky__png, true, 47, 186);
+		loadGraphic(AssetPaths.spiky__png, true, 141, 558);
 
 		angularVelocity = 150;
 	}

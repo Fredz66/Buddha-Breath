@@ -1,10 +1,9 @@
-package;
+package gui;
 
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.text.FlxText;
-import flixel.ui.FlxButton;
 
 class GameOverState extends FlxState
 {
@@ -15,13 +14,13 @@ class GameOverState extends FlxState
 		FlxG.mouse.visible = !FlxG.onMobile;
 
 		// Show message.
-      	add(new FlxText(0, 60, FlxG.width, "Game Over").setFormat(null, 32, FlxColor.RED, FlxTextAlign.CENTER));
+      	add(new FlxText(0, 180, FlxG.width, "Game Over").setFormat(null, 96, FlxColor.RED, FlxTextAlign.CENTER));
 
 		// Show start button.
- 		add(new FlxButton(280, 180, "Retry", play));
+ 		add(new FlxScaleButton(840, 540, "Retry", play));
 
 		// Show main menu button.
- 		add(new FlxButton(280, 210, "Main Menu", reset));
+ 		add(new FlxScaleButton(840, 630, "Main Menu", reset));
 	}
 
 	override public function update(elapsed:Float):Void
