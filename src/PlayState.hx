@@ -22,6 +22,8 @@ import gui.WinState;
 class PlayState extends FlxState
 {
 	var background:FlxBackdrop;
+	var island1:FlxBackdrop;
+
 	var foreground1:FlxBackdrop;
 	var foreground2:FlxBackdrop;
 	var foreground3:FlxBackdrop;
@@ -99,11 +101,17 @@ class PlayState extends FlxState
 		FlxG.sound.playMusic(AssetPaths.asian_mystery_nometadata__ogg, 1, true);
 
 		// Load background.
-		//background = new FlxBackdrop("assets/images/640.png");
-		background = new FlxBackdrop("assets/images/background.png");
+		/*island1 = new FlxBackdrop("assets/images/background.png");
 		background.scrollFactor.x = 0.5;
 		background.scrollFactor.y = 0.5;
 		background.offset.y = 100;
+		add(background);*/
+
+		//background = new FlxBackdrop("assets/images/640.png");
+		background = new FlxBackdrop("assets/images/background1.png");
+		background.scrollFactor.x = 0.5;
+		background.scrollFactor.y = 0.5;
+		background.offset.y = 250;
 		add(background);
 
 		// Load map but don't show it.
