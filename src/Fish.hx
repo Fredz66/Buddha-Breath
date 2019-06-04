@@ -4,14 +4,14 @@ import flixel.FlxSprite;
 
 class Fish extends FlxSprite
 {
-	private static inline var ACCELERATION:Int = 500 * 3;
-	private static inline var DRAG:Int = 320 * 3;
-	private static inline var GRAVITY:Int = 600 * 3;
-	private static inline var JUMP_FORCE:Int = -280 * 3;
-	private static inline var WALK_SPEED:Int = 100 * 3;
-	private static inline var RUN_SPEED:Int = 150 * 3;
-	private static inline var CROUCH_SPEED:Int = 50 * 3;
-	private static inline var FALLING_SPEED:Int = 300 * 3;
+	private static inline var ACCELERATION:Int = 1500;
+	private static inline var DRAG:Int = 960;
+	private static inline var GRAVITY:Int = 1800;
+	private static inline var JUMP_FORCE:Int = -840;
+	private static inline var WALK_SPEED:Int = 300;
+	private static inline var RUN_SPEED:Int = 450;
+	private static inline var CROUCH_SPEED:Int = 150;
+	private static inline var FALLING_SPEED:Int = 900;
 
 	public var direction:Int = 1;
 

@@ -4,14 +4,14 @@ import flixel.FlxSprite;
 
 class Pole extends FlxSprite
 {
-	public var startx:Int = 840 * 3;
-	public var starty:Int = 320 * 3;
+	public var startx:Int = 2520;
+	public var starty:Int = 960;
 
 	public function new() 
 	{
 		super();
 
-		loadGraphic(AssetPaths.pole__png, true, 32 * 3, 160 * 3);
+		loadGraphic(AssetPaths.pole__png, true, 96, 480);
 		
 		x = startx;
 		y = starty;

@@ -116,17 +116,17 @@ class PlayState extends FlxState
 
 		// Load map but don't show it.
 		map = new FlxTilemap();
-		map.loadMapFromArray(StringsToMapData(tiles), 130, 16, AssetPaths.tiles__png, 32 * 3, 32 * 3);
+		map.loadMapFromArray(StringsToMapData(tiles), 130, 16, AssetPaths.tiles__png, 96, 96);
 		add(map);
 
 		// Load flags.
-		flagStart = new Flag(22 * 3, 190 * 3, false);
+		flagStart = new Flag(66, 570, false);
 		add(flagStart);
 
-		flagEnd = new Flag(4037 * 3, 190 * 3, true);
+		flagEnd = new Flag(12111, 570, true);
 		add(flagEnd);
 
-		releaseBirds(11, 0, 0, 300 * 3, 100 * 3);
+		releaseBirds(11, 0, 0, 900, 300);
 
 		// Load player.
 		player = new Player();
@@ -145,24 +145,24 @@ class PlayState extends FlxState
 
 		// Load foreground.
 		foreground1 = new FlxBackdrop("assets/images/water3.png", 1.25, 1.25, true, false);
-		foreground1.offset.y = -450 * 3;
+		foreground1.offset.y = -1350;
 
 		foreground2 = new FlxBackdrop("assets/images/water2.png", 1.30, 1.25, true, false);
-		foreground2.offset.x = 20 * 3;
-		foreground2.offset.y = -474 * 3;
+		foreground2.offset.x = 60;
+		foreground2.offset.y = -1422;
 
 		foreground3 = new FlxBackdrop("assets/images/water1.png", 1.50, 1.25, true, false);
-		foreground3.offset.x = 60 * 3;
-		foreground3.offset.y = -510 * 3;
+		foreground3.offset.x = 180;
+		foreground3.offset.y = -1530;
 
 		foreground4 = new FlxBackdrop("assets/images/reed.png", 1.75, 1.25, true, false);
-		foreground4.offset.y = -490 * 3;
+		foreground4.offset.y = -1470;
 
 		// Load plonk.
 		plonk = new Plonk();
 		plonk.visible = false;
 
-		fish = new Fish(500 * 3, 370 * 3, -300 * 3, -50 * 3, 340 * 3);
+		fish = new Fish(1500, 1110, -900, -150, 1020);
 
 		add(plonk);
 		add(foreground1);
@@ -208,7 +208,7 @@ class PlayState extends FlxState
 
 	public function releaseBirds(count, x, y, speed, height) {
 		for (i in 0...count) {
-			bird = new Bird(FlxG.random.int(0, 25 * 3) * 2 + x, FlxG.random.int(0, 15 * 3) * 2 + y, 20 * 3, speed, height);
+			bird = new Bird(FlxG.random.int(0, 75) * 2 + x, FlxG.random.int(0, 45) * 2 + y, 60, speed, height);
 			add(bird);
 		}
 	}
@@ -232,9 +232,9 @@ class PlayState extends FlxState
 		}
 
 		// Release the second flock of birds.
-		if (!birdsReleased && player.x > 3500 * 3) {
+		if (!birdsReleased && player.x > 10500) {
 			birdsReleased = true;
-			releaseBirds(15, Std.int(map.width), 0, -300 * 3, 100 * 3);
+			releaseBirds(15, Std.int(map.width), 0, -900, 300);
 		}
 
 		// Move the water with a sinusoidal wave.
@@ -324,8 +324,8 @@ class PlayState extends FlxState
 		FlxG.sound.play(AssetPaths.death__ogg, 1);
 		FlxG.camera.shake(0.01, 0.2);
 		player.animation.play("hit");
-		player.maxVelocity.set(500 * 3, 300 * 3);
-		player.velocity.set(-450 * 3,-200 * 3);
+		player.maxVelocity.set(1500, 900);
+		player.velocity.set(-1350, -600);
 		player.acceleration.x = 0;
 		//new FlxTimer().start(1, hitdeath);
 	}

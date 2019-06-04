@@ -7,39 +7,39 @@ import flixel.math.FlxMath;
 
 class Player extends FlxSprite
 {
-	private static inline var ACCELERATION:Int = 320 * 3;
-	private static inline var DRAG:Int = 640 * 3;
-	private static inline var GRAVITY:Int = 600 * 3;
-	private static inline var JUMP_FORCE:Int = -280 * 3;
-	private static inline var WALK_SPEED:Int = 100 * 3;
-	private static inline var RUN_SPEED:Int = 150 * 3;
-	private static inline var CROUCH_SPEED:Int = 50 * 3;
-	private static inline var FALLING_SPEED:Int = 300 * 3;
+	private static inline var ACCELERATION:Int = 1000;
+	private static inline var DRAG:Int = 2400;
+	private static inline var GRAVITY:Int = 1800;
+	private static inline var JUMP_FORCE:Int = -840;
+	private static inline var WALK_SPEED:Int = 300;
+	private static inline var RUN_SPEED:Int = 500;
+	private static inline var CROUCH_SPEED:Int = 150;
+	private static inline var FALLING_SPEED:Int = 900;
 
 	public var direction:Int = 1;
 	public var crouch:Bool = false;
 	public var drown:Bool = false;
 
 	// First position.
-	public var startx:Int = 60 * 3;
-	public var starty:Int = 150 * 3;
+	public var startx:Int = 180;
+	public var starty:Int = 450;
 
 	// Second position.
-	//public var startx:Int = 1400 * 3;
-	//public var starty:Int = 309 * 3;
+	//public var startx:Int = 4200;
+	//public var starty:Int = 927;
 
 	// Third position.
-	//public var startx:Int = 2500 * 3;
-	//public var starty:Int = 309 * 3;
+	//public var startx:Int = 7500;
+	//public var starty:Int = 927;
 
 	// End position.
-	//public var startx:Int = 4100 * 3;
-	//public var starty:Int = 309 * 3;
+	//public var startx:Int = 12300;
+	//public var starty:Int = 927;
 
 	public function new() 
 	{
 		super();
-		loadGraphic(AssetPaths.litang__png, true, 68 * 3, 80 * 3);
+		loadGraphic(AssetPaths.litang__png, true, 204, 240);
 
 		animation.add("idle", [0, 1], 6);
 		animation.add("walk", [2, 3, 4, 5, 6], 12);
@@ -51,8 +51,8 @@ class Player extends FlxSprite
 		animation.add("hit", [16]);
 		//animation.add("attack", [26,27,28,29],8);
 
-		setSize(30 * 3, 76 * 3);
-		offset.set(24 * 3, 4 * 3);
+		setSize(90, 228);
+		offset.set(72, 12);
 		
 		drag.x = DRAG;
 		acceleration.y = GRAVITY;
@@ -79,8 +79,8 @@ class Player extends FlxSprite
 		if (FlxG.keys.pressed.LEFT || PlayState.buttonLeft.pressed)
 		{
 			flipX = true;
-			setSize(30 * 3, 76 * 3);
-			offset.set(14 * 3, 4 * 3);
+			setSize(90, 228);
+			offset.set(42, 12);
 			direction = -1;
 			acceleration.x -= ACCELERATION;
 
@@ -88,8 +88,8 @@ class Player extends FlxSprite
 		else if (FlxG.keys.pressed.RIGHT || PlayState.buttonRight.pressed)
 		{
 			flipX = false;
-			setSize(30 * 3, 76 * 3);
-			offset.set(24 * 3, 4 * 3);
+			setSize(90, 228);
+			offset.set(72, 12);
 			direction = 1;
 			acceleration.x += ACCELERATION;
 		}
