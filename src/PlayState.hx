@@ -82,7 +82,7 @@ class PlayState extends FlxState
 					case ']': mapData.push(3);
 					case '[': mapData.push(4);
 					case '|': mapData.push(5);
-					case '_': mapData.push(6);
+					case '_': mapData.push(10);
 					case ')': mapData.push(7);
 					case '(': mapData.push(8);
 					case 'L': mapData.push(9);
@@ -137,11 +137,11 @@ class PlayState extends FlxState
 		add(pole);
 
 		// Load spikies.
-		addSpiky(50 * 96 - 21, 750 - 279, 33.5, 120);
-		addSpiky(56 * 96 - 21, 750 - 279, 0, 150);
-		addSpiky(62 * 96 - 21, 750 - 279, 50, 102);
-		addSpiky(68 * 96 - 21, 750 - 279, 0, 150);
-		addSpiky(74 * 96 - 21, 750 - 279, 50, 102);
+		addSpiky(50 * 96 - 21, 750 - 30, 33.5, 120);
+		addSpiky(56 * 96 - 21, 750 - 30, 0, 150);
+		addSpiky(62 * 96 - 21, 750 - 30, 50, 102);
+		addSpiky(68 * 96 - 21, 750 - 30, 0, 150);
+		addSpiky(74 * 96 - 21, 750 - 30, 50, 102);
 
 		// Load foreground.
 		foreground1 = new FlxBackdrop("assets/images/water3.png", 1.25, 1.25, true, false);
@@ -272,19 +272,11 @@ class PlayState extends FlxState
 					}
 				}
 			}
-			/*if (player.alive) {
-				for (spiky in spikies) {
-					if (FlxG.overlap(player, spiky)) {
-						player.alive = false;
-						hit();
-					}
-				}
-			}*/
 		}
 
 		if (player.alive || !player.drown) {
 			// Detect if the player falls out of the screen and kill him.
-			if (player.y + player.height > FlxG.height + player.starty) {
+			if (player.y - player.height > FlxG.height) {
 				player.alive = false;
 				player.drown = true;
 				player.acceleration.x = 0;
@@ -312,13 +304,9 @@ class PlayState extends FlxState
 	}
 
 	function addSpiky(x, y, angle, velocity) {
-		var spiky = new Spiky();
+		var spiky = new Spiky(x, y, angle, velocity);
 		//add(new FlxTrail(spiky, null, 3, 0, 0.2));
 		add(spiky);
-		spiky.x = x;
-		spiky.y = y;
-		spiky.angle = angle;
-		spiky.angularVelocity = velocity;
 		spikies.push(spiky);
 	}
 
@@ -337,7 +325,7 @@ class PlayState extends FlxState
 		FlxG.camera.shake(0.01, 0.2);
 		player.animation.play("hit");
 		player.maxVelocity.set(500 * 3, 300 * 3);
-		player.velocity.set(-300 * 3,-200 * 3);
+		player.velocity.set(-450 * 3,-200 * 3);
 		player.acceleration.x = 0;
 		//new FlxTimer().start(1, hitdeath);
 	}
