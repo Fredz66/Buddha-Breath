@@ -109,59 +109,61 @@ class PlayState extends FlxState
 
 		FlxG.sound.playMusic(AssetPaths.asian_mystery_nometadata__ogg, 1, true);
 
+		var yshift = 0;
+
 		//background = new FlxBackdrop("assets/images/640.png");
-		background = new FlxBackdrop("assets/images/background2.png");
+		background = new FlxBackdrop("assets/images/background3.png");
 		background.scrollFactor.x = 0.5;
 		background.scrollFactor.y = 0.5;
-		background.offset.y = 250;
+		background.offset.y = yshift + 250;
 		add(background);
 
 		// Load island 1.
-		island1 = new FlxBackdrop("assets/images/island1.png",0.55, 0.55, false, false);
-		island1.offset.x = -500;
-		island1.offset.y = -250;
+		island1 = new FlxBackdrop("assets/images/island2.png",0.55, 0.55, false, false);
+		island1.offset.x = -600;
+		island1.offset.y = yshift - 250;
 		add(island1);
 
 		// Load island 2.
-		island2 = new FlxBackdrop("assets/images/island1.png",0.55, 0.55, false, false);
-		island2.offset.x = -2500;
-		island2.offset.y = -250;
+		island2 = new FlxBackdrop("assets/images/island2.png",0.55, 0.55, false, false);
+		island2.offset.x = -600 - 2100;
+		island2.offset.y = yshift - 250;
 		add(island2);
 
 		// Load island 3.
-		island3 = new FlxBackdrop("assets/images/island1.png",0.55, 0.55, false, false);
-		island3.offset.x = -4600;
-		island3.offset.y = -250;
+		island3 = new FlxBackdrop("assets/images/island2.png",0.55, 0.55, false, false);
+		island3.offset.x = -600 - 2100*2;
+		island3.offset.y = yshift - 250;
 		add(island3);
 
 		// Load island 4.
-		island4 = new FlxBackdrop("assets/images/island1.png",0.55, 0.55, false, false);
-		island4.offset.x = -6700;
-		island4.offset.y = -250;
+		island4 = new FlxBackdrop("assets/images/island2.png",0.55, 0.55, false, false);
+		island4.offset.x = -600 - 2100*3;
+		island4.offset.y = yshift - 250;
 		add(island4);
 
 		// Load boat 1.
-		boat1 = new FlxBackdrop("assets/images/boat.png",0.58, 0.58, false, false);
-		boat1.offset.x = -1000;
-		boat1.offset.y = -700;
+		boat1 = new FlxBackdrop("assets/images/boat2.png",0.58, 0.58, false, false);
+		boat1.offset.x = -1270;
+		boat1.offset.y = yshift - 700;
 		add(boat1);
 
 		// Load boat 2.
-		boat2 = new FlxBackdrop("assets/images/boat.png",0.58, 0.58, false, false);
-		boat2.offset.x = -3000;
-		boat2.offset.y = -700;
+		boat2 = new FlxBackdrop("assets/images/boat2.png",0.58, 0.58, false, false);
+		boat2.offset.x = -1270 - 2100;
+		boat2.offset.y = yshift - 700;
 		add(boat2);
 
 		// Load island 3.
-		boat3 = new FlxBackdrop("assets/images/boat.png",0.58, 0.58, false, false);
-		boat3.offset.x = -5100;
-		boat3.offset.y = -700;
+		boat3 = new FlxBackdrop("assets/images/boat2.png",0.58, 0.58, false, false);
+		boat3.offset.x = -1270 - 2100*2;
+		boat3.offset.y = yshift - 700;
 		add(boat3);
 
 		// Load island 4.
-		boat4 = new FlxBackdrop("assets/images/boat.png",0.58, 0.58, false, false);
-		boat4.offset.x = -7200;
-		boat4.offset.y = -700;
+		boat4 = new FlxBackdrop("assets/images/boat2.png",0.58, 0.58, false, false);
+		boat4.offset.x = -1270 - 2100*3;
+		boat4.offset.y = yshift - 700;
 		add(boat4);
 
 		// Load map but don't show it.
