@@ -13,7 +13,7 @@ class MenuState extends FlxState
 	override public function create():Void
 	{
 		// Display version number.
-		add(new FlxText(0, 1044, FlxG.width, "v0.2.0-alpha").setFormat(null, 24));
+		add(new FlxText(0, 1044, FlxG.width, "v0.5.0-alpha").setFormat(null, 24));
 
 		FlxG.mouse.visible = !FlxG.onMobile;
 

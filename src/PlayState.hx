@@ -22,7 +22,16 @@ import gui.WinState;
 class PlayState extends FlxState
 {
 	var background:FlxBackdrop;
+
 	var island1:FlxBackdrop;
+	var island2:FlxBackdrop;
+	var island3:FlxBackdrop;
+	var island4:FlxBackdrop;
+
+	var boat1:FlxBackdrop;
+	var boat2:FlxBackdrop;
+	var boat3:FlxBackdrop;
+	var boat4:FlxBackdrop;
 
 	var foreground1:FlxBackdrop;
 	var foreground2:FlxBackdrop;
@@ -100,19 +109,60 @@ class PlayState extends FlxState
 
 		FlxG.sound.playMusic(AssetPaths.asian_mystery_nometadata__ogg, 1, true);
 
-		// Load background.
-		/*island1 = new FlxBackdrop("assets/images/background.png");
-		background.scrollFactor.x = 0.5;
-		background.scrollFactor.y = 0.5;
-		background.offset.y = 100;
-		add(background);*/
-
 		//background = new FlxBackdrop("assets/images/640.png");
-		background = new FlxBackdrop("assets/images/background1.png");
+		background = new FlxBackdrop("assets/images/background2.png");
 		background.scrollFactor.x = 0.5;
 		background.scrollFactor.y = 0.5;
 		background.offset.y = 250;
 		add(background);
+
+		// Load island 1.
+		island1 = new FlxBackdrop("assets/images/island1.png",0.55, 0.55, false, false);
+		island1.offset.x = -500;
+		island1.offset.y = -250;
+		add(island1);
+
+		// Load island 2.
+		island2 = new FlxBackdrop("assets/images/island1.png",0.55, 0.55, false, false);
+		island2.offset.x = -2500;
+		island2.offset.y = -250;
+		add(island2);
+
+		// Load island 3.
+		island3 = new FlxBackdrop("assets/images/island1.png",0.55, 0.55, false, false);
+		island3.offset.x = -4600;
+		island3.offset.y = -250;
+		add(island3);
+
+		// Load island 4.
+		island4 = new FlxBackdrop("assets/images/island1.png",0.55, 0.55, false, false);
+		island4.offset.x = -6700;
+		island4.offset.y = -250;
+		add(island4);
+
+		// Load boat 1.
+		boat1 = new FlxBackdrop("assets/images/boat.png",0.58, 0.58, false, false);
+		boat1.offset.x = -1000;
+		boat1.offset.y = -700;
+		add(boat1);
+
+		// Load boat 2.
+		boat2 = new FlxBackdrop("assets/images/boat.png",0.58, 0.58, false, false);
+		boat2.offset.x = -3000;
+		boat2.offset.y = -700;
+		add(boat2);
+
+		// Load island 3.
+		boat3 = new FlxBackdrop("assets/images/boat.png",0.58, 0.58, false, false);
+		boat3.offset.x = -5100;
+		boat3.offset.y = -700;
+		add(boat3);
+
+		// Load island 4.
+		boat4 = new FlxBackdrop("assets/images/boat.png",0.58, 0.58, false, false);
+		boat4.offset.x = -7200;
+		boat4.offset.y = -700;
+		add(boat4);
 
 		// Load map but don't show it.
 		map = new FlxTilemap();
@@ -181,20 +231,26 @@ class PlayState extends FlxState
 		// Create the buttons for the virtual floating pad.
 		var buttonGraphic:FlxSprite = new FlxSprite().loadGraphic("assets/images/virtual-button.png");
 
-		buttonLeft = new FlxButton(0, 1080 - buttonGraphic.height, "");
-		buttonLeft.loadGraphicFromSprite(buttonGraphic);
+		buttonLeft = new FlxButton(0, 1080 - buttonGraphic.height / 2, "");
+		//buttonLeft.loadGraphicFromSprite(buttonGraphic);
+		buttonLeft.loadGraphic("assets/images/arrow.png");
+		buttonLeft.flipX = true;
 		add(buttonLeft);
 
-		buttonRight = new FlxButton(buttonGraphic.width, 1080 - buttonGraphic.height, "");
-		buttonRight.loadGraphicFromSprite(buttonGraphic);
+		buttonRight = new FlxButton(buttonGraphic.width, 1080 - buttonGraphic.height / 2, "");
+		//buttonRight.loadGraphicFromSprite(buttonGraphic);
+		buttonRight.loadGraphic("assets/images/arrow.png");
 		add(buttonRight);
 
-		buttonJump = new FlxButton(1920 - buttonGraphic.width, 1080 - buttonGraphic.height * 2, "");
-		buttonJump.loadGraphicFromSprite(buttonGraphic);
+		buttonJump = new FlxButton(1920 - 3 * buttonGraphic.width / 4, 1080 - buttonGraphic.height, "");
+		//buttonJump.loadGraphicFromSprite(buttonGraphic);
+		buttonJump.loadGraphic("assets/images/arrow-up.png");
 		add(buttonJump);
 
-		buttonCrouch = new FlxButton(1920 - buttonGraphic.width, 1080 - buttonGraphic.height, "");
-		buttonCrouch.loadGraphicFromSprite(buttonGraphic);
+		buttonCrouch = new FlxButton(1920 - 3 * buttonGraphic.width / 4, 1080 - buttonGraphic.height / 2, "");
+		//buttonCrouch.loadGraphicFromSprite(buttonGraphic);
+		buttonCrouch.loadGraphic("assets/images/arrow-up.png");
+		buttonCrouch.flipY = true;
 		add(buttonCrouch);
 
 		// Hide the virtual floating pad when not on mobile.		
@@ -221,7 +277,7 @@ class PlayState extends FlxState
 
 		// Move the virtual floating pad at the position of each initial touch if it's in the left half of the screen.
 		// Uses an offset between the left/right buttons.
-		if (FlxG.onMobile) {
+		/*if (FlxG.onMobile) {
 			if (FlxG.mouse.justPressed) {
 				if (FlxG.mouse.x - camera.scroll.x < FlxG.camera.width / 2) {
 					var position:FlxPoint = new FlxPoint(FlxG.mouse.x - camera.scroll.x, FlxG.mouse.y - camera.scroll.y);
@@ -229,7 +285,7 @@ class PlayState extends FlxState
 					buttonRight.setPosition(position.x + virtualPadOffset, position.y - (buttonRight.height / 2) - 1);
 				}
 			}
-		}
+		}*/
 
 		// Release the second flock of birds.
 		if (!birdsReleased && player.x > 10500) {
