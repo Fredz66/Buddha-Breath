@@ -15,12 +15,16 @@ import flixel.util.FlxColor;
 import flixel.util.FlxCollision;
 import flixel.util.FlxTimer;
 
+import flixel.addons.editors.tiled.TiledMap;
+
 import gui.ExitState;
 import gui.GameOverState;
 import gui.WinState;
 
 class PlayState extends FlxState
 {
+	//var level:TiledLevel;
+
 	var background:FlxBackdrop;
 
 	var island1:FlxBackdrop;
@@ -37,23 +41,22 @@ class PlayState extends FlxState
 	var foreground2:FlxBackdrop;
 	var foreground3:FlxBackdrop;
 	var foreground4:FlxBackdrop;
+
 	var map:FlxTilemap;
+
 	var pole:Pole;
 	var plonk:Plonk;
 	var spikies:Array<Spiky> = [];
-	var player:Player;
 	var flagStart:Flag;
 	var flagEnd:Flag;
 	var bird:Bird;
 	var fish:Fish;
+
+	var player:Player;
+
+	public static var pad:VirtualPad;
+
 	var frames:Int = 0;
-
-	public var virtualPadOffset:Int = 30;
-	public static var buttonLeft:FlxButton;
-	public static var buttonRight:FlxButton;
-	public static var buttonJump:FlxButton;
-	public static var buttonCrouch:FlxButton;
-
 	var poleFalling:Bool = false;
 	var birdsReleased:Bool = false;
 
@@ -230,37 +233,9 @@ class PlayState extends FlxState
 		// Hide the mouse cursor.
 		FlxG.mouse.visible = false;
 
-		// Create the buttons for the virtual floating pad.
-		var buttonGraphic:FlxSprite = new FlxSprite().loadGraphic("assets/images/virtual-button.png");
-
-		buttonLeft = new FlxButton(0, 1080 - buttonGraphic.height / 2, "");
-		//buttonLeft.loadGraphicFromSprite(buttonGraphic);
-		buttonLeft.loadGraphic("assets/images/arrow.png");
-		buttonLeft.flipX = true;
-		add(buttonLeft);
-
-		buttonRight = new FlxButton(buttonGraphic.width, 1080 - buttonGraphic.height / 2, "");
-		//buttonRight.loadGraphicFromSprite(buttonGraphic);
-		buttonRight.loadGraphic("assets/images/arrow.png");
-		add(buttonRight);
-
-		buttonJump = new FlxButton(1920 - 3 * buttonGraphic.width / 4, 1080 - buttonGraphic.height, "");
-		//buttonJump.loadGraphicFromSprite(buttonGraphic);
-		buttonJump.loadGraphic("assets/images/arrow-up.png");
-		add(buttonJump);
-
-		buttonCrouch = new FlxButton(1920 - 3 * buttonGraphic.width / 4, 1080 - buttonGraphic.height / 2, "");
-		//buttonCrouch.loadGraphicFromSprite(buttonGraphic);
-		buttonCrouch.loadGraphic("assets/images/arrow-up.png");
-		buttonCrouch.flipY = true;
-		add(buttonCrouch);
-
-		// Hide the virtual floating pad when not on mobile.		
-		if (!FlxG.onMobile) {
-			buttonLeft.visible = false;
-			buttonRight.visible = false;
-			buttonJump.visible = false;
-			buttonCrouch.visible = false;
+		if (FlxG.onMobile) {
+			pad = new VirtualPad();
+			add(pad);
 		}
 	}
 
@@ -276,18 +251,6 @@ class PlayState extends FlxState
 		super.update(elapsed);
 
 		frames++;
-
-		// Move the virtual floating pad at the position of each initial touch if it's in the left half of the screen.
-		// Uses an offset between the left/right buttons.
-		/*if (FlxG.onMobile) {
-			if (FlxG.mouse.justPressed) {
-				if (FlxG.mouse.x - camera.scroll.x < FlxG.camera.width / 2) {
-					var position:FlxPoint = new FlxPoint(FlxG.mouse.x - camera.scroll.x, FlxG.mouse.y - camera.scroll.y);
-					buttonLeft.setPosition(position.x - buttonLeft.width - virtualPadOffset, position.y - (buttonLeft.height / 2) - 1);
-					buttonRight.setPosition(position.x + virtualPadOffset, position.y - (buttonRight.height / 2) - 1);
-				}
-			}
-		}*/
 
 		// Release the second flock of birds.
 		if (!birdsReleased && player.x > 10500) {
