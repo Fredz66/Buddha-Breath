@@ -6,6 +6,9 @@ import gui.MenuState;
 
 class Main extends Sprite
 {
+    public static var level:Int = 1;
+	public static var pad:VirtualPad;
+
     public function new()
     {
         super();

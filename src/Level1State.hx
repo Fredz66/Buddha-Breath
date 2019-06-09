@@ -1,12 +1,8 @@
 package;
 
-import flixel.FlxSprite;
-import flixel.ui.FlxButton;
-import flixel.math.FlxPoint;
 import flixel.FlxObject;
 import flixel.math.FlxAngle;
 import flixel.math.FlxMath;
-//import flixel.addons.effects.FlxTrail;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.tile.FlxTilemap;
@@ -15,15 +11,27 @@ import flixel.util.FlxColor;
 import flixel.util.FlxCollision;
 import flixel.util.FlxTimer;
 
-import flixel.addons.editors.tiled.TiledMap;
-
 import gui.ExitState;
 import gui.GameOverState;
 import gui.WinState;
 
-class PlayState extends FlxState
+class Level1State extends FlxState
 {
-	//var level:TiledLevel;
+	// Player first position.
+	public var startx:Int = 180;
+	public var starty:Int = -1100;
+
+	// Player second position.
+	//public var startx:Int = 4200;
+	//public var starty:Int = 927;
+
+	// Player third position.
+	//public var startx:Int = 7500;
+	//public var starty:Int = 927;
+
+	// Player final position.
+	//public var startx:Int = 12300;
+	//public var starty:Int = 927;
 
 	var background:FlxBackdrop;
 
@@ -54,8 +62,6 @@ class PlayState extends FlxState
 
 	var player:Player;
 
-	public static var pad:VirtualPad;
-
 	var frames:Int = 0;
 	var poleFalling:Bool = false;
 	var birdsReleased:Bool = false;
@@ -81,7 +87,7 @@ class PlayState extends FlxState
 
 	/*
 	 * Convert an array of strings to an array of ints suitable for tilemaps.
-	**/
+	 */
 	public function StringsToMapData(strings:Array<String>):Array<Int> {
 		var mapData:Array<Int> = [];
 
@@ -114,7 +120,6 @@ class PlayState extends FlxState
 
 		var yshift = 0;
 
-		//background = new FlxBackdrop("assets/images/640.png");
 		background = new FlxBackdrop("assets/images/background3.png");
 		background.scrollFactor.x = 0.5;
 		background.scrollFactor.y = 0.5;
@@ -169,22 +174,22 @@ class PlayState extends FlxState
 		boat4.offset.y = yshift - 700;
 		add(boat4);
 
-		// Load map but don't show it.
+		// Load map.
 		map = new FlxTilemap();
-		map.loadMapFromArray(StringsToMapData(tiles), 130, 16, AssetPaths.tiles__png, 96, 96);
+		map.loadMapFromArray(StringsToMapData(tiles), tiles[0].length, tiles.length, AssetPaths.tiles__png, 96, 96);
 		add(map);
 
 		// Load flags.
-		flagStart = new Flag(66, 570, false);
+		flagStart = new Flag(66, map.height - 966, false);
 		add(flagStart);
 
-		flagEnd = new Flag(12111, 570, true);
+		flagEnd = new Flag(12111, map.height - 966, true);
 		add(flagEnd);
 
 		releaseBirds(11, 0, 0, 900, 300);
 
 		// Load player.
-		player = new Player();
+		player = new Player(startx, Std.int(map.height + starty));
 		add(player);
 
 		// Load pole.
@@ -200,18 +205,18 @@ class PlayState extends FlxState
 
 		// Load foreground.
 		foreground1 = new FlxBackdrop("assets/images/water3.png", 1.25, 1.25, true, false);
-		foreground1.offset.y = -1350;
+		foreground1.y = map.height * 1.25 - (FlxG.height + foreground1.height) / 2 + 250;
 
 		foreground2 = new FlxBackdrop("assets/images/water2.png", 1.30, 1.25, true, false);
 		foreground2.offset.x = 60;
-		foreground2.offset.y = -1422;
+		foreground2.y = map.height * 1.25 - (FlxG.height + foreground2.height) / 2 + 322;
 
 		foreground3 = new FlxBackdrop("assets/images/water1.png", 1.50, 1.25, true, false);
 		foreground3.offset.x = 180;
-		foreground3.offset.y = -1530;
+		foreground3.y = map.height * 1.25 - (FlxG.height + foreground3.height) / 2 + 430;
 
 		foreground4 = new FlxBackdrop("assets/images/reed.png", 1.75, 1.25, true, false);
-		foreground4.offset.y = -1470;
+		foreground4.y = map.height * 1.25 - (FlxG.height + foreground4.height) / 2 + 200;
 
 		// Load plonk.
 		plonk = new Plonk();
@@ -234,8 +239,8 @@ class PlayState extends FlxState
 		FlxG.mouse.visible = false;
 
 		if (FlxG.onMobile) {
-			pad = new VirtualPad();
-			add(pad);
+			Main.pad = new VirtualPad();
+			add(Main.pad);
 		}
 	}
 
@@ -297,7 +302,7 @@ class PlayState extends FlxState
 
 		if (player.alive || !player.drown) {
 			// Detect if the player falls out of the screen and kill him.
-			if (player.y - player.height > FlxG.height) {
+			if (player.y + player.height > map.height) {
 				player.alive = false;
 				player.drown = true;
 				player.acceleration.x = 0;
@@ -326,7 +331,6 @@ class PlayState extends FlxState
 
 	function addSpiky(x, y, angle, velocity) {
 		var spiky = new Spiky(x, y, angle, velocity);
-		//add(new FlxTrail(spiky, null, 3, 0, 0.2));
 		add(spiky);
 		spikies.push(spiky);
 	}
@@ -334,7 +338,7 @@ class PlayState extends FlxState
 	function drown():Void {
 		FlxG.sound.play(AssetPaths.watersplash__ogg, 1);
 		plonk.x = player.x;
-		plonk.y = FlxG.height + player.height;
+		plonk.y = player.y;
 		plonk.visible = true;
 		plonk.velocity.y = -900;
 		plonk.acceleration.y = 1200;
@@ -348,7 +352,6 @@ class PlayState extends FlxState
 		player.maxVelocity.set(1500, 900);
 		player.velocity.set(-1350, -600);
 		player.acceleration.x = 0;
-		//new FlxTimer().start(1, hitdeath);
 	}
 
 	function hitdeath(Timer:FlxTimer):Void

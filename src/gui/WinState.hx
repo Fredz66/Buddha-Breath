@@ -14,7 +14,7 @@ class WinState extends FlxState
 		FlxG.mouse.visible = !FlxG.onMobile;
 
 		// Show message.
-      	add(new FlxText(0, 180, FlxG.width, "You Won !").setFormat(null, 96, FlxColor.RED, FlxTextAlign.CENTER));
+      	add(new FlxText(0, 180, FlxG.width, "Level " + Main.level + " completed !").setFormat(null, 96, FlxColor.RED, FlxTextAlign.CENTER));
 
 		// Show start button.
  		add(new FlxScaleButton(840, 540, "Continue", play));
@@ -34,7 +34,15 @@ class WinState extends FlxState
 
 	function play():Void
 	{
-		FlxG.switchState(new PlayState());
+		Main.level += 1;
+
+		switch (Main.level) {
+			case 1 : FlxG.switchState(new Level1State());
+			case 2 : FlxG.switchState(new Level2State());
+			default: 
+				Main.level = 1;
+				FlxG.switchState(new MenuState());
+		}
  	}
 
 	function reset():Void

@@ -20,25 +20,17 @@ class Player extends FlxSprite
 	public var crouch:Bool = false;
 	public var drown:Bool = false;
 
-	// First position.
-	public var startx:Int = 180;
-	public var starty:Int = 450;
+	// Initial position.
+	public var startx:Int;
+	public var starty:Int;
 
-	// Second position.
-	//public var startx:Int = 4200;
-	//public var starty:Int = 927;
-
-	// Third position.
-	//public var startx:Int = 7500;
-	//public var starty:Int = 927;
-
-	// End position.
-	//public var startx:Int = 12300;
-	//public var starty:Int = 927;
-
-	public function new() 
+	public function new(X:Int, Y:Int) 
 	{
 		super();
+
+		startx = X;
+		starty = Y;
+
 		loadGraphic(AssetPaths.litang__png, true, 204, 240);
 
 		animation.add("idle", [0, 1], 6);
@@ -76,7 +68,7 @@ class Player extends FlxSprite
 	{
 		acceleration.x = 0;
 		
-		if (FlxG.keys.pressed.LEFT || (PlayState.pad != null && PlayState.pad.buttonLeft.pressed))
+		if (FlxG.keys.pressed.LEFT || (Main.pad != null && Main.pad.buttonLeft.pressed))
 		{
 			flipX = true;
 			setSize(90, 228);
@@ -85,7 +77,7 @@ class Player extends FlxSprite
 			acceleration.x -= ACCELERATION;
 
 		} 
-		else if (FlxG.keys.pressed.RIGHT || (PlayState.pad != null && PlayState.pad.buttonRight.pressed))
+		else if (FlxG.keys.pressed.RIGHT || (Main.pad != null && Main.pad.buttonRight.pressed))
 		{
 			flipX = false;
 			setSize(90, 228);
@@ -96,12 +88,12 @@ class Player extends FlxSprite
 
 		if (velocity.y == 0)
 		{
-			if ((FlxG.keys.justPressed.UP || (PlayState.pad != null && PlayState.pad.buttonUp.pressed)) && isTouching(FlxObject.FLOOR)) {
+			if ((FlxG.keys.justPressed.UP || (Main.pad != null && Main.pad.buttonUp.pressed)) && isTouching(FlxObject.FLOOR)) {
 				FlxG.sound.play(AssetPaths.jump__ogg, 1);
 				velocity.y = JUMP_FORCE;
 			}
 
-			if ((FlxG.keys.pressed.DOWN || (PlayState.pad != null && PlayState.pad.buttonDown.pressed)) && isTouching(FlxObject.FLOOR)) {
+			if ((FlxG.keys.pressed.DOWN || (Main.pad != null && Main.pad.buttonDown.pressed)) && isTouching(FlxObject.FLOOR)) {
 				crouch = true;
 				maxVelocity.x = CROUCH_SPEED;
 			} else {
@@ -109,7 +101,7 @@ class Player extends FlxSprite
 				maxVelocity.x = RUN_SPEED;
 			}
 		} else {
-			if ((FlxG.keys.justPressed.UP || (PlayState.pad != null && PlayState.pad.buttonUp.justPressed)) && isTouching(FlxObject.FLOOR)) {
+			if ((FlxG.keys.justPressed.UP || (Main.pad != null && Main.pad.buttonUp.justPressed)) && isTouching(FlxObject.FLOOR)) {
 				FlxG.sound.play(AssetPaths.jump__ogg, 1);
 				velocity.y = JUMP_FORCE;
 			}

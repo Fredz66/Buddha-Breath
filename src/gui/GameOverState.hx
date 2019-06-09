@@ -34,7 +34,10 @@ class GameOverState extends FlxState
 
 	function play():Void
 	{
-		FlxG.switchState(new PlayState());
+		switch (Main.level) {
+			case 1 : FlxG.switchState(new Level1State());
+			case 2 : FlxG.switchState(new Level2State());
+		}
  	}
 
 	function reset():Void
