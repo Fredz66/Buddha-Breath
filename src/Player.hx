@@ -20,8 +20,6 @@ class Player extends FlxSprite
 	public var crouch:Bool = false;
 	public var drown:Bool = false;
 
-	private var usePad:Bool = false;
-
 	// Initial position.
 	public var startx:Int;
 	public var starty:Int;
@@ -52,8 +50,6 @@ class Player extends FlxSprite
 		acceleration.y = GRAVITY;
 		maxVelocity.set(RUN_SPEED, FALLING_SPEED);
 
-		usePad = Main.pad != null;
-
 		x = startx;
 		y = starty;
 	}
@@ -72,7 +68,7 @@ class Player extends FlxSprite
 	{
 		acceleration.x = 0;
 		
-		if (FlxG.keys.pressed.LEFT || (usePad && Main.pad.buttonLeft.pressed))
+		if (FlxG.keys.pressed.LEFT || (FlxG.onMobile && Main.pad.buttonLeft.pressed))
 		{
 			flipX = true;
 			setSize(90, 150);
@@ -81,7 +77,7 @@ class Player extends FlxSprite
 			acceleration.x -= ACCELERATION;
 
 		} 
-		else if (FlxG.keys.pressed.RIGHT || (usePad && Main.pad.buttonRight.pressed))
+		else if (FlxG.keys.pressed.RIGHT || (FlxG.onMobile && Main.pad.buttonRight.pressed))
 		{
 			flipX = false;
 			setSize(90, 150);
@@ -92,12 +88,12 @@ class Player extends FlxSprite
 
 		if (velocity.y == 0)
 		{
-			if ((FlxG.keys.justPressed.UP || (usePad && Main.pad.buttonUp.pressed)) && isTouching(FlxObject.FLOOR)) {
+			if ((FlxG.keys.justPressed.UP || (FlxG.onMobile && Main.pad.buttonUp.pressed)) && isTouching(FlxObject.FLOOR)) {
 				FlxG.sound.play(AssetPaths.jump__ogg, 1);
 				velocity.y = JUMP_FORCE;
 			}
 
-			if ((FlxG.keys.pressed.DOWN || (usePad && Main.pad.buttonDown.pressed)) && isTouching(FlxObject.FLOOR)) {
+			if ((FlxG.keys.pressed.DOWN || (FlxG.onMobile && Main.pad.buttonDown.pressed)) && isTouching(FlxObject.FLOOR)) {
 				crouch = true;
 				maxVelocity.x = CROUCH_SPEED;
 			} else {
@@ -105,7 +101,7 @@ class Player extends FlxSprite
 				maxVelocity.x = RUN_SPEED;
 			}
 		} else {
-			if ((FlxG.keys.justPressed.UP || (usePad && Main.pad.buttonUp.justPressed)) && isTouching(FlxObject.FLOOR)) {
+			if ((FlxG.keys.justPressed.UP || (FlxG.onMobile && Main.pad.buttonUp.justPressed)) && isTouching(FlxObject.FLOOR)) {
 				FlxG.sound.play(AssetPaths.jump__ogg, 1);
 				velocity.y = JUMP_FORCE;
 			}
