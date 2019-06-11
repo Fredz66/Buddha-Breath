@@ -48,6 +48,9 @@ class MenuState extends FlxState
 		platforms += "mobile ";
 		#end
 
+		platforms += " (" + openfl.system.Capabilities.screenResolutionX + "x" + openfl.system.Capabilities.screenResolutionY + ")";
+		platforms += " (" + FlxG.stage.stageWidth + "x" + FlxG.stage.stageHeight + ")";
+
 		add(new FlxText(0, 1014, FlxG.width, platforms).setFormat(null, 24));
 
 		super.create();
