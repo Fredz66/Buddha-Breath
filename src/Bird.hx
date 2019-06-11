@@ -27,6 +27,8 @@ class Bird extends FlxSprite
 		animation.add("idle", [2]);
 		animation.add("fly", [0, 1, 2, 3, 4, 5], 12);
 
+		allowCollisions = 0;
+
 		drag.x = DRAG;
 		this.accelerationY = accelerationY;
 		this.acceleration.y = this.accelerationY;

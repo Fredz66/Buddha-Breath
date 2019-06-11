@@ -26,6 +26,8 @@ class Fish extends FlxSprite
 
 		animation.add("idle", [0]);
 
+		allowCollisions = 0;
+
 		drag.x = DRAG;
 		this.accelerationY = accelerationY;
 		this.acceleration.y = this.accelerationY;

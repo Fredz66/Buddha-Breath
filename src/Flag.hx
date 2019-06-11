@@ -15,6 +15,8 @@ class Flag extends FlxSprite
 
 		animation.add("float", [0, 1, 2, 3, 4, 5], 12);
 
+		allowCollisions = 0;
+
 		this.x = x;
 		this.y = y;
 		flipX = invert;

@@ -11,6 +11,8 @@ class Plonk extends FlxSprite
 	{
 		super();
 
+		allowCollisions = 0;
+
 		loadGraphic(AssetPaths.plonk__png, true, 192, 192);
 	}
 
