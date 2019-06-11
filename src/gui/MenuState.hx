@@ -1,5 +1,6 @@
 package gui;
 
+import flixel.FlxGame;
 #if html5
 import flixel.ui.FlxButton;
 #end
@@ -13,7 +14,7 @@ class MenuState extends FlxState
 	override public function create():Void
 	{
 		// Display version number.
-		add(new FlxText(0, 1044, FlxG.width, "v0.8.0-alpha").setFormat(null, 24));
+		add(new FlxText(0, 1044 / FlxG.initialZoom, FlxG.width, "v0.9.0-alpha").setFormat(null, Std.int(24 / FlxG.initialZoom)));
 
 		FlxG.mouse.visible = !FlxG.onMobile;
 
