@@ -14,15 +14,15 @@ class MenuState extends FlxState
 	override public function create():Void
 	{
 		// Display version number.
-		add(new FlxText(0, 1044 / FlxG.initialZoom, FlxG.width, "v0.9.1-alpha").setFormat(null, Std.int(24 / FlxG.initialZoom)));
+		add(new FlxText(0, 348 * Main.scale, FlxG.width, Main.version).setFormat(null, 8  * Main.scale));
 
 		FlxG.mouse.visible = !FlxG.onMobile;
 
-      	add(new FlxText(0, 180, FlxG.width, "Buddha Breath").setFormat(null, 192, FlxColor.RED, FlxTextAlign.CENTER));
+      	add(new FlxText(0, 60 * Main.scale, FlxG.width, "Buddha Breath").setFormat(null, 64 * Main.scale, FlxColor.RED, FlxTextAlign.CENTER));
 
- 		add(new FlxScaleButton(840, 540, "New game", play));
-		add(new FlxScaleButton(840, 600, "Settings", settings));
-		add(new FlxScaleButton(840, 660, "Quit", quit));
+ 		add(new FlxScaleButton(280 * Main.scale, 180 * Main.scale, "New game", play));
+		add(new FlxScaleButton(280 * Main.scale, 200 * Main.scale, "Settings", settings));
+		add(new FlxScaleButton(280 * Main.scale, 220 * Main.scale, "Quit", quit));
 
 		var platforms:String = "";
 
@@ -39,8 +39,8 @@ class MenuState extends FlxState
 			platforms += "(desktop) ";
 		}
 
-		var button:FlxButton = new FlxButton(1710, 870, "", function() FlxG.fullscreen = !FlxG.fullscreen);
-		button.loadGraphic("assets/images/fullscreen.png");
+		var button:FlxButton = new FlxButton(570 * Main.scale, 290 * Main.scale, "", function() FlxG.fullscreen = !FlxG.fullscreen);
+		button.loadGraphic("assets/images/" + Main.scale + "/fullscreen.png");
 		add(button);
 		#end
 
@@ -51,11 +51,11 @@ class MenuState extends FlxState
 		platforms += " (" + openfl.system.Capabilities.screenResolutionX + "x" + openfl.system.Capabilities.screenResolutionY + ")";
 		platforms += " (" + FlxG.stage.stageWidth + "x" + FlxG.stage.stageHeight + ")";
 
-		add(new FlxText(0, 1014, FlxG.width, platforms).setFormat(null, 24));
+		add(new FlxText(0, 338 * Main.scale, FlxG.width, platforms).setFormat(null, 8 * Main.scale));
 
 		super.create();
 
-		FlxG.sound.playMusic(AssetPaths.temple_nometadata__ogg, 1, true);
+		FlxG.sound.playMusic("assets/music/temple-nometadata.ogg", 1, true);
 	}
 
 	override public function update(elapsed:Float):Void

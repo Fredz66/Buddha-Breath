@@ -11,7 +11,7 @@ class Flag extends FlxSprite
 	{
 		super();
 
-		loadGraphic(AssetPaths.flag__png, true, 300, 225);
+		loadGraphic("assets/images/" + Main.scale + "/flag.png", true, 100 * Main.scale, 75 * Main.scale);
 
 		animation.add("float", [0, 1, 2, 3, 4, 5], 12);
 

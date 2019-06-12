@@ -14,30 +14,30 @@ class KeyboardState extends FlxState
 		FlxG.mouse.visible = !FlxG.onMobile;
 
 		// Show message.
-      	add(new FlxText(0, 180, FlxG.width, "Keyboard").setFormat(null, 96, FlxColor.RED, FlxTextAlign.CENTER));
+      	add(new FlxText(0, 60 * Main.scale, FlxG.width, "Keyboard").setFormat(null, 32 * Main.scale, FlxColor.RED, FlxTextAlign.CENTER));
 
 		// Show controls.
-		add(new FlxText(540, 360, FlxG.width, "Up").setFormat(null, 48, FlxColor.WHITE, FlxTextAlign.LEFT));
-		add(new FlxText(300, 360, FlxG.width, "up").setFormat(null, 48, FlxColor.WHITE, FlxTextAlign.CENTER));
+		add(new FlxText(180 * Main.scale, 120 * Main.scale, FlxG.width, "Up").setFormat(null, 16 * Main.scale, FlxColor.WHITE, FlxTextAlign.LEFT));
+		add(new FlxText(100 * Main.scale, 120 * Main.scale, FlxG.width, "up").setFormat(null, 16 * Main.scale, FlxColor.WHITE, FlxTextAlign.CENTER));
 
-		add(new FlxText(540, 420, FlxG.width, "Down").setFormat(null, 48, FlxColor.WHITE, FlxTextAlign.LEFT));
-		add(new FlxText(300, 420, FlxG.width, "down").setFormat(null, 48, FlxColor.WHITE, FlxTextAlign.CENTER));
+		add(new FlxText(180 * Main.scale, 140 * Main.scale, FlxG.width, "Down").setFormat(null, 16 * Main.scale, FlxColor.WHITE, FlxTextAlign.LEFT));
+		add(new FlxText(100 * Main.scale, 140 * Main.scale, FlxG.width, "down").setFormat(null, 16 * Main.scale, FlxColor.WHITE, FlxTextAlign.CENTER));
 
-		add(new FlxText(540, 480, FlxG.width, "Left").setFormat(null, 48, FlxColor.WHITE, FlxTextAlign.LEFT));
-		add(new FlxText(300, 480, FlxG.width, "left").setFormat(null, 48, FlxColor.WHITE, FlxTextAlign.CENTER));
+		add(new FlxText(180 * Main.scale, 160 * Main.scale, FlxG.width, "Left").setFormat(null, 16 * Main.scale, FlxColor.WHITE, FlxTextAlign.LEFT));
+		add(new FlxText(100 * Main.scale, 160 * Main.scale, FlxG.width, "left").setFormat(null, 16 * Main.scale, FlxColor.WHITE, FlxTextAlign.CENTER));
 
-		add(new FlxText(540, 540, FlxG.width, "Right").setFormat(null, 48, FlxColor.WHITE, FlxTextAlign.LEFT));
-		add(new FlxText(300, 540, FlxG.width, "right").setFormat(null, 48, FlxColor.WHITE, FlxTextAlign.CENTER));
+		add(new FlxText(180 * Main.scale, 180 * Main.scale, FlxG.width, "Right").setFormat(null, 16 * Main.scale, FlxColor.WHITE, FlxTextAlign.LEFT));
+		add(new FlxText(100 * Main.scale, 180 * Main.scale, FlxG.width, "right").setFormat(null, 16 * Main.scale, FlxColor.WHITE, FlxTextAlign.CENTER));
 
-		add(new FlxText(540, 600, FlxG.width, "Jump").setFormat(null, 48, FlxColor.WHITE, FlxTextAlign.LEFT));
-		add(new FlxText(300, 600, FlxG.width, "up").setFormat(null, 48, FlxColor.WHITE, FlxTextAlign.CENTER));
+		add(new FlxText(180 * Main.scale, 200 * Main.scale, FlxG.width, "Jump").setFormat(null, 16 * Main.scale, FlxColor.WHITE, FlxTextAlign.LEFT));
+		add(new FlxText(100 * Main.scale, 200 * Main.scale, FlxG.width, "up").setFormat(null, 16 * Main.scale, FlxColor.WHITE, FlxTextAlign.CENTER));
 
-		add(new FlxText(540, 660, FlxG.width, "Action").setFormat(null, 48, FlxColor.WHITE, FlxTextAlign.LEFT));
-		add(new FlxText(300, 660, FlxG.width, "Left-Ctrl").setFormat(null, 48, FlxColor.WHITE, FlxTextAlign.CENTER));
+		add(new FlxText(180 * Main.scale, 220 * Main.scale, FlxG.width, "Action").setFormat(null, 16 * Main.scale, FlxColor.WHITE, FlxTextAlign.LEFT));
+		add(new FlxText(100 * Main.scale, 220 * Main.scale, FlxG.width, "Left-Ctrl").setFormat(null, 16 * Main.scale, FlxColor.WHITE, FlxTextAlign.CENTER));
 
-		add(new FlxText(540, 720, FlxG.width, "Reset to default").setFormat(null, 48, FlxColor.WHITE, FlxTextAlign.LEFT));
+		add(new FlxText(180 * Main.scale, 240 * Main.scale, FlxG.width, "Reset to default").setFormat(null, 16 * Main.scale, FlxColor.WHITE, FlxTextAlign.LEFT));
 
- 		add(new FlxScaleButton(660, 810, "Back", reset));
+ 		add(new FlxScaleButton(220 * Main.scale, 270 * Main.scale, "Back", reset));
 	}
 
 	override public function update(elapsed:Float):Void

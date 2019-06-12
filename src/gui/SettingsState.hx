@@ -14,14 +14,14 @@ class SettingsState extends FlxState
 		FlxG.mouse.visible = !FlxG.onMobile;
 
 		// Show message.
-      	add(new FlxText(0, 180, FlxG.width, "Settings").setFormat(null, 96, FlxColor.RED, FlxTextAlign.CENTER));
+      	add(new FlxText(0, 60 * Main.scale, FlxG.width, "Settings").setFormat(null, 32 * Main.scale, FlxColor.RED, FlxTextAlign.CENTER));
 
- 		add(new FlxScaleButton(660, 540, "Graphics", keyboard));
- 		add(new FlxScaleButton(660, 600, "Keyboard", keyboard));
- 		add(new FlxScaleButton(660, 660, "Joypad", keyboard));
- 		add(new FlxScaleButton(660, 720, "Volume", keyboard));
+ 		add(new FlxScaleButton(220 * Main.scale, 180 * Main.scale, "Graphics", keyboard));
+ 		add(new FlxScaleButton(220 * Main.scale, 200 * Main.scale, "Keyboard", keyboard));
+ 		add(new FlxScaleButton(220 * Main.scale, 220 * Main.scale, "Joypad", keyboard));
+ 		add(new FlxScaleButton(220 * Main.scale, 240 * Main.scale, "Volume", keyboard));
 
- 		add(new FlxScaleButton(660, 810, "Back", back));
+ 		add(new FlxScaleButton(220 * Main.scale, 270 * Main.scale, "Back", back));
 	}
 
 	override public function update(elapsed:Float):Void

@@ -5,23 +5,23 @@ import flixel.ui.FlxButton;
 
 class FlxScaleButton extends FlxButton
 {
-	var gameScale:Float = FlxG.width / 640;
-
 	public function new(X:Float = 0, Y:Float = 0, ?Text:String, ?OnClick:Void->Void)
 	{
 		super(X, Y, OnClick);
 
-		scale.set(gameScale, gameScale);
+		scale.set(Main.scale, Main.scale);
 		updateHitbox();
 
 		for (point in labelOffsets)
-			point.set(point.x - gameScale, point.y + 3 * gameScale);
+		if (Main.scale == 3) {
+			point.set(point.x - Main.scale, point.y + 3 * Main.scale);
+		}
 
 		initLabel(Text);
 
-		label.size = Std.int(label.size * gameScale);
-		label.fieldWidth *= gameScale;
-		label.width *= gameScale;
-		label.height *= gameScale;
+		label.size = Std.int(label.size * Main.scale);
+		label.fieldWidth *= Main.scale;
+		label.width *= Main.scale;
+		label.height *= Main.scale;
 	}	
 }

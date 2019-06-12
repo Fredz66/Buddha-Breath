@@ -4,7 +4,7 @@ import flixel.FlxSprite;
 
 class Plonk extends FlxSprite
 {
-	private var speed = 6;
+	private var speed = 2 * Main.scale;
 	public var direction:Int = 1;
 
 	public function new() 
@@ -13,7 +13,7 @@ class Plonk extends FlxSprite
 
 		allowCollisions = 0;
 
-		loadGraphic(AssetPaths.plonk__png, true, 192, 192);
+		loadGraphic("assets/images/" + Main.scale + "/plonk.png", true, 64 * Main.scale, 64 * Main.scale);
 	}
 
 	override public function update(elapsed:Float):Void

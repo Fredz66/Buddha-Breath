@@ -1,0 +1,473 @@
+{
+	"sheets": [
+		{
+			"name": "BuddhaBreath",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "Id"
+				},
+				{
+					"typeStr": "7",
+					"name": "Image",
+					"display": null
+				}
+			],
+			"lines": [
+				{
+					"Id": "litang",
+					"Image": "fef63b38bfe0e625d548fb36e4c6cc37"
+				},
+				{
+					"Id": "bird",
+					"Image": "2a3db600841a887313edd8e666c47746"
+				},
+				{
+					"Id": "fish",
+					"Image": ""
+				},
+				{
+					"Id": "chain",
+					"Image": ""
+				},
+				{
+					"Id": "ball",
+					"Image": ""
+				},
+				{
+					"Id": "pole",
+					"Image": ""
+				},
+				{
+					"Id": "",
+					"Image": ""
+				},
+				{
+					"Id": "",
+					"Image": ""
+				},
+				{
+					"Id": "",
+					"Image": ""
+				},
+				{
+					"Id": "",
+					"Image": ""
+				},
+				{
+					"Id": "",
+					"Image": ""
+				},
+				{
+					"Id": "",
+					"Image": ""
+				},
+				{
+					"Id": "",
+					"Image": ""
+				},
+				{
+					"Id": "",
+					"Image": ""
+				},
+				{
+					"Id": "",
+					"Image": ""
+				},
+				{
+					"Id": "",
+					"Image": ""
+				},
+				{
+					"Id": "",
+					"Image": ""
+				},
+				{
+					"Id": "",
+					"Image": ""
+				},
+				{
+					"Id": "",
+					"Image": ""
+				},
+				{
+					"Id": "",
+					"Image": ""
+				}
+			],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "Introduction",
+			"columns": [],
+			"lines": [],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "Chapter1",
+			"columns": [
+				{
+					"name": "id",
+					"typeStr": "0"
+				},
+				{
+					"name": "width",
+					"typeStr": "3"
+				},
+				{
+					"name": "height",
+					"typeStr": "3"
+				},
+				{
+					"name": "props",
+					"typeStr": "16"
+				},
+				{
+					"name": "tileProps",
+					"typeStr": "8"
+				},
+				{
+					"name": "layers",
+					"typeStr": "8"
+				}
+			],
+			"lines": [
+				{
+					"id": "",
+					"width": 128,
+					"height": 128,
+					"tileProps": [],
+					"layers": []
+				}
+			],
+			"separators": [],
+			"props": {
+				"level": {
+					"tileSets": {}
+				}
+			}
+		},
+		{
+			"name": "Chapter1@tileProps",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": []
+		},
+		{
+			"name": "Chapter1@layers",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"name": "name",
+					"typeStr": "1"
+				},
+				{
+					"name": "data",
+					"typeStr": "15"
+				}
+			]
+		},
+		{
+			"name": "Chapter2",
+			"columns": [
+				{
+					"name": "id",
+					"typeStr": "0"
+				},
+				{
+					"name": "width",
+					"typeStr": "3"
+				},
+				{
+					"name": "height",
+					"typeStr": "3"
+				},
+				{
+					"name": "props",
+					"typeStr": "16"
+				},
+				{
+					"name": "tileProps",
+					"typeStr": "8"
+				},
+				{
+					"name": "layers",
+					"typeStr": "8"
+				}
+			],
+			"lines": [
+				{
+					"id": "",
+					"width": 128,
+					"height": 128,
+					"tileProps": [],
+					"layers": []
+				}
+			],
+			"separators": [],
+			"props": {
+				"level": {
+					"tileSets": {}
+				}
+			}
+		},
+		{
+			"name": "Chapter2@tileProps",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": []
+		},
+		{
+			"name": "Chapter2@layers",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"name": "name",
+					"typeStr": "1"
+				},
+				{
+					"name": "data",
+					"typeStr": "15"
+				}
+			]
+		},
+		{
+			"name": "Chapter3",
+			"columns": [
+				{
+					"name": "id",
+					"typeStr": "0"
+				},
+				{
+					"name": "width",
+					"typeStr": "3"
+				},
+				{
+					"name": "height",
+					"typeStr": "3"
+				},
+				{
+					"name": "props",
+					"typeStr": "16"
+				},
+				{
+					"name": "tileProps",
+					"typeStr": "8"
+				},
+				{
+					"name": "layers",
+					"typeStr": "8"
+				}
+			],
+			"lines": [
+				{
+					"id": "",
+					"width": 128,
+					"height": 128,
+					"tileProps": [],
+					"layers": []
+				}
+			],
+			"separators": [],
+			"props": {
+				"level": {
+					"tileSets": {}
+				}
+			}
+		},
+		{
+			"name": "Chapter3@tileProps",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": []
+		},
+		{
+			"name": "Chapter3@layers",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"name": "name",
+					"typeStr": "1"
+				},
+				{
+					"name": "data",
+					"typeStr": "15"
+				}
+			]
+		},
+		{
+			"name": "Chapter4",
+			"columns": [
+				{
+					"name": "id",
+					"typeStr": "0"
+				},
+				{
+					"name": "width",
+					"typeStr": "3"
+				},
+				{
+					"name": "height",
+					"typeStr": "3"
+				},
+				{
+					"name": "props",
+					"typeStr": "16"
+				},
+				{
+					"name": "tileProps",
+					"typeStr": "8"
+				},
+				{
+					"name": "layers",
+					"typeStr": "8"
+				}
+			],
+			"lines": [
+				{
+					"id": "",
+					"width": 128,
+					"height": 128,
+					"tileProps": [],
+					"layers": []
+				}
+			],
+			"separators": [],
+			"props": {
+				"level": {
+					"tileSets": {}
+				}
+			}
+		},
+		{
+			"name": "Chapter4@tileProps",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": []
+		},
+		{
+			"name": "Chapter4@layers",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"name": "name",
+					"typeStr": "1"
+				},
+				{
+					"name": "data",
+					"typeStr": "15"
+				}
+			]
+		},
+		{
+			"name": "Chapter5",
+			"columns": [
+				{
+					"name": "id",
+					"typeStr": "0"
+				},
+				{
+					"name": "width",
+					"typeStr": "3"
+				},
+				{
+					"name": "height",
+					"typeStr": "3"
+				},
+				{
+					"name": "props",
+					"typeStr": "16"
+				},
+				{
+					"name": "tileProps",
+					"typeStr": "8"
+				},
+				{
+					"name": "layers",
+					"typeStr": "8"
+				}
+			],
+			"lines": [
+				{
+					"id": "",
+					"width": 128,
+					"height": 128,
+					"tileProps": [],
+					"layers": []
+				}
+			],
+			"separators": [],
+			"props": {
+				"level": {
+					"tileSets": {}
+				}
+			}
+		},
+		{
+			"name": "Chapter5@tileProps",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": []
+		},
+		{
+			"name": "Chapter5@layers",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"name": "name",
+					"typeStr": "1"
+				},
+				{
+					"name": "data",
+					"typeStr": "15"
+				}
+			]
+		},
+		{
+			"name": "Epilogue",
+			"columns": [],
+			"lines": [],
+			"separators": [],
+			"props": {}
+		}
+	],
+	"customTypes": [],
+	"compress": true
+}

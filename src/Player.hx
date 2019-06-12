@@ -7,14 +7,12 @@ import flixel.math.FlxMath;
 
 class Player extends FlxSprite
 {
-	private static inline var ACCELERATION:Int = 1000;
-	private static inline var DRAG:Int = 2400;
-	private static inline var GRAVITY:Int = 1800;
-	private static inline var JUMP_FORCE:Int = -840;
-	private static inline var WALK_SPEED:Int = 300;
-	private static inline var RUN_SPEED:Int = 500;
-	private static inline var CROUCH_SPEED:Int = 150;
-	private static inline var FALLING_SPEED:Int = 900;
+	private var ACCELERATION:Int;
+	private var JUMP_FORCE:Int;
+	private var WALK_SPEED:Int;
+	private var RUN_SPEED:Int;
+	private var CROUCH_SPEED:Int;
+	private var FALLING_SPEED:Int;
 
 	public var direction:Int = 1;
 	public var crouch:Bool = false;
@@ -31,7 +29,14 @@ class Player extends FlxSprite
 		startx = X;
 		starty = Y;
 
-		loadGraphic(AssetPaths.litang__png, true, 204, 240);
+		ACCELERATION = 333 * Main.scale;
+		JUMP_FORCE = -280 * Main.scale;
+		WALK_SPEED = 100 * Main.scale;
+		RUN_SPEED = 167 * Main.scale;
+		CROUCH_SPEED = 50 * Main.scale;
+		FALLING_SPEED = 300 * Main.scale;
+
+		loadGraphic("assets/images/" + Main.scale + "/litang.png", true, 68 * Main.scale, 80 * Main.scale);
 
 		animation.add("idle", [0, 1], 6);
 		animation.add("walk", [2, 3, 4, 5, 6], 12);
@@ -43,11 +48,11 @@ class Player extends FlxSprite
 		animation.add("hit", [16]);
 		//animation.add("attack", [26,27,28,29],8);
 
-		setSize(90, 150);
-		offset.set(72, 90);
+		setSize(30 * Main.scale, 50 * Main.scale);
+		offset.set(24 * Main.scale, 30 * Main.scale);
 		
-		drag.x = DRAG;
-		acceleration.y = GRAVITY;
+		drag.x = 800 * Main.scale;
+		acceleration.y = 600 * Main.scale;
 		maxVelocity.set(RUN_SPEED, FALLING_SPEED);
 
 		x = startx;
@@ -71,8 +76,8 @@ class Player extends FlxSprite
 		if (FlxG.keys.pressed.LEFT || (FlxG.onMobile && Main.pad.buttonLeft.pressed))
 		{
 			flipX = true;
-			setSize(90, 150);
-			offset.set(42, 90);
+			setSize(30 * Main.scale, 50 * Main.scale);
+			offset.set(14 * Main.scale, 30 * Main.scale);
 			direction = -1;
 			acceleration.x -= ACCELERATION;
 
@@ -80,8 +85,8 @@ class Player extends FlxSprite
 		else if (FlxG.keys.pressed.RIGHT || (FlxG.onMobile && Main.pad.buttonRight.pressed))
 		{
 			flipX = false;
-			setSize(90, 150);
-			offset.set(72, 90);
+			setSize(30 * Main.scale, 50 * Main.scale);
+			offset.set(24 * Main.scale, 30 * Main.scale);
 			direction = 1;
 			acceleration.x += ACCELERATION;
 		}
@@ -89,7 +94,7 @@ class Player extends FlxSprite
 		if (velocity.y == 0)
 		{
 			if ((FlxG.keys.justPressed.UP || (FlxG.onMobile && Main.pad.buttonUp.pressed)) && isTouching(FlxObject.FLOOR)) {
-				FlxG.sound.play(AssetPaths.jump__ogg, 1);
+				FlxG.sound.play("assets/sounds/jump.ogg", 1);
 				velocity.y = JUMP_FORCE;
 			}
 
@@ -102,7 +107,7 @@ class Player extends FlxSprite
 			}
 		} else {
 			if ((FlxG.keys.justPressed.UP || (FlxG.onMobile && Main.pad.buttonUp.justPressed)) && isTouching(FlxObject.FLOOR)) {
-				FlxG.sound.play(AssetPaths.jump__ogg, 1);
+				FlxG.sound.play("assets/sounds/jump.ogg", 1);
 				velocity.y = JUMP_FORCE;
 			}
 		}

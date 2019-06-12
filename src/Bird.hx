@@ -4,16 +4,8 @@ import flixel.FlxSprite;
 
 class Bird extends FlxSprite
 {
-	private static inline var ACCELERATION:Int = 1500;
-	private static inline var DRAG:Int = 960;
-	private static inline var GRAVITY:Int = 1800;
-	private static inline var JUMP_FORCE:Int = -840;
-	private static inline var WALK_SPEED:Int = 300;
-	private static inline var RUN_SPEED:Int = 450;
-	private static inline var CROUCH_SPEED:Int = 150;
-	private static inline var FALLING_SPEED:Int = 900;
-
 	public var direction:Int = 1;
+	public var ACCELERATION:Int;
 
 	private var minHeight:Int = 0;
 	private var accelerationY:Float = 0;
@@ -22,17 +14,18 @@ class Bird extends FlxSprite
 	{
 		super();
 
-		loadGraphic(AssetPaths.bird__png, true, 60, 60);
+		loadGraphic("assets/images/" + Main.scale + "/bird.png", true, 20 * Main.scale, 20 * Main.scale);
 
 		animation.add("idle", [2]);
 		animation.add("fly", [0, 1, 2, 3, 4, 5], 12);
 
 		allowCollisions = 0;
 
-		drag.x = DRAG;
+		ACCELERATION = 500 * Main.scale;
+		drag.x = 320 * Main.scale;
 		this.accelerationY = accelerationY;
 		this.acceleration.y = this.accelerationY;
-		maxVelocity.set(RUN_SPEED, FALLING_SPEED);
+		maxVelocity.set(150 * Main.scale, 300 * Main.scale);
 
 		this.x = x;
 		this.y = y;

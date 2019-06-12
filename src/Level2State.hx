@@ -16,8 +16,8 @@ import gui.WinState;
 class Level2State extends FlxState
 {
 	// Player first position.
-	public var startx:Int = 180;
-	public var starty:Int = -1100;
+	public var startx:Int = 60 * Main.scale;
+	public var starty:Int = -367 * Main.scale;
 
 	// Player second position.
 	//public var startx:Int = 4200;
@@ -107,50 +107,50 @@ class Level2State extends FlxState
 	{
 		super.create();
 
-		FlxG.sound.playMusic(AssetPaths.asian_mystery_nometadata__ogg, 1, true);
+		FlxG.sound.playMusic("assets/music/asian-mystery-nometadata.ogg", 1, true);
 
-		var yshift = -250;
+		var yshift = -83 * Main.scale;
 
-		background = new FlxBackdrop("assets/images/background3.png");
+		background = new FlxBackdrop("assets/images/" + Main.scale + "/background3.png");
 		background.scrollFactor.x = 0.5;
 		background.scrollFactor.y = 0.5;
-		background.offset.y = yshift + 250;
+		background.offset.y = yshift + 83 * Main.scale;
 		add(background);
 
 		// Load island 1.
-		island1 = new FlxBackdrop("assets/images/island2.png",0.55, 0.55, false, false);
-		island1.offset.x = -600;
-		island1.offset.y = yshift - 250;
+		island1 = new FlxBackdrop("assets/images/" + Main.scale + "/island2.png",0.55, 0.55, false, false);
+		island1.offset.x = -200 * Main.scale;
+		island1.offset.y = yshift - 83 * Main.scale;
 		add(island1);
 
 		// Load island 2.
-		island2 = new FlxBackdrop("assets/images/island2.png",0.55, 0.55, false, false);
-		island2.offset.x = -600 - 2100;
-		island2.offset.y = yshift - 250;
+		island2 = new FlxBackdrop("assets/images/" + Main.scale + "/island2.png",0.55, 0.55, false, false);
+		island2.offset.x = -200 * Main.scale - 700 * Main.scale;
+		island2.offset.y = yshift - 83 * Main.scale;
 		add(island2);
 
 		// Load boat 1.
-		boat1 = new FlxBackdrop("assets/images/boat2.png",0.58, 0.58, false, false);
-		boat1.offset.x = -1270;
-		boat1.offset.y = yshift - 700;
+		boat1 = new FlxBackdrop("assets/images/" + Main.scale + "/boat2.png",0.58, 0.58, false, false);
+		boat1.offset.x = -423 * Main.scale;
+		boat1.offset.y = yshift - 233 * Main.scale;
 		add(boat1);
 
 		// Load boat 2.
-		boat2 = new FlxBackdrop("assets/images/boat2.png",0.58, 0.58, false, false);
-		boat2.offset.x = -1270 - 2100;
-		boat2.offset.y = yshift - 700;
+		boat2 = new FlxBackdrop("assets/images/" + Main.scale + "/boat2.png",0.58, 0.58, false, false);
+		boat2.offset.x = -423 * Main.scale - 700 * Main.scale;
+		boat2.offset.y = yshift - 233 * Main.scale;
 		add(boat2);
 
 		// Load map.
 		map = new FlxTilemap();
-		map.loadMapFromArray(StringsToMapData(tiles), tiles[0].length, tiles.length, AssetPaths.tiles__png, 96, 96);
+		map.loadMapFromArray(StringsToMapData(tiles), tiles[0].length, tiles.length, "assets/images/" + Main.scale + "/tiles.png", 32 * Main.scale, 32 * Main.scale);
 		add(map);
 
 		// Load flags.
-		flagStart = new Flag(66, map.height - 966, false);
+		flagStart = new Flag(22 * Main.scale, map.height - 322 * Main.scale, false);
 		add(flagStart);
 
-		flagEnd = new Flag(5680, map.height - 966, true);
+		flagEnd = new Flag(1893 * Main.scale, map.height - 322 * Main.scale, true);
 		add(flagEnd);
 
 		// Load player.
@@ -162,19 +162,19 @@ class Level2State extends FlxState
 		map.follow();
 
 		// Load foreground.
-		foreground1 = new FlxBackdrop("assets/images/water3.png", 1.25, 1.25, true, false);
-		foreground1.y = map.height * 1.25 - (FlxG.height + foreground1.height) / 2 + 250;
+		foreground1 = new FlxBackdrop("assets/images/" + Main.scale + "/water3.png", 1.25, 1.25, true, false);
+		foreground1.y = map.height * 1.25 - (FlxG.height + foreground1.height) / 2 + 83 * Main.scale;
 
-		foreground2 = new FlxBackdrop("assets/images/water2.png", 1.30, 1.25, true, false);
-		foreground2.offset.x = 60;
-		foreground2.y = map.height * 1.25 - (FlxG.height + foreground2.height) / 2 + 322;
+		foreground2 = new FlxBackdrop("assets/images/" + Main.scale + "/water2.png", 1.30, 1.25, true, false);
+		foreground2.offset.x = 20 * Main.scale;
+		foreground2.y = map.height * 1.25 - (FlxG.height + foreground2.height) / 2 + 108 * Main.scale;
 
-		foreground3 = new FlxBackdrop("assets/images/water1.png", 1.50, 1.25, true, false);
-		foreground3.offset.x = 180;
-		foreground3.y = map.height * 1.25 - (FlxG.height + foreground3.height) / 2 + 430;
+		foreground3 = new FlxBackdrop("assets/images/" + Main.scale + "/water1.png", 1.50, 1.25, true, false);
+		foreground3.offset.x = 60 * Main.scale;
+		foreground3.y = map.height * 1.25 - (FlxG.height + foreground3.height) / 2 + 143 * Main.scale;
 
-		foreground4 = new FlxBackdrop("assets/images/reed.png", 1.75, 1.25, true, false);
-		foreground4.y = map.height * 1.25 - (FlxG.height + foreground4.height) / 2 + 200;
+		foreground4 = new FlxBackdrop("assets/images/" + Main.scale + "/reed.png", 1.75, 1.25, true, false);
+		foreground4.y = map.height * 1.25 - (FlxG.height + foreground4.height) / 2 + 67 * Main.scale;
 
 		// Load plonk.
 		plonk = new Plonk();
@@ -202,14 +202,14 @@ class Level2State extends FlxState
 		frames++;
 
 		// Move the water with a sinusoidal wave.
-		foreground1.x += 6;
-		foreground1.y += FlxMath.fastSin(((frames / (700 + FlxG.random.int(0, 300))) % 360) * FlxAngle.TO_DEG);
+		foreground1.x += 2 * Main.scale;
+		foreground1.y += (FlxMath.fastSin(((frames / (700 + FlxG.random.int(0, 300))) % 360) * FlxAngle.TO_DEG) * Main.scale) / 3;
 
-		foreground2.x += 7;
-		foreground2.y += FlxMath.fastSin(((frames / (700 + FlxG.random.int(0, 300))) % 360) * FlxAngle.TO_DEG);
+		foreground2.x += 2.333 * Main.scale;
+		foreground2.y += (FlxMath.fastSin(((frames / (700 + FlxG.random.int(0, 300))) % 360) * FlxAngle.TO_DEG) * Main.scale) / 3;
 
-		foreground3.x += 9;
-		foreground3.y += FlxMath.fastSin(((frames / (700 + FlxG.random.int(0, 300))) % 360) * FlxAngle.TO_DEG);
+		foreground3.x += 3 * Main.scale;
+		foreground3.y += (FlxMath.fastSin(((frames / (700 + FlxG.random.int(0, 300))) % 360) * FlxAngle.TO_DEG) * Main.scale) / 3;
 
 		// Toggle map visibility with the H key.
 		if (FlxG.keys.justPressed.H) {
@@ -249,22 +249,13 @@ class Level2State extends FlxState
 	}
 
 	function drown():Void {
-		FlxG.sound.play(AssetPaths.watersplash__ogg, 1);
+		FlxG.sound.play("assets/sounds/watersplash.ogg", 1);
 		plonk.x = player.x;
 		plonk.y = player.y;
 		plonk.visible = true;
-		plonk.velocity.y = -900;
-		plonk.acceleration.y = 1200;
+		plonk.velocity.y = -300 * Main.scale;
+		plonk.acceleration.y = 400 * Main.scale;
 		new FlxTimer().start(2, hitdeath);
-	}
-	function hit():Void
-	{
-		FlxG.sound.play(AssetPaths.death__ogg, 1);
-		FlxG.camera.shake(0.01, 0.2);
-		player.animation.play("hit");
-		player.maxVelocity.set(1500, 900);
-		player.velocity.set(-1350, -600);
-		player.acceleration.x = 0;
 	}
 
 	function hitdeath(Timer:FlxTimer):Void

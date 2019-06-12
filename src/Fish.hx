@@ -4,15 +4,7 @@ import flixel.FlxSprite;
 
 class Fish extends FlxSprite
 {
-	private static inline var ACCELERATION:Int = 1500;
-	private static inline var DRAG:Int = 960;
-	private static inline var GRAVITY:Int = 1800;
-	private static inline var JUMP_FORCE:Int = -840;
-	private static inline var WALK_SPEED:Int = 300;
-	private static inline var RUN_SPEED:Int = 450;
-	private static inline var CROUCH_SPEED:Int = 150;
-	private static inline var FALLING_SPEED:Int = 900;
-
+	public var ACCELERATION:Int;
 	public var direction:Int = 1;
 
 	private var maxHeight:Int = 0;
@@ -22,16 +14,17 @@ class Fish extends FlxSprite
 	{
 		super();
 
-		loadGraphic(AssetPaths.fish__png);
+		loadGraphic("assets/images/" + Main.scale + "/fish.png");
 
 		animation.add("idle", [0]);
 
 		allowCollisions = 0;
 
-		drag.x = DRAG;
+		ACCELERATION = 500 * Main.scale;
+		drag.x = 320 * Main.scale;
 		this.accelerationY = accelerationY;
 		this.acceleration.y = this.accelerationY;
-		maxVelocity.set(RUN_SPEED, FALLING_SPEED);
+		maxVelocity.set(150 * Main.scale, 300 * Main.scale);
 
 		this.x = x;
 		this.y = y;

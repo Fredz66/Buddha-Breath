@@ -32,9 +32,9 @@ class VirtualPad extends FlxSpriteGroup
 		super();
 		scrollFactor.set();
 
-		var spriteRight:FlxSprite = new FlxSprite().loadGraphic("assets/images/buttonRight.png");
-		var spriteUp:FlxSprite = new FlxSprite().loadGraphic("assets/images/buttonUp.png");
-		var spriteAction:FlxSprite = new FlxSprite().loadGraphic("assets/images/buttonAction.png");
+		var spriteRight:FlxSprite = new FlxSprite().loadGraphic("assets/images/" + Main.scale + "/buttonRight.png");
+		var spriteUp:FlxSprite = new FlxSprite().loadGraphic("assets/images/" + Main.scale + "/buttonUp.png");
+		var spriteAction:FlxSprite = new FlxSprite().loadGraphic("assets/images/" + Main.scale + "/buttonAction.png");
 
 		buttonLeft = new FlxButton(0, FlxG.height - spriteRight.height, "");
 		buttonLeft.loadGraphicFromSprite(spriteRight);

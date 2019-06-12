@@ -14,7 +14,7 @@ class Spiky extends FlxNestedSprite
 	public var xcenter:Int;
 	public var ycenter:Int;
 
-	public var myLength:Float = 214;
+	public var myLength:Float = 72 * Main.scale;
 
 	var chain:FlxNestedSprite;
 
@@ -22,11 +22,11 @@ class Spiky extends FlxNestedSprite
 	{
 		super();
 		chain = new FlxNestedSprite();
-		chain.loadGraphic(AssetPaths.chain__png);
+		chain.loadGraphic("assets/images/" + Main.scale + "/chain.png");
 		chain.allowCollisions = 0;
 		add(chain);
 
-		loadGraphic(AssetPaths.ball__png);
+		loadGraphic("assets/images/" + Main.scale + "/ball.png");
 
 		myAngle = Angle;
 		myAngularVelocity = Velocity;
@@ -66,8 +66,8 @@ class Spiky extends FlxNestedSprite
 		x = xcenter + xrelative;
 		y = ycenter - yrelative;
 
-		chain.relativeX = -(xrelative / 2) * 1.1 + 54;
-		chain.relativeY = (yrelative / 2) * 1.1 - height / 2;
+		chain.relativeX = -(xrelative / 2) * 1.15 + 18 * Main.scale;
+		chain.relativeY = (yrelative / 2) * 1.15 - height / 2;
 		chain.relativeAngle = -myAngle;
 
 		super.update(elapsed);

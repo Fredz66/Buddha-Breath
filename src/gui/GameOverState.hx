@@ -14,13 +14,13 @@ class GameOverState extends FlxState
 		FlxG.mouse.visible = !FlxG.onMobile;
 
 		// Show message.
-      	add(new FlxText(0, 180, FlxG.width, "Game Over").setFormat(null, 96, FlxColor.RED, FlxTextAlign.CENTER));
+      	add(new FlxText(0, 60 * Main.scale, FlxG.width, "Game Over").setFormat(null, 32 * Main.scale, FlxColor.RED, FlxTextAlign.CENTER));
 
 		// Show start button.
- 		add(new FlxScaleButton(840, 540, "Retry", play));
+ 		add(new FlxScaleButton(280 * Main.scale, 180 * Main.scale, "Retry", play));
 
 		// Show main menu button.
- 		add(new FlxScaleButton(840, 630, "Main Menu", reset));
+ 		add(new FlxScaleButton(280 * Main.scale, 210 * Main.scale, "Main Menu", reset));
 	}
 
 	override public function update(elapsed:Float):Void

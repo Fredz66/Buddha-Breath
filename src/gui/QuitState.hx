@@ -14,13 +14,13 @@ class QuitState extends FlxState
 		FlxG.mouse.visible = !FlxG.onMobile;
 
 		// Show message.
-      	add(new FlxText(0, 180, FlxG.width, "Are you sure ?").setFormat(null, 96, FlxColor.RED, FlxTextAlign.CENTER));
+      	add(new FlxText(0, 60 * Main.scale, FlxG.width, "Are you sure ?").setFormat(null, 32 * Main.scale, FlxColor.RED, FlxTextAlign.CENTER));
 
 		// Show main menu button.
- 		add(new FlxScaleButton(840, 540, "Main Menu", menu));
+ 		add(new FlxScaleButton(280 * Main.scale, 180 * Main.scale, "Main Menu", menu));
 
 		// Show start button.
- 		add(new FlxScaleButton(840, 630, "Quit", quit));
+ 		add(new FlxScaleButton(280 * Main.scale, 210 * Main.scale, "Quit", quit));
 	}
 
 	override public function update(elapsed:Float):Void
