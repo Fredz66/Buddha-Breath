@@ -17,6 +17,7 @@ class Player extends FlxSprite
 	public var direction:Int = 1;
 	public var crouch:Bool = false;
 	public var drown:Bool = false;
+	public var canJump:Bool = true;
 
 	// Initial position.
 	public var startx:Int;
@@ -32,26 +33,28 @@ class Player extends FlxSprite
 		ACCELERATION = 333 * Main.scale;
 		JUMP_FORCE = -280 * Main.scale;
 		WALK_SPEED = 100 * Main.scale;
-		RUN_SPEED = 167 * Main.scale;
+		//RUN_SPEED = 167 * Main.scale;
+		RUN_SPEED = 250 * Main.scale;
 		CROUCH_SPEED = 50 * Main.scale;
 		FALLING_SPEED = 300 * Main.scale;
 
-		loadGraphic("assets/images/" + Main.scale + "/litang.png", true, 68 * Main.scale, 80 * Main.scale);
-
-		animation.add("idle", [0, 1], 6);
-		animation.add("walk", [2, 3, 4, 5, 6], 12);
-		animation.add("crouch", [8, 9], 6);
-		animation.add("crouch-walk", [8, 9], 12);
+		loadGraphic("assets/images/" + Main.scale + "/litang.png", true, 116 * Main.scale, 80 * Main.scale);
+		
+		animation.add("idle", [10, 11, 12, 11, 10], 12);
+		animation.add("walk", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 12);
+		animation.add("crouching", [11, 14, 15, 16], 10, false);
+		animation.add("standing", [16, 15, 14, 11], 12, false);
+		animation.add("crouch", [16], 12);
+		animation.add("crouch-walk", [15, 16], 6);
 		animation.add("skid", [0, 1], 6);
-		animation.add("jump", [17]);
-		animation.add("fall", [17]);
-		animation.add("hit", [16]);
-		//animation.add("attack", [26,27,28,29],8);
+		animation.add("jump", [2]);
+		animation.add("fall", [6]);
+		animation.add("hit", [20, 21, 22, 23], 12, false);
 
 		setSize(30 * Main.scale, 50 * Main.scale);
-		offset.set(24 * Main.scale, 30 * Main.scale);
+		offset.set(64 * Main.scale, 30 * Main.scale);
 		
-		drag.x = 800 * Main.scale;
+		drag.x = 1000 * Main.scale;
 		acceleration.y = 600 * Main.scale;
 		maxVelocity.set(RUN_SPEED, FALLING_SPEED);
 
@@ -77,7 +80,7 @@ class Player extends FlxSprite
 		{
 			flipX = true;
 			setSize(30 * Main.scale, 50 * Main.scale);
-			offset.set(14 * Main.scale, 30 * Main.scale);
+			offset.set(24 * Main.scale, 30 * Main.scale);
 			direction = -1;
 			acceleration.x -= ACCELERATION;
 
@@ -86,27 +89,36 @@ class Player extends FlxSprite
 		{
 			flipX = false;
 			setSize(30 * Main.scale, 50 * Main.scale);
-			offset.set(24 * Main.scale, 30 * Main.scale);
+			offset.set(64 * Main.scale, 30 * Main.scale);
 			direction = 1;
 			acceleration.x += ACCELERATION;
 		}
 
+		if (FlxG.keys.justReleased.UP)
+			canJump = true;
+
 		if (velocity.y == 0)
 		{
-			if ((FlxG.keys.justPressed.UP || (FlxG.onMobile && Main.pad.buttonUp.pressed)) && isTouching(FlxObject.FLOOR)) {
+			if ((FlxG.keys.pressed.UP || (FlxG.onMobile && Main.pad.buttonUp.pressed)) && isTouching(FlxObject.FLOOR) && canJump) {
+				canJump = false;
 				FlxG.sound.play("assets/sounds/jump.ogg", 1);
 				velocity.y = JUMP_FORCE;
 			}
 
 			if ((FlxG.keys.pressed.DOWN || (FlxG.onMobile && Main.pad.buttonDown.pressed)) && isTouching(FlxObject.FLOOR)) {
+				if (!crouch)
+					animation.play("crouching");
 				crouch = true;
 				maxVelocity.x = CROUCH_SPEED;
 			} else {
+				if (crouch)
+					animation.play("standing");
 				crouch = false;
 				maxVelocity.x = RUN_SPEED;
 			}
 		} else {
-			if ((FlxG.keys.justPressed.UP || (FlxG.onMobile && Main.pad.buttonUp.justPressed)) && isTouching(FlxObject.FLOOR)) {
+			if ((FlxG.keys.pressed.UP || (FlxG.onMobile && Main.pad.buttonUp.justPressed)) && isTouching(FlxObject.FLOOR) && canJump) {
+				canJump = false;
 				FlxG.sound.play("assets/sounds/jump.ogg", 1);
 				velocity.y = JUMP_FORCE;
 			}
@@ -121,9 +133,13 @@ class Player extends FlxSprite
 			animation.play("fall");
 		} else if (velocity.x == 0) {
 			if (crouch) {
-				animation.play("crouch");
+				if (animation.curAnim.name == "crouch-walk" || (animation.curAnim.name == "crouching" && animation.finished)) {
+					animation.play("crouch");
+				}
 			} else {
-				animation.play("idle");
+				if (animation.curAnim.name != "standing" || animation.finished) {
+					animation.play("idle");
+				}
 			}
 		} else {
 			if (crouch) {
