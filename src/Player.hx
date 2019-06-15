@@ -41,7 +41,7 @@ class Player extends FlxSprite
 		loadGraphic("assets/images/" + Main.scale + "/litang.png", true, 116 * Main.scale, 80 * Main.scale);
 		
 		animation.add("idle", [10, 11, 12, 11, 10], 12);
-		animation.add("walk", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 12);
+		animation.add("run", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 12);
 		animation.add("crouching", [11, 14, 15, 16], 10, false);
 		animation.add("standing", [16, 15, 14, 11], 12, false);
 		animation.add("crouch", [16], 12);
@@ -148,7 +148,7 @@ class Player extends FlxSprite
 				if (FlxMath.signOf(velocity.x) != FlxMath.signOf(direction)) {
 					animation.play("skid");
 				} else {
-					animation.play("walk");
+					animation.play("run");
 				}
 			}
 		}
