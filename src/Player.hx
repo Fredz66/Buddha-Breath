@@ -94,8 +94,9 @@ class Player extends FlxSprite
 			acceleration.x += ACCELERATION;
 		}
 
-		if (FlxG.keys.justReleased.UP)
+		if (!FlxG.keys.pressed.UP) {
 			canJump = true;
+		}
 
 		if (velocity.y == 0)
 		{

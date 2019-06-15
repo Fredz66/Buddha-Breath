@@ -55,6 +55,7 @@ class MenuState extends FlxState
 
 		super.create();
 
+		FlxG.sound.music.stop();
 		FlxG.sound.playMusic("assets/music/temple-nometadata.ogg", 1, true);
 	}
 
