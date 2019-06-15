@@ -34,7 +34,7 @@ class Player extends FlxSprite
 		JUMP_FORCE = -280 * Main.scale;
 		WALK_SPEED = 100 * Main.scale;
 		//RUN_SPEED = 167 * Main.scale;
-		RUN_SPEED = 250 * Main.scale;
+		RUN_SPEED = 200 * Main.scale;
 		CROUCH_SPEED = 50 * Main.scale;
 		FALLING_SPEED = 300 * Main.scale;
 
