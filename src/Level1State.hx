@@ -29,9 +29,13 @@ class Level1State extends FlxState
 	//public var startx:Int = 7500;
 	//public var starty:Int = 927;
 
-	// Player final position.
+	// Player fourth position.
 	//public var startx:Int = 12300;
 	//public var starty:Int = 927;
+
+	// Player final position.
+	//public var startx:Int = 4700 * Main.scale;
+	//public var starty:Int = -177 * Main.scale;
 
 	var background:FlxBackdrop;
 
@@ -53,6 +57,7 @@ class Level1State extends FlxState
 	var map:FlxTilemap;
 
 	var pole:Pole;
+	var crate:Crate;
 	var plonk:Plonk;
 	var spikies:Array<Spiky> = [];
 	var flagStart:Flag;
@@ -64,25 +69,26 @@ class Level1State extends FlxState
 
 	var frames:Int = 0;
 	var poleFalling:Bool = false;
+	var crateFalling:Bool = false;
 	var birdsReleased:Bool = false;
 
 	var tiles:Array<String> = [
-		'                                                                                                                                  ',
-		'                                                                                                                                  ',
-		'                                                  |     |     |     |     |                                                       ',
-		'                                                  |     |     |     |     |                                                       ',
-		'                                                  |     |     |     |     |                                     v                 ',
-		'                                                  |     |     |     |     |                                    [-]                ',
-		')                                                 |     |     |     |     |                                     |                (',
-		'|                                                 |     |     |     |     |                        [-]    [-]   |                |',
-		'|                                                                                        [--]       |      |    |     [-]        L',
-		'|                                                                                         ||   ()   |      |    |      |          ',
-		'|                =                     [_)                                         [-]    ||   ||   |      |    |      |          ',
-		'|  v    ~     =  |    =        [--]      |           ~                         ~    |     ||   ||   |      |    |      |          ',
-		'--------------)  |    |         ||       (--------------------------------------------)   ||   ||   |      |    |      |       (--',
-		'|||||||||||||||  |    |         ||       ||||||||||||||||||||||||||||||||||||||||||||||   ||   ||   |      |    |      |       |||',
-		'|||||||||||||||  |    |         ||       ||||||||||||||||||||||||||||||||||||||||||||||   ||   ||   |      |    |      |       |||',
-		'|||||||||||||||  |    |         ||       ||||||||||||||||||||||||||||||||||||||||||||||   ||   ||   |      |    |      |       |||',
+		'                                                                                                                                                                            ',
+		'                                                                                                                                                                            ',
+		'                                                  |     |     |     |     |                                                                                                 ',
+		'                                                  |     |     |     |     |                                                                                                 ',
+		'                                                  |     |     |     |     |                                     v                                                           ',
+		'                                                  |     |     |     |     |                                    [-]                                                          ',
+		')                                                 |     |     |     |     |                                     |                                                          (',
+		'|>                                                |     |     |     |     |                        [-]    [-]   |                                                         <|',
+		'|                                                                                        [--]       |      |    |     [-]                                                  L',
+		'|                                                                                         ||   ()   |      |    |      |                                                    ',
+		'|                =                     [_)                                        [-]     ||   ||   |      |    |      |                                                    ',
+		'|  v    ~     =  |    =        [--]      |           ~                         ~   |      ||   ||   |      |    |      |                                                    ',
+		'-_-_-_-_-_-_-_)  |    |         ||       (_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_)    ||   ||   |      |    |      |       (_-_-_-_)      (_-_-_-_-_)      (_-_-_-_-_-_-',
+		'| | | | | | | |  |    |         ||       | | | | | | | | | | | | | | | | | | | | | | |    ||   ||   |      |    |      |       | | | | |      | | | | | |      | | | | | | |',
+		'| | | | | | | |  |    |         ||       | | | | | | | | | | | | | | | | | | | | | | |    ||   ||   |      |    |      |       | | | | |      | | | | | |      | | | | | | |',
+		'| | | | | | | |  |    |         ||       | | | | | | | | | | | | | | | | | | | | | | |    ||   ||   |      |    |      |       | | | | |      | | | | | |      | | | | | | |',
 	];
 
 	/*
@@ -91,6 +97,7 @@ class Level1State extends FlxState
 	public function StringsToMapData(strings:Array<String>):Array<Int> {
 		var mapData:Array<Int> = [];
 
+		var j = 0;
 		for (row in strings) {
 			for (i in 0...row.length) {
 				switch row.charAt(i) {
@@ -104,9 +111,20 @@ class Level1State extends FlxState
 					case ')': mapData.push(7);
 					case '(': mapData.push(8);
 					case 'L': mapData.push(9);
+					case '>':
+						// Load start flag.
+						mapData.push(0);
+						//flagStart = new Flag(22 * Main.scale, map.height - 322 * Main.scale, false);
+						flagStart = new Flag((i * 32 - 10) * Main.scale, ((j - 1) * 32) * Main.scale, false);
+					case '<':
+						// Load end flag.
+						mapData.push(0);
+						//flagEnd = new Flag(4037 * Main.scale, map.height - 322 * Main.scale, true);
+						flagEnd = new Flag(((i - 2) * 32 + 5) * Main.scale, ((j - 1) * 32) * Main.scale, true);
 					default:  mapData.push(0);
 				}
 			}
+			j++;
 		}
 
 		return mapData;
@@ -179,11 +197,7 @@ class Level1State extends FlxState
 		map.loadMapFromArray(StringsToMapData(tiles), tiles[0].length, tiles.length, "assets/images/" + Main.scale + "/tiles.png", 32 * Main.scale, 32 * Main.scale);
 		add(map);
 
-		// Load flags.
-		flagStart = new Flag(22 * Main.scale, map.height - 322 * Main.scale, false);
 		add(flagStart);
-
-		flagEnd = new Flag(4037 * Main.scale, map.height - 322 * Main.scale, true);
 		add(flagEnd);
 
 		releaseBirds(11, 0, 0, 300 * Main.scale, 100 * Main.scale);
@@ -193,8 +207,11 @@ class Level1State extends FlxState
 		add(player);
 
 		// Load pole.
-		pole = new Pole();
+		pole = new Pole(840, 320);
 		add(pole);
+		// Load crate.
+		crate = new Crate(4800, 250);
+		add(crate);
 
 		// Load spikies.
 		addSpiky(50 * 32 * Main.scale - 7 * Main.scale, 240 * Main.scale, 33.5, 120);
@@ -287,7 +304,9 @@ class Level1State extends FlxState
 		if (player.alive) {
 			// Detect collision between the player and the map.
 			FlxG.overlap(player, pole, hitPole);
+			FlxG.collide(player, crate);
 			FlxG.collide(player, map);
+			FlxG.collide(crate, map);
 
 			// Detect collision between the player and the spikies.
 			if (player.alive) {
@@ -300,13 +319,24 @@ class Level1State extends FlxState
 			}
 		}
 
+		// Player drown.
 		if (player.alive || !player.drown) {
 			// Detect if the player falls out of the screen and kill him.
 			if (player.y + player.height > map.height) {
 				player.alive = false;
 				player.drown = true;
 				player.acceleration.x = 0;
-				drown();
+				drown(player, player.x, player.y);
+			}			
+		}
+
+		// Crate drown.
+		if (!crate.drown) {
+			// Detect if the crate falls out of the screen.
+			if (crate.y + crate.height > map.height) {
+				crate.drown = true;
+				crate.acceleration.x = 0;
+				drown(crate, crate.x, crate.y);
 			}			
 		}
 
@@ -321,7 +351,7 @@ class Level1State extends FlxState
 		#end
 	}
 
-	function hitPole(Object1:flixel.FlxObject, Object2:flixel.FlxObject):Void {
+	function hitPole(Object1:FlxObject, Object2:FlxObject):Void {
 		FlxObject.separate(Object1, Object2);
 		if (!poleFalling) {
 			poleFalling = true;
@@ -335,14 +365,16 @@ class Level1State extends FlxState
 		spikies.push(spiky);
 	}
 
-	function drown():Void {
+	function drown(object: FlxObject, x, y):Void {
 		FlxG.sound.play("assets/sounds/watersplash.ogg", 1);
-		plonk.x = player.x;
-		plonk.y = player.y;
+		plonk.x = x;
+		plonk.y = y;
 		plonk.visible = true;
 		plonk.velocity.y = -300 * Main.scale;
 		plonk.acceleration.y = 400 * Main.scale;
-		new FlxTimer().start(2, hitdeath);
+		if (object == player) {
+			new FlxTimer().start(2, hitdeath);
+		}
 	}
 	function hit():Void
 	{

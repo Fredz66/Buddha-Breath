@@ -1,5 +1,6 @@
 package;
 
+import flixel.system.FlxSound;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxG;
@@ -18,6 +19,8 @@ class Player extends FlxSprite
 	public var crouch:Bool = false;
 	public var drown:Bool = false;
 	public var canJump:Bool = true;
+
+	var soundCrate:FlxSound;
 
 	// Initial position.
 	public var startx:Int;
@@ -38,9 +41,11 @@ class Player extends FlxSprite
 		CROUCH_SPEED = 50 * Main.scale;
 		FALLING_SPEED = 300 * Main.scale;
 
+		soundCrate = FlxG.sound.load("assets/sounds/scrape.ogg", 1, true);
+
 		loadGraphic("assets/images/" + Main.scale + "/litang.png", true, 116 * Main.scale, 80 * Main.scale);
 		
-		animation.add("idle", [10, 11, 12, 11, 10], 12);
+		animation.add("idle", [10, 11, 12, 13, 12, 11, 10], 12);
 		animation.add("run", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 12);
 		animation.add("crouching", [11, 14, 15, 16], 10, false);
 		animation.add("standing", [16, 15, 14, 11], 12, false);
@@ -50,9 +55,10 @@ class Player extends FlxSprite
 		animation.add("jump", [2]);
 		animation.add("fall", [6]);
 		animation.add("hit", [20, 21, 22, 23], 12, false);
+		animation.add("push", [30, 31, 32, 33, 34, 35, 36], 12, false);
 
-		setSize(30 * Main.scale, 50 * Main.scale);
-		offset.set(64 * Main.scale, 30 * Main.scale);
+		setSize(40 * Main.scale, 50 * Main.scale);
+		offset.set(54 * Main.scale, 30 * Main.scale);
 		
 		drag.x = 1000 * Main.scale;
 		acceleration.y = 600 * Main.scale;
@@ -79,8 +85,8 @@ class Player extends FlxSprite
 		if (FlxG.keys.pressed.LEFT || (FlxG.onMobile && Main.pad.buttonLeft.pressed))
 		{
 			flipX = true;
-			setSize(30 * Main.scale, 50 * Main.scale);
-			offset.set(24 * Main.scale, 30 * Main.scale);
+			setSize(40 * Main.scale, 50 * Main.scale);
+			offset.set(14 * Main.scale, 30 * Main.scale);
 			direction = -1;
 			acceleration.x -= ACCELERATION;
 
@@ -88,8 +94,8 @@ class Player extends FlxSprite
 		else if (FlxG.keys.pressed.RIGHT || (FlxG.onMobile && Main.pad.buttonRight.pressed))
 		{
 			flipX = false;
-			setSize(30 * Main.scale, 50 * Main.scale);
-			offset.set(64 * Main.scale, 30 * Main.scale);
+			setSize(40 * Main.scale, 50 * Main.scale);
+			offset.set(54 * Main.scale, 30 * Main.scale);
 			direction = 1;
 			acceleration.x += ACCELERATION;
 		}
@@ -149,7 +155,15 @@ class Player extends FlxSprite
 				if (FlxMath.signOf(velocity.x) != FlxMath.signOf(direction)) {
 					animation.play("skid");
 				} else {
-					animation.play("run");
+					if ((isTouching(FlxObject.LEFT) || isTouching(FlxObject.RIGHT)) && (FlxG.keys.pressed.RIGHT || FlxG.keys.pressed.LEFT)) {
+						animation.play("push");
+						if (!soundCrate.playing) {
+							soundCrate.play();
+						}
+					} else {
+						soundCrate.stop();
+						animation.play("run");
+					}
 				}
 			}
 		}
