@@ -16,7 +16,7 @@ class Crate extends FlxSprite
 		y = Y * Main.scale;
 
 		acceleration.y = 600 * Main.scale;
-		drag.x = 300 * Main.scale;
+		drag.x = 400 * Main.scale;
 	}
 
 	override public function update(elapsed:Float):Void
