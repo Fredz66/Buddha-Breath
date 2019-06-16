@@ -177,7 +177,7 @@ class Level2State extends FlxState
 		foreground4.y = map.height * 1.25 - (FlxG.height + foreground4.height) / 2 + 67 * Main.scale;
 
 		// Load plonk.
-		plonk = new Plonk();
+		plonk = new Plonk("assets/images/" + Main.scale + "/plonk.png");
 		plonk.visible = false;
 
 		add(plonk);

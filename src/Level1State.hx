@@ -59,6 +59,7 @@ class Level1State extends FlxState
 	var pole:Pole;
 	var crate:Crate;
 	var plonk:Plonk;
+	var plonkCrate:Plonk;
 	var spikies:Array<Spiky> = [];
 	var flagStart:Flag;
 	var flagEnd:Flag;
@@ -236,12 +237,17 @@ class Level1State extends FlxState
 		foreground4.y = map.height * 1.25 - (FlxG.height + foreground4.height) / 2 + 67 * Main.scale;
 
 		// Load plonk.
-		plonk = new Plonk();
+		plonk = new Plonk("assets/images/" + Main.scale + "/plonk.png");
 		plonk.visible = false;
+
+		// Load plonk crate.
+		plonkCrate = new Plonk("assets/images/" + Main.scale + "/plonk-crate.png");
+		plonkCrate.visible = false;
 
 		fish = new Fish(500 * Main.scale, 370 * Main.scale, -300 * Main.scale, -50 * Main.scale, 340 * Main.scale);
 
 		add(plonk);
+		add(plonkCrate);
 		add(foreground1);
 		add(fish);
 		add(foreground2);
@@ -326,7 +332,7 @@ class Level1State extends FlxState
 				player.alive = false;
 				player.drown = true;
 				player.acceleration.x = 0;
-				drown(player, player.x, player.y);
+				drown(player.x, player.y);
 			}			
 		}
 
@@ -336,7 +342,7 @@ class Level1State extends FlxState
 			if (crate.y + crate.height > map.height) {
 				crate.drown = true;
 				crate.acceleration.x = 0;
-				drown(crate, crate.x, crate.y);
+				drownCrate(crate.x, crate.y);
 			}			
 		}
 
@@ -365,17 +371,25 @@ class Level1State extends FlxState
 		spikies.push(spiky);
 	}
 
-	function drown(object: FlxObject, x, y):Void {
+	function drown(x, y):Void {
 		FlxG.sound.play("assets/sounds/watersplash.ogg", 1);
 		plonk.x = x;
 		plonk.y = y;
 		plonk.visible = true;
 		plonk.velocity.y = -300 * Main.scale;
 		plonk.acceleration.y = 400 * Main.scale;
-		if (object == player) {
-			new FlxTimer().start(2, hitdeath);
-		}
+		new FlxTimer().start(2, hitdeath);
 	}
+
+	function drownCrate(x, y):Void {
+		FlxG.sound.play("assets/sounds/watersplash.ogg", 1);
+		plonkCrate.x = x;
+		plonkCrate.y = y;
+		plonkCrate.visible = true;
+		plonkCrate.velocity.y = -300 * Main.scale;
+		plonkCrate.acceleration.y = 400 * Main.scale;
+	}
+
 	function hit():Void
 	{
 		FlxG.sound.play("assets/sounds/death.ogg", 1);
