@@ -16,6 +16,9 @@ class MenuState extends FlxState
 		// Display version number.
 		add(new FlxText(0, 348 * Main.scale, FlxG.width, Main.version).setFormat(null, 8  * Main.scale));
 
+
+		Main.level = 1;
+
 		FlxG.mouse.visible = !FlxG.onMobile;
 
       	add(new FlxText(0, 60 * Main.scale, FlxG.width, "Buddha Breath").setFormat(null, 64 * Main.scale, FlxColor.RED, FlxTextAlign.CENTER));
