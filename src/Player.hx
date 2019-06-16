@@ -100,8 +100,14 @@ class Player extends FlxSprite
 			acceleration.x += ACCELERATION;
 		}
 
-		if (!FlxG.keys.pressed.UP) {
-			canJump = true;
+		if (FlxG.onMobile) {
+			if (!Main.pad.buttonUp.pressed) {
+				canJump = true;
+			}
+		} else {
+			if (!FlxG.keys.pressed.UP) {
+				canJump = true;
+			}
 		}
 
 		if (velocity.y == 0)
@@ -155,7 +161,8 @@ class Player extends FlxSprite
 				if (FlxMath.signOf(velocity.x) != FlxMath.signOf(direction)) {
 					animation.play("skid");
 				} else {
-					if ((isTouching(FlxObject.LEFT) || isTouching(FlxObject.RIGHT)) && (FlxG.keys.pressed.RIGHT || FlxG.keys.pressed.LEFT)) {
+					if ((isTouching(FlxObject.LEFT) || isTouching(FlxObject.RIGHT)) &&
+						(FlxG.keys.pressed.RIGHT || FlxG.keys.pressed.LEFT || (FlxG.onMobile && Main.pad.buttonLeft.pressed) || (FlxG.onMobile && Main.pad.buttonRight.pressed))) {
 						animation.play("push");
 						if (!soundCrate.playing) {
 							soundCrate.play();
