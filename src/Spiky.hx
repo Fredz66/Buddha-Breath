@@ -66,8 +66,8 @@ class Spiky extends FlxNestedSprite
 		x = xcenter + xrelative;
 		y = ycenter - yrelative;
 
-		chain.relativeX = -(xrelative / 2) * 1.15 + 18 * Main.scale;
-		chain.relativeY = (yrelative / 2) * 1.15 - height / 2;
+		chain.relativeX = -(xrelative / 2) * 1.14 + 12 * Main.scale;
+		chain.relativeY = (yrelative / 2) * 1.14 - height / 2;
 		chain.relativeAngle = -myAngle;
 
 		super.update(elapsed);

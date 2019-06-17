@@ -22,8 +22,8 @@ class Level1State extends FlxState
 	public var starty:Int = -367 * Main.scale;
 
 	// Player second position.
-	//public var startx:Int = 4200;
-	//public var starty:Int = 927;
+	//public var startx:Int = 1400 * Main.scale;
+	//public var starty:Int = -177 * Main.scale;
 
 	// Player third position.
 	//public var startx:Int = 7500;
@@ -216,11 +216,11 @@ class Level1State extends FlxState
 		add(pole);
 
 		// Load spikies.
-		addSpiky(50 * 32 * Main.scale - 7 * Main.scale, 240 * Main.scale, 33.5, 120);
-		addSpiky(56 * 32 * Main.scale - 7 * Main.scale, 240 * Main.scale, 0, 150);
-		addSpiky(62 * 32 * Main.scale - 7 * Main.scale, 240 * Main.scale, 50, 102);
-		addSpiky(68 * 32 * Main.scale - 7 * Main.scale, 240 * Main.scale, 0, 150);
-		addSpiky(74 * 32 * Main.scale - 7 * Main.scale, 240 * Main.scale, 50, 102);
+		addSpiky(50 * 32 * Main.scale - 3 * Main.scale, 240 * Main.scale, 33.5, 120);
+		addSpiky(56 * 32 * Main.scale - 3 * Main.scale, 240 * Main.scale, 0, 150);
+		addSpiky(62 * 32 * Main.scale - 3 * Main.scale, 240 * Main.scale, 50, 102);
+		addSpiky(68 * 32 * Main.scale - 3 * Main.scale, 240 * Main.scale, 0, 150);
+		addSpiky(74 * 32 * Main.scale - 3 * Main.scale, 240 * Main.scale, 50, 102);
 
 		// Load foreground.
 		foreground1 = new FlxBackdrop("assets/images/" + Main.scale + "/water3.png", 1.25, 1.25, true, false);
