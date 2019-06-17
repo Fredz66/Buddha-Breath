@@ -203,6 +203,10 @@ class Level1State extends FlxState
 
 		releaseBirds(11, 0, 0, 300 * Main.scale, 100 * Main.scale);
 
+		// Load crate.
+		crate = new Crate(4800, 300);
+		add(crate);
+
 		// Load player.
 		player = new Player(startx, Std.int(map.height + starty));
 		add(player);
@@ -210,9 +214,6 @@ class Level1State extends FlxState
 		// Load pole.
 		pole = new Pole(840, 320);
 		add(pole);
-		// Load crate.
-		crate = new Crate(4800, 250);
-		add(crate);
 
 		// Load spikies.
 		addSpiky(50 * 32 * Main.scale - 7 * Main.scale, 240 * Main.scale, 33.5, 120);
