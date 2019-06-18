@@ -92,7 +92,7 @@ class Level2State extends FlxState
 					case '[': mapData.push(4);
 					case '|': mapData.push(5);
 					case '_': mapData.push(10);
-					case ')': mapData.push(7);
+					case ')': mapData.push(11);
 					case '(': mapData.push(8);
 					case 'L': mapData.push(9);
 					default:  mapData.push(0);
