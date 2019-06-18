@@ -104,7 +104,7 @@ class Level1State extends FlxState
 				switch row.charAt(i) {
 					case ' ': mapData.push(0);
 					case '-': mapData.push(1);
-					case '=': mapData.push(2);
+					case '=': mapData.push(15);
 					case ']': mapData.push(3);
 					case '[': mapData.push(4);
 					case '|': mapData.push(5);
