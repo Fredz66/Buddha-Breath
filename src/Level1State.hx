@@ -1,15 +1,20 @@
 package;
 
+import flixel.addons.nape.*;
+import flixel.addons.nape.FlxNapeTilemap;
+import nape.geom.Vec2;
+
 import flixel.FlxObject;
 import flixel.math.FlxAngle;
 import flixel.math.FlxMath;
 import flixel.FlxG;
 import flixel.FlxState;
-import flixel.tile.FlxTilemap;
 import flixel.addons.display.FlxBackdrop;
 import flixel.util.FlxColor;
 import flixel.util.FlxCollision;
 import flixel.util.FlxTimer;
+
+import nape.phys.Material;
 
 import gui.ExitState;
 import gui.GameOverState;
@@ -34,7 +39,7 @@ class Level1State extends FlxState
 	//public var starty:Int = 927;
 
 	// Player final position.
-	//public var startx:Int = 4700 * Main.scale;
+	//public var startx:Int = 4600 * Main.scale;
 	//public var starty:Int = -177 * Main.scale;
 
 	var background:FlxBackdrop;
@@ -54,7 +59,7 @@ class Level1State extends FlxState
 	var foreground3:FlxBackdrop;
 	var foreground4:FlxBackdrop;
 
-	var map:FlxTilemap;
+	var map:FlxNapeTilemap;
 
 	var pole:Pole;
 	var crate:Crate;
@@ -135,6 +140,10 @@ class Level1State extends FlxState
 	{
 		super.create();
 
+		FlxNapeSpace.init();
+		FlxNapeSpace.createWalls(0,0,FlxG.width, FlxG.height);
+		FlxNapeSpace.space.gravity.setxy(0, 600);
+
 		FlxG.sound.playMusic("assets/music/asian-mystery-nometadata.ogg", 1, true);
 
 		var yshift = 0;
@@ -194,8 +203,9 @@ class Level1State extends FlxState
 		add(boat4);
 
 		// Load map.
-		map = new FlxTilemap();
+		map = new FlxNapeTilemap();
 		map.loadMapFromArray(StringsToMapData(tiles), tiles[0].length, tiles.length, "assets/images/" + Main.scale + "/tiles.png", 32 * Main.scale, 32 * Main.scale);
+		map.setupTileIndices([8, 9, 10, 11], new Material(0.2, 0.8, 0.4, 1));
 		add(map);
 
 		add(flagStart);
@@ -204,12 +214,13 @@ class Level1State extends FlxState
 		releaseBirds(11, 0, 0, 300 * Main.scale, 100 * Main.scale);
 
 		// Load crate.
-		crate = new Crate(4800, 300);
-		add(crate);
+		crate = new Crate(4800, 200);
 
 		// Load player.
 		player = new Player(startx, Std.int(map.height + starty));
 		add(player);
+		crate.player = player;
+		add(crate);
 
 		// Load pole.
 		pole = new Pole(840, 320);
@@ -313,8 +324,7 @@ class Level1State extends FlxState
 			FlxG.overlap(player, pole, hitPole);
 			FlxG.collide(player, crate);
 			FlxG.collide(player, map);
-			FlxG.collide(crate, map);
-
+	
 			// Detect collision between the player and the spikies.
 			if (player.alive) {
 				for (spiky in spikies) {

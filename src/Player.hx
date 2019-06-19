@@ -19,19 +19,13 @@ class Player extends FlxSprite
 	public var crouch:Bool = false;
 	public var drown:Bool = false;
 	public var canJump:Bool = true;
+	public var pushing:Bool = false;
 
 	var soundCrate:FlxSound;
 
-	// Initial position.
-	public var startx:Int;
-	public var starty:Int;
-
 	public function new(X:Int, Y:Int) 
 	{
-		super();
-
-		startx = X;
-		starty = Y;
+		super(X, Y);
 
 		ACCELERATION = 333 * Main.scale;
 		JUMP_FORCE = -280 * Main.scale;
@@ -63,9 +57,6 @@ class Player extends FlxSprite
 		drag.x = 1000 * Main.scale;
 		acceleration.y = 600 * Main.scale;
 		maxVelocity.set(RUN_SPEED, FALLING_SPEED);
-
-		x = startx;
-		y = starty;
 	}
 
 	override public function update(elapsed:Float):Void
@@ -85,7 +76,6 @@ class Player extends FlxSprite
 		if (FlxG.keys.pressed.LEFT || (FlxG.onMobile && Main.pad.buttonLeft.pressed))
 		{
 			flipX = true;
-			setSize(40 * Main.scale, 50 * Main.scale);
 			offset.set(14 * Main.scale, 30 * Main.scale);
 			direction = -1;
 			acceleration.x -= ACCELERATION;
@@ -94,7 +84,6 @@ class Player extends FlxSprite
 		else if (FlxG.keys.pressed.RIGHT || (FlxG.onMobile && Main.pad.buttonRight.pressed))
 		{
 			flipX = false;
-			setSize(40 * Main.scale, 50 * Main.scale);
 			offset.set(54 * Main.scale, 30 * Main.scale);
 			direction = 1;
 			acceleration.x += ACCELERATION;
@@ -140,6 +129,8 @@ class Player extends FlxSprite
 		
 	private function animate() 
 	{
+		pushing = false;
+
 		if ((velocity.y <= 0) && (!isTouching(FlxObject.FLOOR))) {
 			animation.play("jump");
 		} else if (velocity.y > 0) {
@@ -163,7 +154,9 @@ class Player extends FlxSprite
 				} else {
 					if ((isTouching(FlxObject.LEFT) || isTouching(FlxObject.RIGHT)) &&
 						(FlxG.keys.pressed.RIGHT || FlxG.keys.pressed.LEFT || (FlxG.onMobile && Main.pad.buttonLeft.pressed) || (FlxG.onMobile && Main.pad.buttonRight.pressed))) {
+						offset.set(74 * Main.scale, 30 * Main.scale);
 						animation.play("push");
+						pushing = true;
 						if (!soundCrate.playing) {
 							soundCrate.play();
 						}
