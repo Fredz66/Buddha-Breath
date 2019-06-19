@@ -4,6 +4,7 @@ import flixel.math.FlxAngle;
 import flixel.math.FlxMath;
 import flixel.FlxG;
 import flixel.FlxState;
+import flixel.FlxObject;
 import flixel.tile.FlxTilemap;
 import flixel.addons.display.FlxBackdrop;
 import flixel.util.FlxColor;
@@ -60,20 +61,20 @@ class Level2State extends FlxState
 		'                                                               ',
 		'                                                               ',
 		'                                                               ',
-		'                   [------]                                    ',
-	    '                                                               ',
-		'           [---]                                               ',
-		'                               [---]                           ',
-		')                  [--]                                       (',
-		'|                                                             |',
-		'|                         [---]                     [---]     L',
-		'|                                          [---]               ',
-		'|                 [---]                                        ',
-		'|                                                              ',
-		'--------------)                                             (--',
-		'|||||||||||||||                                             |||',
-		'|||||||||||||||                                             |||',
-		'|||||||||||||||                                             |||',
+		'                   [_---__]                                    ',
+	    '                     III                                       ',
+		'           [---]     III                                       ',
+		'            III      III       [---]                           ',
+		')           III    [--]         III                           (',
+		'|           III     II          III                           |',
+		'|           III     II    [---] III                 [---]     L',
+		'|           III     II     |||  III         [---]    |||       ',
+		'|           III   [---]    |||  III          |||     |||       ',
+		'|           III    |||     |||  III          |||     |||       ',
+		'--------------)    |||     |||  III          |||     |||    (--',
+		'|||||||||||||||    |||     |||  III          |||     |||    |||',
+		'|||||||||||||||    |||     |||  III          |||     |||    |||',
+		'|||||||||||||||    |||     |||  III          |||     |||    |||',
 	];
 
 	/*
@@ -91,6 +92,7 @@ class Level2State extends FlxState
 					case ']': mapData.push(3);
 					case '[': mapData.push(4);
 					case '|': mapData.push(5);
+					case 'I': mapData.push(6);
 					case '_': mapData.push(10);
 					case ')': mapData.push(11);
 					case '(': mapData.push(8);
@@ -144,6 +146,7 @@ class Level2State extends FlxState
 		// Load map.
 		map = new FlxTilemap();
 		map.loadMapFromArray(StringsToMapData(tiles), tiles[0].length, tiles.length, "assets/images/" + Main.scale + "/tiles.png", 32 * Main.scale, 32 * Main.scale);
+		map.setTileProperties(6, FlxObject.NONE);
 		add(map);
 
 		// Load flags.
