@@ -23,8 +23,8 @@ import gui.WinState;
 class Level1State extends FlxState
 {
 	// Player first position.
-	public var startx:Int = 60 * Main.scale;
-	public var starty:Int = -367 * Main.scale;
+	//public var startx:Int = 60 * Main.scale;
+	//public var starty:Int = -367 * Main.scale;
 
 	// Player second position.
 	//public var startx:Int = 1400 * Main.scale;
@@ -39,8 +39,8 @@ class Level1State extends FlxState
 	//public var starty:Int = 927;
 
 	// Player final position.
-	//public var startx:Int = 4600 * Main.scale;
-	//public var starty:Int = -177 * Main.scale;
+	public var startx:Int = 4600 * Main.scale;
+	public var starty:Int = -177 * Main.scale;
 
 	var background:FlxBackdrop;
 
@@ -72,6 +72,7 @@ class Level1State extends FlxState
 	var fish:Fish;
 
 	var player:Player;
+	var hands:Hands;
 
 	var frames:Int = 0;
 	var poleFalling:Bool = false;
@@ -142,7 +143,7 @@ class Level1State extends FlxState
 
 		FlxNapeSpace.init();
 		FlxNapeSpace.createWalls(0,0,FlxG.width, FlxG.height);
-		FlxNapeSpace.space.gravity.setxy(0, 600);
+		FlxNapeSpace.space.gravity.setxy(0, 200 * Main.scale);
 
 		FlxG.sound.playMusic("assets/music/asian-mystery-nometadata.ogg", 1, true);
 
@@ -218,6 +219,9 @@ class Level1State extends FlxState
 
 		// Load player.
 		player = new Player(startx, Std.int(map.height + starty));
+		hands = new Hands(startx, Std.int(map.height + starty));
+		add(hands);
+		player.hands = hands;
 		add(player);
 		crate.player = player;
 		add(crate);

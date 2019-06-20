@@ -1,10 +1,18 @@
 package;
 
+import flixel.util.FlxColor;
+import flixel.addons.nape.FlxNapeSprite;
 import flixel.system.FlxSound;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.math.FlxMath;
+
+import nape.geom.Vec2;
+import nape.phys.Body;
+import nape.phys.BodyType;
+import nape.shape.Polygon;
+import nape.phys.Material;
 
 class Player extends FlxSprite
 {
@@ -22,6 +30,7 @@ class Player extends FlxSprite
 	public var pushing:Bool = false;
 
 	var soundCrate:FlxSound;
+	public var hands:FlxNapeSprite;
 
 	public function new(X:Int, Y:Int) 
 	{
@@ -57,6 +66,25 @@ class Player extends FlxSprite
 		drag.x = 1000 * Main.scale;
 		acceleration.y = 600 * Main.scale;
 		maxVelocity.set(RUN_SPEED, FALLING_SPEED);
+
+		hands = new FlxNapeSprite();
+
+		//super(X * Main.scale, Y * Main.scale);
+
+		//loadGraphic("assets/images/" + Main.scale + "/crate.png");
+		hands.makeGraphic(10 * Main.scale, 10 * Main.scale, FlxColor.BLACK);
+
+		if (hands.body != null)
+			hands.destroyPhysObjects();
+
+		hands.centerOffsets(false);
+		hands.body = new Body(BodyType.DYNAMIC, Vec2.weak(x + 50, y));
+
+		var box = new Polygon(Polygon.box(10 * Main.scale, 10 * Main.scale));
+		hands.body.shapes.add(box);
+		hands.body.setShapeMaterials(new Material(0, 0.001, 0.005, 1));
+		hands.body.allowRotation = false;
+		//hands.alive = false;
 	}
 
 	override public function update(elapsed:Float):Void
@@ -125,11 +153,14 @@ class Player extends FlxSprite
 				velocity.y = JUMP_FORCE;
 			}
 		}
+
+		hands.setPosition(x + width / 2, y);
 	}
 		
 	private function animate() 
 	{
 		pushing = false;
+		//hands.alive = false;
 
 		if ((velocity.y <= 0) && (!isTouching(FlxObject.FLOOR))) {
 			animation.play("jump");
@@ -157,6 +188,7 @@ class Player extends FlxSprite
 						offset.set(74 * Main.scale, 30 * Main.scale);
 						animation.play("push");
 						pushing = true;
+						//hands.alive = true;
 						if (!soundCrate.playing) {
 							soundCrate.play();
 						}
