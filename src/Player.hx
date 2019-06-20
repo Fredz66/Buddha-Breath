@@ -27,9 +27,8 @@ class Player extends FlxSprite
 	public var crouch:Bool = false;
 	public var drown:Bool = false;
 	public var canJump:Bool = true;
-	public var pushing:Bool = false;
 
-	var soundCrate:FlxSound;
+	//var soundCrate:FlxSound;
 	public var hands:FlxNapeSprite;
 
 	public function new(X:Int, Y:Int) 
@@ -44,7 +43,7 @@ class Player extends FlxSprite
 		CROUCH_SPEED = 50 * Main.scale;
 		FALLING_SPEED = 300 * Main.scale;
 
-		soundCrate = FlxG.sound.load("assets/sounds/scrape.ogg", 1, true);
+		//soundCrate = FlxG.sound.load("assets/sounds/scrape.ogg", 1, true);
 
 		loadGraphic("assets/images/" + Main.scale + "/litang.png", true, 116 * Main.scale, 80 * Main.scale);
 		
@@ -66,25 +65,6 @@ class Player extends FlxSprite
 		drag.x = 1000 * Main.scale;
 		acceleration.y = 600 * Main.scale;
 		maxVelocity.set(RUN_SPEED, FALLING_SPEED);
-
-		hands = new FlxNapeSprite();
-
-		//super(X * Main.scale, Y * Main.scale);
-
-		//loadGraphic("assets/images/" + Main.scale + "/crate.png");
-		hands.makeGraphic(10 * Main.scale, 10 * Main.scale, FlxColor.BLACK);
-
-		if (hands.body != null)
-			hands.destroyPhysObjects();
-
-		hands.centerOffsets(false);
-		hands.body = new Body(BodyType.DYNAMIC, Vec2.weak(x + 50, y));
-
-		var box = new Polygon(Polygon.box(10 * Main.scale, 10 * Main.scale));
-		hands.body.shapes.add(box);
-		hands.body.setShapeMaterials(new Material(0, 0.001, 0.005, 1));
-		hands.body.allowRotation = false;
-		//hands.alive = false;
 	}
 
 	override public function update(elapsed:Float):Void
@@ -136,15 +116,17 @@ class Player extends FlxSprite
 			}
 
 			if ((FlxG.keys.pressed.DOWN || (FlxG.onMobile && Main.pad.buttonDown.pressed)) && isTouching(FlxObject.FLOOR)) {
-				if (!crouch)
+				if (!crouch) {
 					animation.play("crouching");
-				crouch = true;
-				maxVelocity.x = CROUCH_SPEED;
+					crouch = true;
+					maxVelocity.x = CROUCH_SPEED;
+				}
 			} else {
-				if (crouch)
+				if (crouch) {
 					animation.play("standing");
-				crouch = false;
-				maxVelocity.x = RUN_SPEED;
+					crouch = false;
+					maxVelocity.x = RUN_SPEED;
+				}
 			}
 		} else {
 			if ((FlxG.keys.pressed.UP || (FlxG.onMobile && Main.pad.buttonUp.justPressed)) && isTouching(FlxObject.FLOOR) && canJump) {
@@ -159,14 +141,11 @@ class Player extends FlxSprite
 		
 	private function animate() 
 	{
-		pushing = false;
-		//hands.alive = false;
-
 		if ((velocity.y <= 0) && (!isTouching(FlxObject.FLOOR))) {
 			animation.play("jump");
 		} else if (velocity.y > 0) {
 			animation.play("fall");
-		} else if (velocity.x == 0) {
+		} else if (FlxMath.equal(velocity.x, 0)) {
 			if (crouch) {
 				if (animation.curAnim.name == "crouch-walk" || (animation.curAnim.name == "crouching" && animation.finished)) {
 					animation.play("crouch");
@@ -187,13 +166,11 @@ class Player extends FlxSprite
 						(FlxG.keys.pressed.RIGHT || FlxG.keys.pressed.LEFT || (FlxG.onMobile && (Main.pad.buttonLeft.pressed || Main.pad.buttonRight.pressed)))) {
 						offset.set(74 * Main.scale, 30 * Main.scale);
 						animation.play("push");
-						pushing = true;
-						//hands.alive = true;
-						if (!soundCrate.playing) {
+						/*if (!soundCrate.playing) {
 							soundCrate.play();
-						}
+						}*/
 					} else {
-						soundCrate.stop();
+						//soundCrate.stop();
 						animation.play("run");
 					}
 				}

@@ -16,8 +16,7 @@ class Hands extends FlxNapeSprite
 	{
 		super(X * Main.scale, Y * Main.scale);
 
-		//loadGraphic("assets/images/" + Main.scale + "/crate.png");
-		makeGraphic(size * Main.scale, size * Main.scale, FlxColor.BLACK);
+		makeGraphic(size * Main.scale, size * Main.scale, FlxColor.TRANSPARENT);
 
 		if (body != null)
 			destroyPhysObjects();
@@ -34,13 +33,5 @@ class Hands extends FlxNapeSprite
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-
-		/*if (player != null && player.pushing) {
-			if (Main.scale == 1) {
-				body.applyImpulse(Vec2.weak(20, 0));
-			} else {
-				body.applyImpulse(Vec2.weak(200, 0));
-			}
-		}*/
 	}
 }

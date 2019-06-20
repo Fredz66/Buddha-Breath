@@ -23,8 +23,8 @@ import gui.WinState;
 class Level1State extends FlxState
 {
 	// Player first position.
-	//public var startx:Int = 60 * Main.scale;
-	//public var starty:Int = -367 * Main.scale;
+	public var startx:Int = 60 * Main.scale;
+	public var starty:Int = -367 * Main.scale;
 
 	// Player second position.
 	//public var startx:Int = 1400 * Main.scale;
@@ -39,8 +39,8 @@ class Level1State extends FlxState
 	//public var starty:Int = 927;
 
 	// Player final position.
-	public var startx:Int = 4600 * Main.scale;
-	public var starty:Int = -177 * Main.scale;
+	//public var startx:Int = 4600 * Main.scale;
+	//public var starty:Int = -177 * Main.scale;
 
 	var background:FlxBackdrop;
 
@@ -214,15 +214,15 @@ class Level1State extends FlxState
 
 		releaseBirds(11, 0, 0, 300 * Main.scale, 100 * Main.scale);
 
-		// Load crate.
-		crate = new Crate(4800, 200);
-
 		// Load player.
 		player = new Player(startx, Std.int(map.height + starty));
 		hands = new Hands(startx, Std.int(map.height + starty));
 		add(hands);
 		player.hands = hands;
 		add(player);
+
+		// Load crate.
+		crate = new Crate(4800, 200);
 		crate.player = player;
 		add(crate);
 
