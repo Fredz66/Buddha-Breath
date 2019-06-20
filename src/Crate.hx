@@ -37,7 +37,11 @@ class Crate extends FlxNapeSprite
 		super.update(elapsed);
 
 		if (player != null && player.pushing) {
-			body.applyImpulse(Vec2.weak(200, 0));
+			if (Main.scale == 1) {
+				body.applyImpulse(Vec2.weak(20, 0));
+			} else {
+				body.applyImpulse(Vec2.weak(200, 0));
+			}
 		}
 	}
 }

@@ -153,7 +153,7 @@ class Player extends FlxSprite
 					animation.play("skid");
 				} else {
 					if ((isTouching(FlxObject.LEFT) || isTouching(FlxObject.RIGHT)) &&
-						(FlxG.keys.pressed.RIGHT || FlxG.keys.pressed.LEFT || (FlxG.onMobile && Main.pad.buttonLeft.pressed) || (FlxG.onMobile && Main.pad.buttonRight.pressed))) {
+						(FlxG.keys.pressed.RIGHT || FlxG.keys.pressed.LEFT || (FlxG.onMobile && (Main.pad.buttonLeft.pressed || Main.pad.buttonRight.pressed)))) {
 						offset.set(74 * Main.scale, 30 * Main.scale);
 						animation.play("push");
 						pushing = true;
