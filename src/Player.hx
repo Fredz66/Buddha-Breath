@@ -136,7 +136,9 @@ class Player extends FlxSprite
 			}
 		}
 
-		hands.setPosition(x + width / 2, y);
+		if (hands != null) {
+			hands.setPosition(x + width / 2, y);
+		}
 	}
 		
 	private function animate() 
