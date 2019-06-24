@@ -11,7 +11,7 @@ class Main extends Sprite
     public static var scale:Int;
     public static var level:Int = 1;
 	public static var pad:VirtualPad;
-    public static var version:String = "v3.0.0-alpha";
+    public static var version:String = "v3.0.1-alpha";
 
     public function new()
     {
